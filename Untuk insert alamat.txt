@@ -1,0 +1,64 @@
+address::create([
+    'user_id' => 1,
+    'alamat' => "Jl.P.Diponegoro no 162-164",
+    'provinsi' => "Sulawesi Selatan",
+    'kabupaten' => "Makassar",
+    'kecamatan' => 'bontoala',
+    'kelurahan' => 'bontoala parang',
+    'kodepos' => "90157"
+])
+address::create([
+    'user_id' => 1,
+    'alamat' => "Jl.Telaga Indah no 1 , Komp Taman Kahyangan",
+    'provinsi' => "Sulawesi Selatan",
+    'kabupaten' => "Makassar",
+    'kecamatan' => 'Tamalate',
+    'kelurahan' => 'Maccini Sombala',
+    'kodepos' => "90157"
+])
+address::create([
+    'user_id' => 3,
+    'alamat' => "Vetran Utara",
+    'provinsi' => "Sulawesi Selatan",
+    'kabupaten' => "Makassar",
+    'kecamatan' => 'Makassar',
+    'kelurahan' => 'Barana',
+    'kodepos' => "90145"
+])
+address::create([
+    'user_id' => 3,
+    'alamat' => "Green House Homestay",
+    'provinsi' => "Jawa Timur",
+    'kabupaten' => "Surabaya",
+    'kecamatan' => 'Waru',
+    'kelurahan' => 'Waru',
+    'kodepos' => "61256"
+])
+address::create([
+    'user_id' => 2,
+    'alamat' => "Jl.Ternate No 1",
+    'provinsi' => "Sulawesi Selatan",
+    'kabupaten' => "Makassar",
+    'kecamatan' => 'Wajo',
+    'kelurahan' => 'Melayu Baru',
+    'kodepos' => "90171"
+])
+address::create([
+    'user_id' => 2,
+    'alamat' => "Jl.Ngagel Jaya Tengah",
+    'provinsi' => "Jawa Timur",
+    'kabupaten' => "Surabaya",
+    'kecamatan' => 'Gubeng',
+    'kelurahan' => 'Baratajaya',
+    'kodepos' => "60284"
+])
+
+address::create([
+    'user_id' => 1,
+    'alamat' => "Jl.Ngagel Madya VIII",
+    'provinsi' => "Jawa Timur",
+    'kabupaten' => "Surabaya",
+    'kecamatan' => 'Gubeng',
+    'kelurahan' => 'Baratajaya',
+    'kodepos' => "60284"
+])
