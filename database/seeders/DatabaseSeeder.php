@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\address;
 use App\Models\Category;
+use App\Models\Size;
 
 class DatabaseSeeder extends Seeder
 {
@@ -236,5 +237,16 @@ class DatabaseSeeder extends Seeder
             'slug' => 'keyboard'
         ]);
 
+        Size::create([
+            'name' => 'ATX'
+        ]);
+
+        Size::create([
+            'name' => 'Mini ATX'
+        ]);
+
+        Size::create([
+            'name' => 'Micro ATX'
+        ]);
     }
 }

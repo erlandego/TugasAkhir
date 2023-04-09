@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_barang')->nullable();
+            $table->string('nama_barang');
             $table->foreignId('category_id');
             $table->string('slug');
-            $table->integer('harga')->nullable();
+            $table->integer('harga');
             $table->char('deskripsi' , 255);
             $table->string('size');
             $table->string('ddr');
