@@ -29,8 +29,9 @@
         <div class="form-group mb-3" id="divmerk">
             <b><label for="merk">Merk</label></b>
             <select class="form-control" id="merk" name="merk">
-                <option value="1">Intel</option>
-                <option value="2">AMD</option>
+                @foreach ($merkPro as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama_merk }}</option>
+                @endforeach
             </select>
         </div>
         {{-- Size --}}
@@ -91,12 +92,14 @@
         const nama = document.querySelector('#nama_barang');
         const slug = document.querySelector('#slug');
         const kategori = document.querySelector('#category_id');
+        const merk = document.querySelector('#merk');
 
         document.getElementById("divsize").style.display = "none";
         document.getElementById("divddr").style.display = "none";
 
         function muncul(){
             var namakategori = kategori.options[kategori.selectedIndex].text;
+            var idcat = kategori.value;
             if(namakategori == "Casing"){
                 document.getElementById("divsize").style.display = "";
                 document.getElementById("divmerk").style.display = "";
@@ -127,7 +130,17 @@
                 document.getElementById("divsocket").style.display = "none"
                 document.getElementById("divddr").style.display = "none";
             }
+
+            if(idcat == 1){
+                document.getElementById('merk').innerHTML = "";
+                document.getElementById('merk').innerHTML = "@foreach($merkPro as $item) <option value='{{ $item->id }}'>{{ $item->nama_merk }}</option>  @endforeach";
+            }
+            else{
+                document.getElementById('merk').innerHTML = "";
+                document.getElementById('merk').innerHTML = "@foreach($merkOth as $item) <option value='{{ $item->id }}'>{{ $item->nama_merk }}</option> @endforeach";
+            }
         }
+
 
         // function string_to_slug (str) {
         //     str = str.replace(/^\s+|\s+$/g, ''); // trim

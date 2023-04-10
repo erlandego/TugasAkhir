@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('slots', function (Blueprint $table) {
             $table->id();
-            $table->string('DDR');
+            $table->string('ddr');
             $table->timestamps();
         });
     }

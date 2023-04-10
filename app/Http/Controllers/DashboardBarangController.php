@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Category;
+use App\Models\Merk;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -30,7 +31,9 @@ class DashboardBarangController extends Controller
     {
         return view('dashboard.barang.create', [
             "title" => "Tambah barang",
-            "barangs" => Category::all()
+            "barangs" => Category::all(),
+            "merkPro" => Merk::where('category_id',1)->get(),
+            "merkOth" => Merk::where('category_id' , '!=' , 1)->get()
         ]);
     }
 

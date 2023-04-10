@@ -8,6 +8,9 @@ use App\Models\User;
 use App\Models\address;
 use App\Models\Category;
 use App\Models\Size;
+use App\Models\Slot;
+use App\Models\Socket;
+use App\Models\Merk;
 
 class DatabaseSeeder extends Seeder
 {
@@ -237,16 +240,79 @@ class DatabaseSeeder extends Seeder
             'slug' => 'keyboard'
         ]);
 
+        //Size------------------------------------------------------------------------------------------------------
         Size::create([
-            'name' => 'ATX'
+            'nama_ukuran' => 'ATX'
         ]);
 
         Size::create([
-            'name' => 'Mini ATX'
+            'nama_ukuran' => 'Mini ATX'
         ]);
 
         Size::create([
-            'name' => 'Micro ATX'
+            'nama_ukuran' => 'Micro ATX'
+        ]);
+
+        //Slots------------------------------------------------------------------------------------------------------
+        Slot::create([
+            'ddr' => 'DDR1'
+        ]);
+
+        Slot::create([
+            'ddr' => 'DDR2'
+        ]);
+
+        Slot::create([
+            'ddr' => 'DDR3'
+        ]);
+
+        Slot::create([
+            'ddr' => 'DDR4'
+        ]);
+
+        Slot::create([
+            'ddr' => 'DDR3L'
+        ]);
+
+        Slot::create([
+            'ddr' => 'DDR4L'
+        ]);
+
+        //Socket----------------------------------------------------------------------------------------------------
+        Socket::create([
+            'nama_socket' => 'LGA1151',
+            'merk_id' => 1
+        ]);
+
+        Socket::create([
+            'nama_socket' => 'LGA1200',
+            'merk_id' => 1
+        ]);
+
+        Socket::create([
+            'nama_socket' => 'AM4',
+            'merk_id' => 2
+        ]);
+
+        Socket::create([
+            'nama_socket' => 'AM5',
+            'merk_id' => 2
+        ]);
+
+        //Merk-------------------------------------------------------------------------------------------------------
+        Merk::create([
+            'nama_merk' => 'Intel',
+            'category_id' => 1,
+        ]);
+
+        Merk::create([
+            'nama_merk' => 'AMD',
+            'category_id' => 1,
+        ]);
+
+        Merk::create([
+            'nama_merk' => 'Samsung',
+            'category_id' => 2
         ]);
     }
 }

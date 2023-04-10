@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Socket extends Model
 {
     use HasFactory;
+
+    public function Merk(){
+        return $this->belongsTo(Merk::class);
+    }
 }

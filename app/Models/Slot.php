@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Slot extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    public function Barang(){
+        return $this->hasMany(Barang::class);
+    }
 }

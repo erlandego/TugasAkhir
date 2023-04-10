@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('slug');
             $table->integer('harga');
             $table->char('deskripsi' , 255);
-            $table->string('size');
-            $table->string('ddr');
-            $table->string('socket');
+            $table->foreignId('size')->nullable();
+            $table->foreignId('ddr')->nullable();
+            $table->foreignId('socket')->nullable();
             $table->string('power');
             $table->integer('nvme');
             $table->timestamps();
