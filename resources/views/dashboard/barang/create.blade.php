@@ -1,6 +1,10 @@
 @extends('dashboard.layout.dashboard')
 
 @section('container')
+    @if(isset($kategoripilihan)){
+        @dd($kategoripilihan)
+    }
+    @endif
     <h2>Ini halaman create</h2>
 
     <form method="post" action="/dashboard/barang">
