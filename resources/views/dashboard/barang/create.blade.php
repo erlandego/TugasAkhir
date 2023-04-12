@@ -112,6 +112,7 @@
 
         document.getElementById("divsize").style.display = "none";
         document.getElementById("divddr").style.display = "none";
+        document.getElementById("divpower").style.display = "none";
 
         function muncul(){
             var namakategori = kategori.options[kategori.selectedIndex].text;
@@ -119,32 +120,44 @@
             if(namakategori == "Casing"){
                 document.getElementById("divsize").style.display = "";
                 document.getElementById("divmerk").style.display = "";
-                document.getElementById("divsocket").style.display = "none"
+                document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
+                document.getElementById("divpower").style.display = "none";
             }
             else if(namakategori == "Processor"){
                 document.getElementById("divsize").style.display = "none";
                 document.getElementById("divmerk").style.display = "";
-                document.getElementById("divsocket").style.display = ""
+                document.getElementById("divsocket").style.display = "";
                 document.getElementById("divddr").style.display = "none";
+                document.getElementById("divpower").style.display = "none";
             }
             else if(namakategori == "RAM"){
                 document.getElementById("divsize").style.display = "none";
                 document.getElementById("divmerk").style.display = "";
-                document.getElementById("divsocket").style.display = "none"
+                document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "";
+                document.getElementById("divpower").style.display = "none";
             }
             else if(namakategori == "VGA Card"){
                 document.getElementById("divsize").style.display = "none";
                 document.getElementById("divmerk").style.display = "";
-                document.getElementById("divsocket").style.display = "none"
+                document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "";
+                document.getElementById("divpower").style.display = "";
+            }
+            else if(namakategori == "Motherboard"){
+                document.getElementById("divsize").style.display = "none";
+                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divsocket").style.display = "";
+                document.getElementById("divddr").style.display = "";
+                document.getElementById("divpower").style.display = "";
             }
             else{
                 document.getElementById("divsize").style.display = "none";
                 document.getElementById("divmerk").style.display = "";
-                document.getElementById("divsocket").style.display = "none"
+                document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
+                document.getElementById("divpower").style.display = "none";
             }
 
             if(idcat == 1){

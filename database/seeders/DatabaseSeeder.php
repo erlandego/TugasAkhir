@@ -288,6 +288,10 @@ class DatabaseSeeder extends Seeder
             'ddr' => 'DDR4L'
         ]);
 
+        Slot::create([
+            'ddr' => 'DDR5'
+        ]);
+
         //Socket----------------------------------------------------------------------------------------------------
         Socket::create([
             'nama_socket' => 'LGA1151',
