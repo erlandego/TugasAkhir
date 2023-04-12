@@ -240,6 +240,16 @@ class DatabaseSeeder extends Seeder
             'slug' => 'keyboard'
         ]);
 
+        Category:: create([
+            'name' => 'Motherboard',
+            'slug' => 'motherboard'
+        ]);
+
+        Category:: create([
+            'name' => 'CPU Cooler',
+            'slug' => 'cpu-cooler'
+        ]);
+
         //Size------------------------------------------------------------------------------------------------------
         Size::create([
             'nama_ukuran' => 'ATX'

@@ -70,6 +70,18 @@
                 <option value="4">DDR4</option>
             </select>
         </div>
+
+        {{-- Power --}}
+        <div class="form-group mb-3" id="divpower">
+            <b><label for="power">Power :</label></b>
+            <div class="input-group input-group-sm mb-3">
+                <input id="power" type="number" value="{{ old('power') }}" class="form-control" aria-label="Small" name="power">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Watt</span>
+                </div>
+            </div>
+        </div>
+
         {{-- Harga Barang --}}
         <div class="form-group mb-3">
             <b><label for="harga">Harga Barang</label></b>

@@ -130,20 +130,6 @@ class DashboardBarangController extends Controller
             $validatedData['nvme'] = 1;
         }
 
-        $validatedData = $request->validate([
-            'nama_barang' => 'max:255',
-            'category_id' => 'required',
-            'slug' => 'required|unique:barangs',
-            'harga' => 'required|numeric',
-            'deskripsi' => 'required'
-        ]);
-
-        $validatedData['size'] = "Ini size";
-        $validatedData['ddr'] = "Ini DDR";
-        $validatedData['socket'] = "Ini socket";
-        $validatedData['power'] = "Ini power";
-        $validatedData['nvme'] = 1;
-
         // Barang::create($validatedData);
         // return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
     }
