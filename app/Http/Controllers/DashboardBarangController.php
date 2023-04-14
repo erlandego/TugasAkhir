@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Category;
 use App\Models\Merk;
+use App\Models\Size;
+use App\Models\Slot;
+use App\Models\Socket;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -33,7 +36,15 @@ class DashboardBarangController extends Controller
             "title" => "Tambah barang",
             "barangs" => Category::all(),
             "merkPro" => Merk::where('category_id',1)->get(),
-            "merkOth" => Merk::where('category_id' , '!=' , 1)->get()
+            "merkOth" => Merk::where('category_id' , '!=' , 1)->get(),
+            "listslot" => Slot::all(),
+            "socketamd" => Socket::select('sockets.*')
+            ->join('merks' , 'merks.id' , '=' , 'sockets.merk_id')
+            ->where('merks.nama_merk' , '=' , 'AMD')->get(),
+            "socketintel" => Socket::select('sockets.*')
+            ->join('merks' , 'merks.id' , '=' , 'sockets.merk_id')
+            ->where('merks.nama_merk' , '=' , 'Intel')->get(),
+            "listsize" => Size::all()
         ]);
     }
 
@@ -59,6 +70,7 @@ class DashboardBarangController extends Controller
                 'nama_barang' => 'max:255',
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
+                'power' =>'required|numeric',
                 'harga' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
@@ -66,7 +78,6 @@ class DashboardBarangController extends Controller
             $validatedData['size'] = null;
             $validatedData['ddr'] = null;
             $validatedData['socket'] = $request->socket;
-            $validatedData['power'] = "";
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'RAM'){
@@ -74,6 +85,7 @@ class DashboardBarangController extends Controller
                 'nama_barang' => 'max:255',
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
+                'power' =>'required|numeric',
                 'harga' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
@@ -81,7 +93,6 @@ class DashboardBarangController extends Controller
             $validatedData['size'] = null;
             $validatedData['ddr'] = $request->ddr;
             $validatedData['socket'] = null;
-            $validatedData['power'] = "";
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'VGA Card'){
@@ -89,6 +100,7 @@ class DashboardBarangController extends Controller
                 'nama_barang' => 'max:255',
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
+                'power' =>'required|numeric',
                 'harga' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
@@ -96,7 +108,6 @@ class DashboardBarangController extends Controller
             $validatedData['size'] = null;
             $validatedData['ddr'] = $request->ddr;
             $validatedData['socket'] = null;
-            $validatedData['power'] = "";
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'Casing'){
@@ -119,19 +130,19 @@ class DashboardBarangController extends Controller
                 'nama_barang' => 'max:255',
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
+                'power' =>'required|numeric',
+                'size' => 'required',
+                'ddr' => 'required',
+                'socket'=> 'required',
                 'harga' => 'required|numeric',
+                'nvme' => 'required',
                 'deskripsi' => 'required'
             ]);
 
-            $validatedData['size'] = "Ini size";
-            $validatedData['ddr'] = "Ini DDR";
-            $validatedData['socket'] = "Ini socket";
-            $validatedData['power'] = "Ini power";
-            $validatedData['nvme'] = 1;
         }
 
-        // Barang::create($validatedData);
-        // return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
+        Barang::create($validatedData);
+        return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
     }
 
     /**

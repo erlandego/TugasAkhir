@@ -1,6 +1,7 @@
 @extends('dashboard.layout.dashboard')
 
 @section('container')
+    {{-- @dd($socketamd) --}}
     @if(isset($kategoripilihan)){
         @dd($kategoripilihan)
     }
@@ -20,6 +21,7 @@
           @enderror
           <input type="hidden" class="form-control" id="slug" name="slug">
         </div>
+
         {{-- Kategori --}}
         <div class="form-group mb-3">
           <b><label for="category_id">Kategori</label></b>
@@ -29,45 +31,42 @@
             @endforeach
           </select>
         </div>
+
         {{-- Merk --}}
         <div class="form-group mb-3" id="divmerk">
             <b><label for="merk">Merk</label></b>
-            <select class="form-control" id="merk" name="merk">
+            <select class="form-control" id="merk" name="merk" onchange="ubahMerk()">
                 @foreach ($merkPro as $item)
                     <option value="{{ $item->id }}">{{ $item->nama_merk }}</option>
                 @endforeach
             </select>
         </div>
+
         {{-- Size --}}
         <div class="form-group mb-3" id="divsize">
             <b><label for="size">Ukuran Case</label></b>
             <select class="form-control" id="size" name="size">
-                <option value="1">ATX</option>
-                <option value="2">Mini ITX</option>
-                <option value="3">Micro ATX</option>
-                <option value="4">EATX</option>
-                <option value="5">Nano ITX</option>
-                <option value="6">Pico ITX</option>
+                @foreach ($listsize as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama_ukuran }}</option>
+                @endforeach
             </select>
         </div>
+
         {{-- DDR --}}
         <div class="form-group mb-3" id="divddr">
             <b><label for="ddr">DDR</label></b>
             <select class="form-control" id="ddr" name="ddr">
-                <option value="1">DDR1</option>
-                <option value="2">DDR2</option>
-                <option value="3">DDR3</option>
-                <option value="4">DDR4</option>
+                @foreach ($listslot as $item)
+                    <option value="{{ $item->id }}">{{ $item->ddr }}</option>
+                @endforeach
             </select>
         </div>
+
         {{-- Socket --}}
         <div class="form-group mb-3" id="divsocket">
             <b><label for="socket">Socket</label></b>
             <select class="form-control" id="socket" name="socket">
-                <option value="1">DDR1</option>
-                <option value="2">DDR2</option>
-                <option value="3">DDR3</option>
-                <option value="4">DDR4</option>
+
             </select>
         </div>
 
@@ -79,6 +78,14 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Watt</span>
                 </div>
+            </div>
+        </div>
+
+        {{-- NVME --}}
+        <div class="form-group mb-3" id="divnvme">
+            <b><label for="nvme">Jumlah Slot NVME</label></b>
+            <div class="input-group input-group-sm mb-3">
+                <input id="nvme" type="number" value="{{ old('nvme') }}" class="form-control" aria-label="Small" name="nvme">
             </div>
         </div>
 
@@ -112,7 +119,8 @@
 
         document.getElementById("divsize").style.display = "none";
         document.getElementById("divddr").style.display = "none";
-        document.getElementById("divpower").style.display = "none";
+        document.getElementById("divnvme").style.display = "none";
+        document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
 
         function muncul(){
             var namakategori = kategori.options[kategori.selectedIndex].text;
@@ -123,20 +131,23 @@
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "none";
+                document.getElementById("divnvme").style.display = "none";
             }
             else if(namakategori == "Processor"){
                 document.getElementById("divsize").style.display = "none";
                 document.getElementById("divmerk").style.display = "";
                 document.getElementById("divsocket").style.display = "";
                 document.getElementById("divddr").style.display = "none";
-                document.getElementById("divpower").style.display = "none";
+                document.getElementById("divpower").style.display = "";
+                document.getElementById("divnvme").style.display = "none";
             }
             else if(namakategori == "RAM"){
                 document.getElementById("divsize").style.display = "none";
                 document.getElementById("divmerk").style.display = "";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "";
-                document.getElementById("divpower").style.display = "none";
+                document.getElementById("divpower").style.display = "";
+                document.getElementById("divnvme").style.display = "none";
             }
             else if(namakategori == "VGA Card"){
                 document.getElementById("divsize").style.display = "none";
@@ -144,13 +155,15 @@
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
+                document.getElementById("divnvme").style.display = "none";
             }
             else if(namakategori == "Motherboard"){
-                document.getElementById("divsize").style.display = "none";
+                document.getElementById("divsize").style.display = "";
                 document.getElementById("divmerk").style.display = "";
                 document.getElementById("divsocket").style.display = "";
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
+                document.getElementById("divnvme").style.display = "";
             }
             else{
                 document.getElementById("divsize").style.display = "none";
@@ -158,8 +171,10 @@
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "none";
+                document.getElementById("divnvme").style.display = "none";
             }
 
+            //nanti ganti , nd boleh tembak langsung ID nya
             if(idcat == 1){
                 document.getElementById('merk').innerHTML = "";
                 document.getElementById('merk').innerHTML = "@foreach($merkPro as $item) <option value='{{ $item->id }}'>{{ $item->nama_merk }}</option>  @endforeach";
@@ -167,6 +182,20 @@
             else{
                 document.getElementById('merk').innerHTML = "";
                 document.getElementById('merk').innerHTML = "@foreach($merkOth as $item) <option value='{{ $item->id }}'>{{ $item->nama_merk }}</option> @endforeach";
+            }
+        }
+
+        function ubahMerk(){
+            var namamerk = merk.options[merk.selectedIndex].text;
+            if(namamerk == "Intel"){
+                alert('Intel Bos');
+                document.getElementById('socket').innerHTML = "";
+                document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
+            }
+            else if(namamerk == "AMD"){
+                alert("AMD Bos");
+                document.getElementById('socket').innerHTML = "";
+                document.getElementById('socket').innerHTML = "@foreach($socketamd as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
             }
         }
 

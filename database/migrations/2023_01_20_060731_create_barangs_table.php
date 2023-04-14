@@ -23,8 +23,8 @@ return new class extends Migration
             $table->foreignId('size')->nullable();
             $table->foreignId('ddr')->nullable();
             $table->foreignId('socket')->nullable();
-            $table->string('power');
-            $table->integer('nvme');
+            $table->integer('power')->nullable();
+            $table->integer('nvme')->nullable();
             $table->timestamps();
         });
     }
