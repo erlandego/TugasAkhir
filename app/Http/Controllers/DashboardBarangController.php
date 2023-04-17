@@ -72,6 +72,7 @@ class DashboardBarangController extends Controller
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
                 'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
 
@@ -87,6 +88,7 @@ class DashboardBarangController extends Controller
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
                 'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
 
@@ -102,6 +104,7 @@ class DashboardBarangController extends Controller
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
                 'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
 
@@ -116,6 +119,7 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
 
@@ -135,10 +139,27 @@ class DashboardBarangController extends Controller
                 'ddr' => 'required',
                 'socket'=> 'required',
                 'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
                 'nvme' => 'required',
                 'deskripsi' => 'required'
             ]);
 
+        }
+        else if($kategoripilihan == 'Power Supply'){
+            $validatedData = $request->validate([
+                'nama_barang' => 'max:255',
+                'category_id' => 'required',
+                'slug' => 'required|unique:barangs',
+                'power' => 'required|numeric',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'deskripsi' => 'required|max:'
+            ]);
+
+            $validatedData['size'] = null;
+            $validatedData['ddr'] = null;
+            $validatedData['socket'] = null;
+            $validatedData['nvme'] = null;
         }
 
         Barang::create($validatedData);
@@ -193,5 +214,12 @@ class DashboardBarangController extends Controller
     public function checkSlug(Request $request){
         $slug = SlugService::createSlug(Barang::class, 'slug', $request->nama);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function tambahsocket(Request $request){
+        Socket::create([
+            'nama_socket' => $request->namasocketbaru,
+            'merk_id' => (int)$request->socketbarumerk
+        ]);
     }
 }

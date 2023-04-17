@@ -70,6 +70,21 @@
             </select>
         </div>
 
+        {{-- Add Socket --}}
+        <div class="form-group mb-3" id="divsocketbaru">
+            <b><label for="socketbaru">Input Socket baru : </label></b>
+            <input type="text" class="form-control" id="socketbaru" name="socketbaru" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <select class="form-control" id="socketbarumerk" name="socketbarumerk">
+                    <option value="1">Intel</option>
+                    <option value="2">AMD</option>
+                </select>
+            </div>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" onclick="tambahsocket()" type="button">Add</button>
+            </div>
+        </div>
+
         {{-- Power --}}
         <div class="form-group mb-3" id="divpower">
             <b><label for="power">Power :</label></b>
@@ -99,6 +114,15 @@
                 <input id="harga" type="number" value="{{ old('harga') }}" class="form-control" aria-label="Small" name="harga" required>
             </div>
         </div>
+
+        {{-- Stok Barang --}}
+        <div class="form-group mb-3">
+            <b><label for="stok">Input Stok : </label></b>
+            <div class="input-group input-group-sm mb-3">
+                <input id="stok" type="number" value="{{ old('stok') }}" class="form-control" aria-label="Small" name="stok" required>
+            </div>
+        </div>
+
         {{-- Deskripsi barang --}}
         @error('deskripsi')
             <p class="text-danger"> {{ $message }} </p>
@@ -165,6 +189,14 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "";
             }
+            else if(namaketegori == "Power Supply"){
+                document.getElementById("divsize").style.display = "none";
+                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divsocket").style.display = "none";
+                document.getElementById("divddr").style.display = "none";
+                document.getElementById("divpower").style.display = "";
+                document.getElementById("divnvme").style.display = "none";
+            }
             else{
                 document.getElementById("divsize").style.display = "none";
                 document.getElementById("divmerk").style.display = "";
@@ -188,15 +220,20 @@
         function ubahMerk(){
             var namamerk = merk.options[merk.selectedIndex].text;
             if(namamerk == "Intel"){
-                alert('Intel Bos');
                 document.getElementById('socket').innerHTML = "";
                 document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
             }
             else if(namamerk == "AMD"){
-                alert("AMD Bos");
                 document.getElementById('socket').innerHTML = "";
                 document.getElementById('socket').innerHTML = "@foreach($socketamd as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
             }
+        }
+
+        function tambahsocket(){
+            var namasocketbaru = document.getElementById('socketbaru').value;
+            var socketbarumerk = document.getElementById('socketbarumerk').value;
+            fetch('/dashboard/barang/tambahsocket?namasocketbaru='+ namasocketbaru + "&socketbarumerk=" + socketbarumerk)
+                .then(data => alert(data.berhasil))
         }
 
 

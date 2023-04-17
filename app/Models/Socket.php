@@ -9,6 +9,8 @@ class Socket extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function Merk(){
         return $this->belongsTo(Merk::class);
     }

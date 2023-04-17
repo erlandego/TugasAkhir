@@ -313,6 +313,11 @@ class DatabaseSeeder extends Seeder
             'merk_id' => 2
         ]);
 
+        Socket::create([
+            'nama_socket' => 'LGA1700',
+            'merk_id' => 1
+        ]);
+
         //Merk-------------------------------------------------------------------------------------------------------
         Merk::create([
             'nama_merk' => 'Intel',

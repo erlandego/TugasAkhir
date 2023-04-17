@@ -35,5 +35,6 @@ Route::post('/login', [LoginController::class , 'authenticate']);
 Route::post('/logout', [LoginController::class , 'logout']);
 
 Route::get('/dashboard/barang/checkSlug' , [DashboardBarangController::class,'checkSlug'])->middleware('auth');
+Route::get('/dashboard/barang/tambahsocket' , [DashboardBarangController::class, 'tambahsocket']);
 Route::get('/dashboard', [tes::class, 'dashboard'])->middleware('auth');
 Route::resource('/dashboard/barang', DashboardBarangController::class)->middleware('auth');

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreignId('category_id');
             $table->string('slug');
             $table->integer('harga');
-            $table->char('deskripsi' , 255);
+            $table->integer('stok');
+            $table->longtext('deskripsi');
             $table->foreignId('size')->nullable();
             $table->foreignId('ddr')->nullable();
             $table->foreignId('socket')->nullable();
