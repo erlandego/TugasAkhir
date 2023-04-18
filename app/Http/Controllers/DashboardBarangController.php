@@ -221,5 +221,19 @@ class DashboardBarangController extends Controller
             'nama_socket' => $request->namasocketbaru,
             'merk_id' => (int)$request->socketbarumerk
         ]);
+        return response()->json([
+            'berhasil' => "Berhasil Menambahkan socket",
+            'merksocketbaru' => $request->socketbarumerk
+        ]);
+    }
+
+    public function tambahmerk(Request $request){
+        Merk::create([
+            'nama_merk' => $request->namamerkbaru,
+            'category_id' => $request->kategorimerkbaru
+        ]);
+        return response()->json([
+            'berhasil' => 'berhasil menambahkan socket baru',
+        ]);
     }
 }

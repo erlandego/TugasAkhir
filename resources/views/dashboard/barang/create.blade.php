@@ -35,11 +35,28 @@
         {{-- Merk --}}
         <div class="form-group mb-3" id="divmerk">
             <b><label for="merk">Merk</label></b>
-            <select class="form-control" id="merk" name="merk" onchange="ubahMerk()">
-                @foreach ($merkPro as $item)
-                    <option value="{{ $item->id }}">{{ $item->nama_merk }}</option>
+            <div class="input-group input-group-sm mb-3">
+                <select class="form-control" id="merk" name="merk" onchange="ubahMerk()">
+                    @foreach ($merkPro as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama_merk }}</option>
+                    @endforeach
+                </select>
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-primary" id="addnewmerk" onclick="addmerk()">Tambahkan Merk baru</button>
+                </div>
+            </div>
+        </div>
+
+        {{-- Tambah Merk --}}
+        <div class="form-group mb-3" id="divmerkbaru">
+            <b><label for="merkbaru">Tambah Merk baru</label></b>
+            <input type="text" class="form-control" id="merkbaru" name="merkbaru">
+            <select class="form-control" id="merkcategory" name="merkcategory">
+                @foreach ($barangs as $item)
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
             </select>
+            <button type="button" class="btn btn-primary" onclick="tambahmerk()">Tambah</button>
         </div>
 
         {{-- Size --}}
@@ -65,9 +82,14 @@
         {{-- Socket --}}
         <div class="form-group mb-3" id="divsocket">
             <b><label for="socket">Socket</label></b>
-            <select class="form-control" id="socket" name="socket">
+            <div class="input-group input-group-sm mb-3">
+                <select class="form-control" id="socket" name="socket">
 
-            </select>
+                </select>
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-primary" id="addnewsocket" onclick="addsocket()">Tambahkan Socket baru</button>
+                </div>
+            </div>
         </div>
 
         {{-- Add Socket --}}
@@ -81,7 +103,7 @@
                 </select>
             </div>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" onclick="tambahsocket()" type="button">Add</button>
+              <button class="btn btn-outline-secondary" onclick="tambahsocket()" type="button">Tambah</button>
             </div>
         </div>
 
@@ -144,6 +166,9 @@
         document.getElementById("divsize").style.display = "none";
         document.getElementById("divddr").style.display = "none";
         document.getElementById("divnvme").style.display = "none";
+        document.getElementById("divsocketbaru").style.display = "none";
+        document.getElementById('divmerkbaru').style.display = "none";
+        //Karena intel merk pertama yang muncul
         document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
 
         function muncul(){
@@ -229,14 +254,31 @@
             }
         }
 
+
         function tambahsocket(){
             var namasocketbaru = document.getElementById('socketbaru').value;
             var socketbarumerk = document.getElementById('socketbarumerk').value;
             fetch('/dashboard/barang/tambahsocket?namasocketbaru='+ namasocketbaru + "&socketbarumerk=" + socketbarumerk)
-                .then(data => alert(data.berhasil))
+                .then(response => response.json())
+                .then(location.reload())
         }
 
+        function addsocket(){
+            document.getElementById('divsocketbaru').style.display = "";
+        }
 
+        function tambahmerk(){
+            var namamerkbaru = document.getElementById('merkbaru').value;
+            var kategorimerkbaru = document.getElementById('merkcategory').value;
+            fetch('/dashboard/barang/tambahmerk?namamerkbaru=' + namamerkbaru + '&kategorimerkbaru=' + kategorimerkbaru)
+                .then(response => response.json())
+                .then(alert('Berhasil menambahkan merk baru'))
+                .then(location.reload())
+        }
+
+        function addmerk() {
+            document.getElementById('divmerkbaru').style.display = "";
+        }
         // function string_to_slug (str) {
         //     str = str.replace(/^\s+|\s+$/g, ''); // trim
         //     str = str.toLowerCase();
