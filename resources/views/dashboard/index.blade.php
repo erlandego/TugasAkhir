@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+    @php $ctr = 1; $ctruser = 1 @endphp
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -123,8 +124,7 @@
         </div>
       </div>
 
-      <h2>List Barang</h2>
-      <a href="/barang/create" class="btn btn-primary mb-4">Tambah Barang</a>
+      <h4>List Barang</h4>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -134,57 +134,60 @@
               <th scope="col">Harga</th>
               <th scope="col">Stok</th>
               <th scope="col">Category</th>
+              <th scope="col">Merk</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
+            @foreach($barangs as $item)
             <tr>
-              <td>1,001</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>Kategori</td>
+              <td>{{ $ctr }}</td>
+              <td>{{ $item->nama_barang }}</td>
+              <td>{{ number_format($item->harga) }}</td>
+              <td>{{ $item->stok }}</td>
+              <td>{{ $item->Category->name }}</td>
+              <td>{{ $item->Merk->nama_merk }}</td>
               <td>
                 <a href="#" class="btn btn-danger">Delete</a>
                 <a href="#" class="btn btn-warning">Edit</a>
               </td>
             </tr>
-            <tr>
-              <td>1,002</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>Kategori</td>
-              <td>
-                <a href="#" class="btn btn-danger">Delete</a>
-                <a href="#" class="btn btn-warning">Edit</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>Kategori</td>
-              <td>
-                <a href="#" class="btn btn-danger">Delete</a>
-                <a href="#" class="btn btn-warning">Edit</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>Kategori</td>
-              <td>
-                <a href="#" class="btn btn-danger">Delete</a>
-                <a href="#" class="btn btn-warning">Edit</a>
-              </td>
-            </tr>
+            @php $ctr++ @endphp
+            @endforeach
           </tbody>
         </table>
       </div>
+      <a class="link link-primary" href="/dashboard/barang">See More...</a>
+      <h4 class="mt-5">List User</h4>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nama Lengkap</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($users as $item)
+            <tr>
+              <td>{{ $ctruser }}</td>
+              <td>{{ $item->name }}</td>
+              <td>{{ $item->email }}</td>
+              <td>@if($item->is_admin == 1){{ "Admin" }} @else {{ "User" }} @endif</td>
+              <td>
+                <a href="#" class="btn btn-danger">Delete</a>
+                <a href="#" class="btn btn-warning">Edit</a>
+              </td>
+            </tr>
+            @php $ctruser++ @endphp
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+      <a class="link link-primary" href="/dashboard/user">See More...</a>
     </main>
   </div>
 </div>

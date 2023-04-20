@@ -46,7 +46,8 @@ class DashboardBarangController extends Controller
             "socketintel" => Socket::select('sockets.*')
             ->join('merks' , 'merks.id' , '=' , 'sockets.merk_id')
             ->where('merks.nama_merk' , '=' , 'Intel')->get(),
-            "listsize" => Size::all()
+            "listsize" => Size::all(),
+            "page" => "List Barang"
         ]);
     }
 

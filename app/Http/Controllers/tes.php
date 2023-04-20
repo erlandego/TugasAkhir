@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\address;
+use App\Models\Barang;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -64,7 +65,9 @@ class tes extends Controller
     public function dashboard(){
         return view('dashboard.index' , [
             'title' => 'Halaman Dashboard',
-            'page' => 'Home'
+            'page' => 'Home',
+            'barangs' => Barang::first()->paginate(5),
+            'users' => User::first()->paginate(5)
         ]);
     }
 }
