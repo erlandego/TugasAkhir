@@ -36,39 +36,39 @@
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/dashboard">
+            <a class="nav-link" aria-current="page" href="/dashboard">
               <span data-feather="home" class="align-text-bottom"></span>
-              Dashboard Barang
+              Home
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link @if($page == 'List Barang') {{ "active" }} @endif" href="/dashboard/barang">
               <span data-feather="file" class="align-text-bottom"></span>
               List Barang
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link @if($page == 'List User') {{ "active" }} @endif" href="/dashboard/user">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
-              Products
+              List User
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link @if($page == 'List Socket') {{ "active" }} @endif" href="/dashboard/socket">
               <span data-feather="users" class="align-text-bottom"></span>
-              Customers
+              List Socket
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link @if($page == 'List Merk') {{ "active" }} @endif" href="/dashboard/merk">
               <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-              Reports
+              List Merk
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link @if($page == 'List Transaksi') {{ "active" }} @endif" href="/dashboard/transaksi">
               <span data-feather="layers" class="align-text-bottom"></span>
-              Integrations
+              List Transaksi
             </a>
           </li>
         </ul>

@@ -36,7 +36,7 @@
         <div class="form-group mb-3" id="divmerk">
             <b><label for="merk">Merk</label></b>
             <div class="input-group input-group-sm mb-3">
-                <select class="form-control" id="merk" name="merk" onchange="ubahMerk()">
+                <select class="form-control" id="merk" name="merk_id" onchange="ubahMerk()">
                     @foreach ($merkPro as $item)
                         <option value="{{ $item->id }}">{{ $item->nama_merk }}</option>
                     @endforeach
@@ -214,7 +214,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "";
             }
-            else if(namaketegori == "Power Supply"){
+            else if(namakategori == "Power Supply"){
                 document.getElementById("divsize").style.display = "none";
                 document.getElementById("divmerk").style.display = "";
                 document.getElementById("divsocket").style.display = "none";
@@ -229,6 +229,7 @@
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
+                // alert('masuk kesini');
             }
 
             //nanti ganti , nd boleh tembak langsung ID nya
@@ -279,6 +280,7 @@
         function addmerk() {
             document.getElementById('divmerkbaru').style.display = "";
         }
+
         // function string_to_slug (str) {
         //     str = str.replace(/^\s+|\s+$/g, ''); // trim
         //     str = str.toLowerCase();

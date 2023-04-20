@@ -21,7 +21,9 @@ class DashboardBarangController extends Controller
     public function index()
     {
         return view('dashboard.barang.barang', [
-            "title" => "Dashboard admin"
+            "title" => "Dashboard admin",
+            "barangs" => Barang::all(),
+            "page" => "List Barang"
         ]);
     }
 
@@ -71,6 +73,7 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
+                'merk_id' => 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required'
@@ -87,6 +90,7 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
+                'merk_id' => 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required'
@@ -103,6 +107,7 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
+                'merk_id' => 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required'
@@ -119,6 +124,7 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'harga' => 'required|numeric',
+                'merk_id' => 'required',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
@@ -135,6 +141,7 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
+                'merk_id' => 'required',
                 'size' => 'required',
                 'ddr' => 'required',
                 'socket'=> 'required',
@@ -151,9 +158,10 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' => 'required|numeric',
+                'merk_id' => 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
-                'deskripsi' => 'required|max:'
+                'deskripsi' => 'required'
             ]);
 
             $validatedData['size'] = null;
@@ -161,9 +169,27 @@ class DashboardBarangController extends Controller
             $validatedData['socket'] = null;
             $validatedData['nvme'] = null;
         }
+        else{
+            $validatedData = $request->validate([
+                'nama_barang' => 'max:255',
+                'category_id' => 'required',
+                'slug' => 'required|unique:barangs',
+                'merk_id' => 'required',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'deskripsi' => 'required'
+            ]);
+
+            $validatedData['size'] = null;
+            $validatedData['ddr'] = null;
+            $validatedData['power'] = null;
+            $validatedData['socket'] = null;
+            $validatedData['nvme'] = null;
+        }
 
         Barang::create($validatedData);
         return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
+        //return $validatedData;
     }
 
     /**

@@ -63,7 +63,8 @@ class tes extends Controller
 
     public function dashboard(){
         return view('dashboard.index' , [
-            'title' => 'Halaman Dashboard'
+            'title' => 'Halaman Dashboard',
+            'page' => 'Home'
         ]);
     }
 }

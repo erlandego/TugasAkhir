@@ -38,7 +38,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">
               <span data-feather="home" class="align-text-bottom"></span>
-              Dashboard Barang
+              Home
             </a>
           </li>
           <li class="nav-item">
@@ -50,25 +50,25 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
-              Products
+              List User
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="users" class="align-text-bottom"></span>
-              Customers
+              List Socket
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-              Reports
+              List Merk
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="layers" class="align-text-bottom"></span>
-              Integrations
+              List Transaksi
             </a>
           </li>
         </ul>

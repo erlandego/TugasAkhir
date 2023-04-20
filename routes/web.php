@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardBarangController;
+use App\Http\Controllers\DashboardUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tes;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [tes::class, 'index']);
 Route::get('/register', [tes::class, 'register']);
@@ -39,3 +40,5 @@ Route::get('/dashboard/barang/tambahsocket' , [DashboardBarangController::class,
 Route::get('/dashboard/barang/tambahmerk' , [DashboardBarangController::class, 'tambahmerk']);
 Route::get('/dashboard', [tes::class, 'dashboard'])->middleware('auth');
 Route::resource('/dashboard/barang', DashboardBarangController::class)->middleware('auth');
+
+Route::resource('/dashboard/user' , DashboardUserController::class)->middleware('auth');
