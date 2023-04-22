@@ -235,7 +235,8 @@ class DashboardBarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        //
+        Barang::destroy($barang->id);
+        return redirect('/dashboard/barang')->with('success' , 'Barang telah dihapus!');
     }
 
     public function checkSlug(Request $request){

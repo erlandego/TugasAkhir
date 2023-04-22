@@ -14,7 +14,7 @@ class tes extends Controller
     {
         return view("index" , [
             "title" => "Home",
-            "categories" => Category::latest()->get()
+            "categories" => Category::first()->paginate(6)
         ]);
     }
 

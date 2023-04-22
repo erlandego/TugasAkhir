@@ -33,8 +33,12 @@
                 <td>{{ $item->Category->name }}</td>
                 <td>{{ $item->Merk->nama_merk }}</td>
                 <td>
-                  <a href="#" class="btn btn-danger">Delete</a>
-                  <a href="#" class="btn btn-warning">Edit</a>
+                    <form action="/dashboard/barang/{{ $item->slug }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <button class="btn btn-danger" onclick="return confirm('Apakah yakin ingin menghapus ?')">Delete</button>
+                        <a href="#" class="btn btn-warning">Edit</a>
+                    </form>
                 </td>
                 <?php $ctr+= 1 ?>
             </tr>

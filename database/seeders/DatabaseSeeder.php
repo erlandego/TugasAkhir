@@ -227,7 +227,7 @@ class DatabaseSeeder extends Seeder
 
         Category::create([
             'name' => 'Casing',
-            'slug' => 'case'
+            'slug' => 'casing'
         ]);
 
         Category::create([
