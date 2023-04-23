@@ -37,7 +37,7 @@
                         @method('delete')
                         @csrf
                         <button class="btn btn-danger" onclick="return confirm('Apakah yakin ingin menghapus ?')">Delete</button>
-                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a href="/dashboard/barang/{{ $item->slug }}/edit" class="btn btn-warning">Edit</a>
                     </form>
                 </td>
                 <?php $ctr+= 1 ?>

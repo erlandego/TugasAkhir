@@ -212,7 +212,22 @@ class DashboardBarangController extends Controller
      */
     public function edit(Barang $barang)
     {
-        //
+        return view('dashboard.barang.edit' , [
+            'title' => 'Halaman Edit',
+            'page' => 'List Barang' ,
+            'categories' => Category::all(),
+            "merkPro" => Merk::where('category_id',1)->get(),
+            "merkOth" => Merk::where('category_id' , '!=' , 1)->get(),
+            "listslot" => Slot::all(),
+            "socketamd" => Socket::select('sockets.*')
+            ->join('merks' , 'merks.id' , '=' , 'sockets.merk_id')
+            ->where('merks.nama_merk' , '=' , 'AMD')->get(),
+            "socketintel" => Socket::select('sockets.*')
+            ->join('merks' , 'merks.id' , '=' , 'sockets.merk_id')
+            ->where('merks.nama_merk' , '=' , 'Intel')->get(),
+            "listsize" => Size::all(),
+            "barang" => $barang
+        ]);
     }
 
     /**
