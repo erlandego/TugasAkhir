@@ -47,6 +47,12 @@
             </div>
         </div>
 
+        {{-- Merk 2 --}}
+        <div class="form-group mb-3" id="divmerk2">
+            <b><label for="merk2">Merk</label></b>
+            @livewire('search-merk')
+        </div>
+
         {{-- Tambah Merk --}}
         <div class="form-group mb-3" id="divmerkbaru">
             <b><label for="merkbaru">Tambah Merk baru</label></b>
@@ -279,6 +285,11 @@
 
         function addmerk() {
             document.getElementById('divmerkbaru').style.display = "";
+        }
+
+        function listgroupclick(merk){
+            var pilih = document.getElementById(merk).innerHTML;
+            document.getElementById('merk2').value = pilih;
         }
 
         // function string_to_slug (str) {
