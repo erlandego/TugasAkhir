@@ -14,7 +14,11 @@ class SearchMerk extends Component
     public function render()
     {
         return view('livewire.search-merk' , [
-            'merks' => Merk::where('nama_merk' , 'like' , '%'. $this->search. '%')->get()
+            'merks' => Merk::where([
+                ['nama_merk' , '!=' , 'Intel'],
+                ['nama_merk' , '!=' , 'AMD'] ,
+                ['nama_merk' , 'like' , '%'. $this->search. '%']
+            ])->get()
         ]);
     }
 }

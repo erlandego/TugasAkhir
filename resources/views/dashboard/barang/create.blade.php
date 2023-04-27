@@ -174,6 +174,7 @@
         document.getElementById("divnvme").style.display = "none";
         document.getElementById("divsocketbaru").style.display = "none";
         document.getElementById('divmerkbaru').style.display = "none";
+        document.getElementById('divmerk2').style.display = "none";
         //Karena intel merk pertama yang muncul
         document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
 
@@ -182,11 +183,12 @@
             var idcat = kategori.value;
             if(namakategori == "Casing"){
                 document.getElementById("divsize").style.display = "";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divmerk2').style.display = "";
             }
             else if(namakategori == "Processor"){
                 document.getElementById("divsize").style.display = "none";
@@ -195,46 +197,52 @@
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divmerk2').style.display = "none";
             }
             else if(namakategori == "RAM"){
                 document.getElementById("divsize").style.display = "none";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divmerk2').style.display = "";
             }
             else if(namakategori == "VGA Card"){
                 document.getElementById("divsize").style.display = "none";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divmerk2').style.display = "";
             }
             else if(namakategori == "Motherboard"){
                 document.getElementById("divsize").style.display = "";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
                 document.getElementById("divsocket").style.display = "";
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "";
+                document.getElementById('divmerk2').style.display = "";
             }
             else if(namakategori == "Power Supply"){
                 document.getElementById("divsize").style.display = "none";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divmerk2').style.display = "";
             }
             else{
                 document.getElementById("divsize").style.display = "none";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divmerk2').style.display = "";
                 // alert('masuk kesini');
             }
 
@@ -290,6 +298,12 @@
         function listgroupclick(merk){
             var pilih = document.getElementById(merk).innerHTML;
             document.getElementById('merk2').value = pilih;
+            resetdata();
+        }
+
+        function resetdata(){
+            var ulmerk = document.getElementById('ulmerk');
+            ulmerk.innerHTML = "";
         }
 
         // function string_to_slug (str) {
