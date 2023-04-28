@@ -151,6 +151,17 @@
             </div>
         </div>
 
+        {{-- Berat Barang --}}
+        <div class="form-group mb-3" id="divberat">
+            <b><label for="berat">Berat :</label></b>
+            <div class="input-group input-group-sm mb-3">
+                <input id="berat" type="number" value="{{ old('berat') }}" class="form-control" aria-label="Small" name="berat" required>
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Kg</span>
+                </div>
+            </div>
+        </div>
+
         {{-- Deskripsi barang --}}
         @error('deskripsi')
             <p class="text-danger"> {{ $message }} </p>
@@ -189,6 +200,7 @@
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
+                document.getElementById('berat').style.display = "";
             }
             else if(namakategori == "Processor"){
                 document.getElementById("divsize").style.display = "none";
@@ -198,6 +210,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "none";
+                document.getElementById('berat').style.display = "";
             }
             else if(namakategori == "RAM"){
                 document.getElementById("divsize").style.display = "none";
@@ -207,6 +220,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
+                document.getElementById('berat').style.display = "";
             }
             else if(namakategori == "VGA Card"){
                 document.getElementById("divsize").style.display = "none";
@@ -216,6 +230,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
+                document.getElementById('berat').style.display = "";
             }
             else if(namakategori == "Motherboard"){
                 document.getElementById("divsize").style.display = "";
@@ -225,6 +240,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "";
                 document.getElementById('divmerk2').style.display = "";
+                document.getElementById('berat').style.display = "";
             }
             else if(namakategori == "Power Supply"){
                 document.getElementById("divsize").style.display = "none";
@@ -234,6 +250,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
+                document.getElementById('berat').style.display = "";
             }
             else{
                 document.getElementById("divsize").style.display = "none";
@@ -243,6 +260,7 @@
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
+                document.getElementById('berat').style.display = "";
                 // alert('masuk kesini');
             }
 

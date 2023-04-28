@@ -78,7 +78,8 @@ class DashboardBarangController extends Controller
                 'merk_id' => 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
-                'deskripsi' => 'required'
+                'deskripsi' => 'required',
+                'berat' => 'required'
             ]);
 
             $validatedData['size'] = null;
@@ -94,7 +95,8 @@ class DashboardBarangController extends Controller
                 'power' =>'required|numeric',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
-                'deskripsi' => 'required'
+                'deskripsi' => 'required',
+                'berat' => 'required'
             ]);
 
             $idmerk = 0;
@@ -117,7 +119,8 @@ class DashboardBarangController extends Controller
                 'power' =>'required|numeric',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
-                'deskripsi' => 'required'
+                'deskripsi' => 'required',
+                'berat' => 'required'
             ]);
             $idmerk = 0;
             foreach ($listmerk as $key => $value) {
@@ -138,7 +141,8 @@ class DashboardBarangController extends Controller
                 'slug' => 'required|unique:barangs',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
-                'deskripsi' => 'required'
+                'deskripsi' => 'required',
+                'berat' => 'required'
             ]);
 
             $idmerk = 0;
@@ -166,7 +170,8 @@ class DashboardBarangController extends Controller
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'nvme' => 'required',
-                'deskripsi' => 'required'
+                'deskripsi' => 'required',
+                'berat' => 'required'
             ]);
             $idmerk = 0;
             foreach ($listmerk as $key => $value) {
@@ -185,7 +190,8 @@ class DashboardBarangController extends Controller
                 'power' => 'required|numeric',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
-                'deskripsi' => 'required'
+                'deskripsi' => 'required',
+                'berat' => 'required'
             ]);
 
             $idmerk = 0;
@@ -207,7 +213,8 @@ class DashboardBarangController extends Controller
                 'slug' => 'required|unique:barangs',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
-                'deskripsi' => 'required'
+                'deskripsi' => 'required',
+                'berat' => 'required'
             ]);
 
             $idmerk = 0;

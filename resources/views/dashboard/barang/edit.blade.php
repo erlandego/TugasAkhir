@@ -2,6 +2,15 @@
 
 @section('container')
 
+@php
+    $kategoribarang;
+    foreach ($categories as $key => $value) {
+        if($barang->category_id == $value->id){
+            $kategoribarang = $value->name;
+        }
+    }
+    // echo "<script>alert('".$kategoribarang."')</script>";
+@endphp
 <h2 class="mt-2 mb-3">Halaman Edit</h2>
 <form method="post" action="/dashboard/barang/{{ $barang->slug }}">
     @csrf
@@ -34,7 +43,7 @@
     </div>
 
     {{-- Merk --}}
-    <div class="form-group mb-3" id="divmerk">
+    <div class="form-group mb-3" id="divmerk" @if($kategoribarang != 'Processor') {{ 'style=display:none' }} @endif>
         <b><label for="merk">Merk</label></b>
         <div class="input-group input-group-sm mb-3">
             <select class="form-control" id="merk" name="merk_id" onchange="ubahMerk()">
@@ -182,6 +191,7 @@
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divberat').style.display = "";
             }
             else if(namakategori == "Processor"){
                 document.getElementById("divsize").style.display = "none";
@@ -190,6 +200,7 @@
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divberat').style.display = "";
             }
             else if(namakategori == "RAM"){
                 document.getElementById("divsize").style.display = "none";
@@ -198,6 +209,7 @@
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divberat').style.display = "";
             }
             else if(namakategori == "VGA Card"){
                 document.getElementById("divsize").style.display = "none";
@@ -206,6 +218,7 @@
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divberat').style.display = "";
             }
             else if(namakategori == "Motherboard"){
                 document.getElementById("divsize").style.display = "";
@@ -214,6 +227,7 @@
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "";
+                document.getElementById('divberat').style.display = "";
             }
             else if(namakategori == "Power Supply"){
                 document.getElementById("divsize").style.display = "none";
@@ -222,6 +236,7 @@
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divberat').style.display = "";
             }
             else{
                 document.getElementById("divsize").style.display = "none";
@@ -230,6 +245,7 @@
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
+                document.getElementById('divberat').style.display = "";
                 // alert('masuk kesini');
             }
 

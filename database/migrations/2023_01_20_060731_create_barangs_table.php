@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->longtext('deskripsi');
             $table->foreignId('merk_id');
+            $table->float('berat')->nullable();
             $table->foreignId('size')->nullable();
             $table->foreignId('ddr')->nullable();
             $table->foreignId('socket')->nullable();
