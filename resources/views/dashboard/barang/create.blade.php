@@ -298,12 +298,19 @@
         function listgroupclick(merk){
             var pilih = document.getElementById(merk).innerHTML;
             document.getElementById('merk2').value = pilih;
+            pilihan();
             resetdata();
         }
 
         function resetdata(){
             var ulmerk = document.getElementById('ulmerk');
             ulmerk.innerHTML = "";
+        }
+
+        function pilihan(){
+            var merkpilihan = document.getElementById('merkpilihan');
+            var merkpilihan2 = document.getElementById('merk2');
+            merkpilihan.value = merkpilihan2.value;
         }
 
         // function string_to_slug (str) {

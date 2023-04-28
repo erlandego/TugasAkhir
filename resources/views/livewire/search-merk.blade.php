@@ -14,4 +14,6 @@
         @endif
         </ul>
     @endif
+
+    <input type="hidden" name="merkpilihan" class="form-control" id="merkpilihan">
 </div>

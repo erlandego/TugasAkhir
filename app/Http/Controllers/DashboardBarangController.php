@@ -60,6 +60,7 @@ class DashboardBarangController extends Controller
     public function store(Request $request)
     {
         $listcat = Category::select('id','name')->get();
+        $listmerk = Merk::all();
         $kategoripilihan = "";
         $validatedData = [];
         foreach ($listcat as $key => $value) {
@@ -91,12 +92,18 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
-                'merk_id' => 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
 
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
             $validatedData['size'] = null;
             $validatedData['ddr'] = $request->ddr;
             $validatedData['socket'] = null;
@@ -108,12 +115,17 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
-                'merk_id' => 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
-
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
             $validatedData['size'] = null;
             $validatedData['ddr'] = $request->ddr;
             $validatedData['socket'] = null;
@@ -125,11 +137,17 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'harga' => 'required|numeric',
-                'merk_id' => 'required',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
 
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
             $validatedData['size'] = $request->size;
             $validatedData['ddr'] = null;
             $validatedData['socket'] = null;
@@ -142,7 +160,6 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
-                'merk_id' => 'required',
                 'size' => 'required',
                 'ddr' => 'required',
                 'socket'=> 'required',
@@ -151,6 +168,13 @@ class DashboardBarangController extends Controller
                 'nvme' => 'required',
                 'deskripsi' => 'required'
             ]);
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
 
         }
         else if($kategoripilihan == 'Power Supply'){
@@ -159,12 +183,18 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' => 'required|numeric',
-                'merk_id' => 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
 
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
             $validatedData['size'] = null;
             $validatedData['ddr'] = null;
             $validatedData['socket'] = null;
@@ -175,12 +205,18 @@ class DashboardBarangController extends Controller
                 'nama_barang' => 'max:255',
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
-                'merk_id' => 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required'
             ]);
 
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
             $validatedData['size'] = null;
             $validatedData['ddr'] = null;
             $validatedData['power'] = null;
