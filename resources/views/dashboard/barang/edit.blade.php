@@ -4,12 +4,18 @@
 
 @php
     $kategoribarang;
+    $merkproc;
     foreach ($categories as $key => $value) {
         if($barang->category_id == $value->id){
             $kategoribarang = $value->name;
         }
     }
-    // echo "<script>alert('".$kategoribarang."')</script>";
+    foreach ($merkPro as $key => $value) {
+        if($value->id == $barang->merk_id){
+            $merkproc = $value->nama_merk;
+        }
+    }
+    //  echo "<script>alert('".$merkproc."')</script>";
 @endphp
 <h2 class="mt-2 mb-3">Halaman Edit</h2>
 <form method="post" action="/dashboard/barang/{{ $barang->slug }}">
@@ -48,13 +54,25 @@
         <div class="input-group input-group-sm mb-3">
             <select class="form-control" id="merk" name="merk_id" onchange="ubahMerk()">
                 @foreach ($merkPro as $item)
-                    <option value="{{ $item->id }}">{{ $item->nama_merk }}</option>
+                    @if($item->id == $barang->merk_id){
+                        <option value="{{ $item->id }}" selected>{{ $item->nama_merk }}</option>
+                    }
+                    @else{
+                        <option value="{{ $item->id }}">{{ $item->nama_merk }}</option>
+                    }
+                    @endif
                 @endforeach
             </select>
             <div class="input-group-prepend">
                 <button type="button" class="btn btn-primary" id="addnewmerk" onclick="addmerk()">Tambahkan Merk baru</button>
             </div>
         </div>
+    </div>
+
+    {{-- Merk 2 --}}
+    <div class="form-group mb-3" id="divmerk2" @if($kategoribarang == 'Processor') {{ 'style=display:none' }} @endif>
+        <b><label for="merk2">Merk</label></b>
+        @livewire('search-merk')
     </div>
 
     {{-- Tambah Merk --}}
@@ -70,31 +88,67 @@
     </div>
 
     {{-- Size --}}
-    <div class="form-group mb-3" id="divsize">
+    <div class="form-group mb-3" id="divsize" @if($barang->size == null) {{ 'style=display:none' }} @endif>
         <b><label for="size">Ukuran Case</label></b>
         <select class="form-control" id="size" name="size">
             @foreach ($listsize as $item)
-                <option value="{{ $item->id }}">{{ $item->nama_ukuran }}</option>
+                @if($item->id == $barang->size){
+                    <option value="{{ $item->id }}" selected>{{ $item->nama_ukuran }}</option>
+                }
+                @else{
+                    <option value="{{ $item->id }}">{{ $item->nama_ukuran }}</option>
+                }
+                @endif
             @endforeach
         </select>
     </div>
 
     {{-- DDR --}}
-    <div class="form-group mb-3" id="divddr">
+    <div class="form-group mb-3" id="divddr" @if($barang->ddr == null) {{ 'style=display:none' }} @endif>
         <b><label for="ddr">DDR</label></b>
         <select class="form-control" id="ddr" name="ddr">
             @foreach ($listslot as $item)
-                <option value="{{ $item->id }}">{{ $item->ddr }}</option>
+                @if($item->id == $barang->ddr){
+                    <option value="{{ $item->id }}" selected>{{ $item->ddr }}</option>
+                }
+                @else{
+                    <option value="{{ $item->id }}">{{ $item->ddr }}</option>
+                }
+                @endif
             @endforeach
         </select>
     </div>
 
     {{-- Socket --}}
-    <div class="form-group mb-3" id="divsocket">
+    <div class="form-group mb-3" id="divsocket" @if($barang->socket == null) {{ 'style=display:none' }} @endif>
         <b><label for="socket">Socket</label></b>
         <div class="input-group input-group-sm mb-3">
             <select class="form-control" id="socket" name="socket">
-
+                @if($merkproc == 'Intel'){
+                    {{-- @foreach ($socketintel as $item)
+                        @if($item->id == $barang->socket){
+                            <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
+                        }
+                        @else{
+                            <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
+                        }
+                        @endif
+                    @endforeach --}}
+                    <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
+                }
+                @elseif($merkproc == 'AMD'){
+                    @foreach ($socketamd as $item)
+                        {{-- @if($item->id == $barang->socket){
+                            <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
+                        }
+                        @else{
+                            <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
+                        }
+                        @endif --}}
+                        <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
+                    @endforeach
+                }
+                @endif
             </select>
             <div class="input-group-prepend">
                 <button type="button" class="btn btn-primary" id="addnewsocket" onclick="addsocket()">Tambahkan Socket baru</button>
@@ -118,7 +172,7 @@
     </div>
 
     {{-- Power --}}
-    <div class="form-group mb-3" id="divpower">
+    <div class="form-group mb-3" id="divpower" @if($barang->power == null) {{ 'style=display:none' }} @endif>
         <b><label for="power">Power :</label></b>
         <div class="input-group input-group-sm mb-3">
             <input id="power" type="number" value="{{ old('power') }}" class="form-control" aria-label="Small" name="power">
@@ -129,7 +183,7 @@
     </div>
 
     {{-- NVME --}}
-    <div class="form-group mb-3" id="divnvme">
+    <div class="form-group mb-3" id="divnvme" @if($barang->nvme == null) {{ 'style=display:none' }} @endif>
         <b><label for="nvme">Jumlah Slot NVME</label></b>
         <div class="input-group input-group-sm mb-3">
             <input id="nvme" type="number" value="{{ old('nvme') }}" class="form-control" aria-label="Small" name="nvme">
@@ -173,9 +227,9 @@
         const kategori = document.querySelector('#category_id');
         const merk = document.querySelector('#merk');
 
-        document.getElementById("divsize").style.display = "none";
-        document.getElementById("divddr").style.display = "none";
-        document.getElementById("divnvme").style.display = "none";
+        // document.getElementById("divsize").style.display = "none";
+        // document.getElementById("divddr").style.display = "none";
+        // document.getElementById("divnvme").style.display = "none";
         document.getElementById("divsocketbaru").style.display = "none";
         document.getElementById('divmerkbaru').style.display = "none";
         //Karena intel merk pertama yang muncul
