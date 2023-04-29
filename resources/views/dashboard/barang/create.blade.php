@@ -50,7 +50,7 @@
         {{-- Merk 2 --}}
         <div class="form-group mb-3" id="divmerk2">
             <b><label for="merk2">Merk</label></b>
-            @livewire('search-merk')
+            @livewire('search-merk' , ['barang' => null , 'checker' => false])
         </div>
 
         {{-- Tambah Merk --}}

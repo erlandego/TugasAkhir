@@ -5,17 +5,25 @@
 @php
     $kategoribarang;
     $merkproc ="";
+    $merkbarang = "";
     foreach ($categories as $key => $value) {
         if($barang->category_id == $value->id){
             $kategoribarang = $value->name;
         }
     }
+
     foreach ($merkPro as $key => $value) {
         if($value->id == $barang->merk_id){
             $merkproc = $value->nama_merk;
         }
     }
-    // echo "<script>alert('".$barang->deskripsi."')</script>";
+
+    foreach ($merkOth as $key => $value) {
+        if($value->id == $barang->merk_id){
+            $merkbarang = $value->nama_merk;
+        }
+    }
+    //echo "<script>alert('".$merkbarang."')</script>";
 @endphp
 <h2 class="mt-2 mb-3">Halaman Edit</h2>
 <form method="post" action="/dashboard/barang/{{ $barang->slug }}">
@@ -72,11 +80,11 @@
     {{-- Merk 2 --}}
     <div class="form-group mb-3" id="divmerk2" @if($kategoribarang == 'Processor') {{ 'style=display:none' }} @endif>
         <b><label for="merk2">Merk</label></b>
-        @livewire('search-merk')
+        @livewire('search-merk' , ['barang' => $barang , 'checker' => true])
     </div>
 
     {{-- Tambah Merk --}}
-    <div class="form-group mb-3" id="divmerkbaru">
+    <div class="form-group mb-3" id="divmerkbaru" style="display:none">
         <b><label for="merkbaru">Tambah Merk baru</label></b>
         <input type="text" class="form-control" id="merkbaru" name="merkbaru">
         <select class="form-control" id="merkcategory" name="merkcategory">
@@ -155,7 +163,7 @@
     </div>
 
     {{-- Add Socket --}}
-    <div class="form-group mb-3" id="divsocketbaru">
+    <div class="form-group mb-3" id="divsocketbaru" style="displaynone">
         <b><label for="socketbaru">Input Socket baru : </label></b>
         <input type="text" class="form-control" id="socketbaru" name="socketbaru" aria-label="Recipient's username" aria-describedby="basic-addon2">
         <div class="input-group-append">
@@ -225,9 +233,8 @@
         const kategori = document.querySelector('#category_id');
         const merk = document.querySelector('#merk');
 
-        // document.getElementById("divsize").style.display = "none";
-        // document.getElementById("divddr").style.display = "none";
-        // document.getElementById("divnvme").style.display = "none";
+        //document.getElementById('merk2').value = {{ $merkbarang }};
+
         document.getElementById("divsocketbaru").style.display = "none";
         document.getElementById('divmerkbaru').style.display = "none";
         // //Karena intel merk pertama yang muncul
@@ -350,7 +357,25 @@
             document.getElementById('divmerkbaru').style.display = "";
         }
 
-    nama.addEventListener('change' , function(){
+        function listgroupclick(merk){
+            var pilih = document.getElementById(merk).innerHTML;
+            document.getElementById('merk2').value = pilih;
+            pilihan();
+            resetdata();
+        }
+
+        function resetdata(){
+            var ulmerk = document.getElementById('ulmerk');
+            ulmerk.innerHTML = "";
+        }
+
+        function pilihan(){
+            var merkpilihan = document.getElementById('merkpilihan');
+            var merkpilihan2 = document.getElementById('merk2');
+            merkpilihan.value = merkpilihan2.value;
+        }
+
+        nama.addEventListener('change' , function(){
             fetch('/dashboard/barang/checkSlug?nama=' + nama.value)
                 .then(response => response.json())
                 .then(data => slug.value = data.slug)
