@@ -4,7 +4,7 @@
 
 @php
     $kategoribarang;
-    $merkproc;
+    $merkproc ="";
     foreach ($categories as $key => $value) {
         if($barang->category_id == $value->id){
             $kategoribarang = $value->name;
@@ -15,7 +15,7 @@
             $merkproc = $value->nama_merk;
         }
     }
-    //  echo "<script>alert('".$merkproc."')</script>";
+    // echo "<script>alert('".$barang->deskripsi."')</script>";
 @endphp
 <h2 class="mt-2 mb-3">Halaman Edit</h2>
 <form method="post" action="/dashboard/barang/{{ $barang->slug }}">
@@ -125,7 +125,7 @@
         <div class="input-group input-group-sm mb-3">
             <select class="form-control" id="socket" name="socket">
                 @if($merkproc == 'Intel'){
-                    {{-- @foreach ($socketintel as $item)
+                    @foreach ($socketintel as $item)
                         @if($item->id == $barang->socket){
                             <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
                         }
@@ -133,19 +133,17 @@
                             <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
                         }
                         @endif
-                    @endforeach --}}
-                    <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
+                    @endforeach
                 }
                 @elseif($merkproc == 'AMD'){
                     @foreach ($socketamd as $item)
-                        {{-- @if($item->id == $barang->socket){
+                        @if($item->id == $barang->socket){
                             <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
                         }
                         @else{
                             <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
                         }
-                        @endif --}}
-                        <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
+                        @endif
                     @endforeach
                 }
                 @endif
@@ -175,7 +173,7 @@
     <div class="form-group mb-3" id="divpower" @if($barang->power == null) {{ 'style=display:none' }} @endif>
         <b><label for="power">Power :</label></b>
         <div class="input-group input-group-sm mb-3">
-            <input id="power" type="number" value="{{ old('power') }}" class="form-control" aria-label="Small" name="power">
+            <input id="power" type="number" value="{{ $barang->power }}" class="form-control" aria-label="Small" name="power">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Watt</span>
             </div>
@@ -186,7 +184,7 @@
     <div class="form-group mb-3" id="divnvme" @if($barang->nvme == null) {{ 'style=display:none' }} @endif>
         <b><label for="nvme">Jumlah Slot NVME</label></b>
         <div class="input-group input-group-sm mb-3">
-            <input id="nvme" type="number" value="{{ old('nvme') }}" class="form-control" aria-label="Small" name="nvme">
+            <input id="nvme" type="number" value="{{ $barang->nvme }}" class="form-control" aria-label="Small" name="nvme">
         </div>
     </div>
 
@@ -197,7 +195,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
             </div>
-            <input id="harga" type="number" value="{{ old('harga') }}" class="form-control" aria-label="Small" name="harga" required>
+            <input id="harga" type="number" value="{{ $barang->harga }}" class="form-control" aria-label="Small" name="harga" required>
         </div>
     </div>
 
@@ -205,7 +203,7 @@
     <div class="form-group mb-3">
         <b><label for="stok">Input Stok : </label></b>
         <div class="input-group input-group-sm mb-3">
-            <input id="stok" type="number" value="{{ old('stok') }}" class="form-control" aria-label="Small" name="stok" required>
+            <input id="stok" type="number" value="{{ $barang->stok }}" class="form-control" aria-label="Small" name="stok" required>
         </div>
     </div>
 
@@ -215,7 +213,7 @@
     @enderror
     <div class="form-group mb-3">
         <b><label for="deskripsi">Deskripsi barang</label></b>
-        <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
+        <textarea class="form-control" id="deskripsi" rows="5" name="deskripsi">{{ $barang->deskripsi }}</textarea>
     </div>
     {{-- btn submit --}}
     <button type="submit" class="btn btn-primary">Tambah+</button>
@@ -232,8 +230,8 @@
         // document.getElementById("divnvme").style.display = "none";
         document.getElementById("divsocketbaru").style.display = "none";
         document.getElementById('divmerkbaru').style.display = "none";
-        //Karena intel merk pertama yang muncul
-        document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
+        // //Karena intel merk pertama yang muncul
+        // document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
 
         function muncul(){
             var namakategori = kategori.options[kategori.selectedIndex].text;
