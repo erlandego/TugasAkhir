@@ -282,7 +282,178 @@ class DashboardBarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-        //
+        $listcat = Category::select('id','name')->get();
+        $listmerk = Merk::all();
+        $kategoripilihan = "";
+        $validatedData = [];
+        foreach ($listcat as $key => $value) {
+            if($key+1 == $request->category_id){
+                $kategoripilihan = $value->name;
+            }
+        }
+        if($kategoripilihan == 'Processor'){
+            $validatedData = $request->validate([
+                'nama_barang' => 'max:255',
+                'category_id' => 'required',
+                'slug' => 'required|unique:barangs',
+                'power' =>'required|numeric',
+                'merk_id' => 'required',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'deskripsi' => 'required',
+                'berat' => 'required'
+            ]);
+
+            $validatedData['size'] = null;
+            $validatedData['ddr'] = null;
+            $validatedData['socket'] = $request->socket;
+            $validatedData['nvme'] = 0;
+        }
+        else if($kategoripilihan == 'RAM'){
+            $validatedData = $request->validate([
+                'nama_barang' => 'max:255',
+                'category_id' => 'required',
+                'slug' => 'required|unique:barangs',
+                'power' =>'required|numeric',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'deskripsi' => 'required',
+                'berat' => 'required'
+            ]);
+
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
+            $validatedData['size'] = null;
+            $validatedData['ddr'] = $request->ddr;
+            $validatedData['socket'] = null;
+            $validatedData['nvme'] = 0;
+        }
+        else if($kategoripilihan == 'VGA Card'){
+            $validatedData = $request->validate([
+                'nama_barang' => 'max:255',
+                'category_id' => 'required',
+                'slug' => 'required|unique:barangs',
+                'power' =>'required|numeric',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'deskripsi' => 'required',
+                'berat' => 'required'
+            ]);
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
+            $validatedData['size'] = null;
+            $validatedData['ddr'] = $request->ddr;
+            $validatedData['socket'] = null;
+            $validatedData['nvme'] = 0;
+        }
+        else if($kategoripilihan == 'Casing'){
+            $validatedData = $request->validate([
+                'nama_barang' => 'max:255',
+                'category_id' => 'required',
+                'slug' => 'required|unique:barangs',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'deskripsi' => 'required',
+                'berat' => 'required'
+            ]);
+
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
+            $validatedData['size'] = $request->size;
+            $validatedData['ddr'] = null;
+            $validatedData['socket'] = null;
+            $validatedData['power'] = null;
+            $validatedData['nvme'] = null;
+        }
+        else if($kategoripilihan == 'Motherboard'){
+            $validatedData = $request->validate([
+                'nama_barang' => 'max:255',
+                'category_id' => 'required',
+                'slug' => 'required|unique:barangs',
+                'power' =>'required|numeric',
+                'size' => 'required',
+                'ddr' => 'required',
+                'socket'=> 'required',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'nvme' => 'required',
+                'deskripsi' => 'required',
+                'berat' => 'required'
+            ]);
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
+
+        }
+        else if($kategoripilihan == 'Power Supply'){
+            $validatedData = $request->validate([
+                'nama_barang' => 'max:255',
+                'category_id' => 'required',
+                'slug' => 'required|unique:barangs',
+                'power' => 'required|numeric',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'deskripsi' => 'required',
+                'berat' => 'required'
+            ]);
+
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
+            $validatedData['size'] = null;
+            $validatedData['ddr'] = null;
+            $validatedData['socket'] = null;
+            $validatedData['nvme'] = null;
+        }
+        else{
+            $validatedData = $request->validate([
+                'nama_barang' => 'max:255',
+                'category_id' => 'required',
+                'slug' => 'required|unique:barangs',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'deskripsi' => 'required',
+                'berat' => 'required'
+            ]);
+
+            $idmerk = 0;
+            foreach ($listmerk as $key => $value) {
+                if($request->merkpilihan == $value->nama_merk){
+                    $idmerk = $value->id;
+                }
+            }
+            $validatedData['merk_id'] = $idmerk;
+            $validatedData['size'] = null;
+            $validatedData['ddr'] = null;
+            $validatedData['power'] = null;
+            $validatedData['socket'] = null;
+            $validatedData['nvme'] = null;
+        }
+
+
     }
 
     /**

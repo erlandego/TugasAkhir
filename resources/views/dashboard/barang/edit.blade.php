@@ -27,6 +27,7 @@
 @endphp
 <h2 class="mt-2 mb-3">Halaman Edit</h2>
 <form method="post" action="/dashboard/barang/{{ $barang->slug }}">
+    @method('put')
     @csrf
     {{-- Nama Barang --}}
     <div class="form-group mt-2 mb-3">
@@ -37,7 +38,7 @@
             {{ $message }}
         </div>
       @enderror
-      <input type="hidden" class="form-control" id="slug" name="slug">
+      <input type="hidden" class="form-control" id="slug" name="slug" value="{{ $barang->slug }}">
     </div>
 
     {{-- Kategori --}}
