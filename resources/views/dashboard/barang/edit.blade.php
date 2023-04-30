@@ -27,8 +27,8 @@
 @endphp
 <h2 class="mt-2 mb-3">Halaman Edit</h2>
 <form method="post" action="/dashboard/barang/{{ $barang->slug }}">
-    @method('put')
     @csrf
+    @method('put')
     {{-- Nama Barang --}}
     <div class="form-group mt-2 mb-3">
       <b><label for="nama_barang">Nama Barang </label></b>
@@ -39,6 +39,11 @@
         </div>
       @enderror
       <input type="hidden" class="form-control" id="slug" name="slug" value="{{ $barang->slug }}">
+      @error('slug')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+      @enderror
     </div>
 
     {{-- Kategori --}}
@@ -55,6 +60,11 @@
             @endif
         @endforeach
       </select>
+      @error('category_id')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+      @enderror
     </div>
 
     {{-- Merk --}}
@@ -76,12 +86,22 @@
                 <button type="button" class="btn btn-primary" id="addnewmerk" onclick="addmerk()">Tambahkan Merk baru</button>
             </div>
         </div>
+        @error('merk_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     {{-- Merk 2 --}}
     <div class="form-group mb-3" id="divmerk2" @if($kategoribarang == 'Processor') {{ 'style=display:none' }} @endif>
         <b><label for="merk2">Merk</label></b>
         @livewire('search-merk' , ['barang' => $barang , 'checker' => true])
+        @error('merk_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     {{-- Tambah Merk --}}
@@ -110,6 +130,11 @@
                 @endif
             @endforeach
         </select>
+        @error('size')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     {{-- DDR --}}
@@ -126,6 +151,11 @@
                 @endif
             @endforeach
         </select>
+        @error('ddr')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     {{-- Socket --}}
@@ -161,6 +191,11 @@
                 <button type="button" class="btn btn-primary" id="addnewsocket" onclick="addsocket()">Tambahkan Socket baru</button>
             </div>
         </div>
+        @error('socket')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     {{-- Add Socket --}}
@@ -187,6 +222,11 @@
                 <span class="input-group-text" id="inputGroup-sizing-sm">Watt</span>
             </div>
         </div>
+        @error('power')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     {{-- NVME --}}
@@ -195,6 +235,11 @@
         <div class="input-group input-group-sm mb-3">
             <input id="nvme" type="number" value="{{ $barang->nvme }}" class="form-control" aria-label="Small" name="nvme">
         </div>
+        @error('nvme')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     {{-- Harga Barang --}}
@@ -206,6 +251,11 @@
             </div>
             <input id="harga" type="number" value="{{ $barang->harga }}" class="form-control" aria-label="Small" name="harga" required>
         </div>
+        @error('harga')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     {{-- Stok Barang --}}
@@ -213,6 +263,22 @@
         <b><label for="stok">Input Stok : </label></b>
         <div class="input-group input-group-sm mb-3">
             <input id="stok" type="number" value="{{ $barang->stok }}" class="form-control" aria-label="Small" name="stok" required>
+        </div>
+        @error('stok')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+
+    {{-- Berat Barang --}}
+    <div class="form-group mb-3" id="divberat">
+        <b><label for="berat">Berat :</label></b>
+        <div class="input-group input-group-sm mb-3">
+            <input id="berat" type="number" value="{{ $barang->berat }}" class="form-control" aria-label="Small" name="berat" required>
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Kg</span>
+            </div>
         </div>
     </div>
 
@@ -225,7 +291,7 @@
         <textarea class="form-control" id="deskripsi" rows="5" name="deskripsi">{{ $barang->deskripsi }}</textarea>
     </div>
     {{-- btn submit --}}
-    <button type="submit" class="btn btn-primary">Tambah+</button>
+    <button type="submit" class="btn btn-warning">Edit</button>
 </form>
 
 <script>

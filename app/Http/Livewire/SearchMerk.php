@@ -34,7 +34,7 @@ class SearchMerk extends Component
                 ['nama_merk' , '!=' , 'AMD'] ,
                 ['nama_merk' , 'like' , '%'. $this->search. '%']
             ])->get(),
-            'barang' => $this->barang
+            'barang' => $this->barang,
         ]);
     }
 }

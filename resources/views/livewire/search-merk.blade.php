@@ -17,5 +17,5 @@
         </ul>
     @endif
 
-    <input type="hidden" name="merkpilihan" class="form-control" id="merkpilihan">
+    <input type="hidden" name="merkpilihan" class="form-control" id="merkpilihan" value="{{ $barang->Merk->nama_merk }}">
 </div>
