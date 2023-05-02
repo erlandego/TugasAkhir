@@ -17,5 +17,5 @@
         </ul>
     @endif
 
-    <input type="hidden" name="merkpilihan" class="form-control" id="merkpilihan" value="{{ $barang->Merk->nama_merk }}">
+    <input type="hidden" name="merkpilihan" class="form-control" id="merkpilihan" @if(isset($barang)) value="{{ $barang->Merk->nama_merk }}" @endif>
 </div>
