@@ -162,6 +162,11 @@
             </div>
         </div>
 
+        {{-- upload gambar --}}
+        <div class="form-group mb-3" id="image">
+            <b><label for="image">Upload Gambar :</label></b>
+            <input class="form-control" type="file" id="formFile">
+        </div>
         {{-- Deskripsi barang --}}
         @error('deskripsi')
             <p class="text-danger"> {{ $message }} </p>
