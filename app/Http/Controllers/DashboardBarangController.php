@@ -79,9 +79,11 @@ class DashboardBarangController extends Controller
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required',
-                'berat' => 'required'
+                'berat' => 'required',
+                'image' => 'required|image'
             ]);
 
+            $validatedData['image'] = $request->file('image')->store('barang-images');
             $validatedData['size'] = null;
             $validatedData['ddr'] = null;
             $validatedData['socket'] = $request->socket;
@@ -96,7 +98,8 @@ class DashboardBarangController extends Controller
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required',
-                'berat' => 'required'
+                'berat' => 'required',
+                'image' => 'required|image'
             ]);
 
             $idmerk = 0;
@@ -106,6 +109,7 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
+            $validatedData['image'] = $request->file('image')->store('barang-images');
             $validatedData['size'] = null;
             $validatedData['ddr'] = $request->ddr;
             $validatedData['socket'] = null;
@@ -120,7 +124,8 @@ class DashboardBarangController extends Controller
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required',
-                'berat' => 'required'
+                'berat' => 'required',
+                'image' => 'required|image'
             ]);
             $idmerk = 0;
             foreach ($listmerk as $key => $value) {
@@ -129,6 +134,7 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
+            $validatedData['image'] = $request->file('image')->store('barang-images');
             $validatedData['size'] = null;
             $validatedData['ddr'] = $request->ddr;
             $validatedData['socket'] = null;
@@ -142,7 +148,8 @@ class DashboardBarangController extends Controller
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required',
-                'berat' => 'required'
+                'berat' => 'required',
+                'image' => 'required|image'
             ]);
 
             $idmerk = 0;
@@ -152,6 +159,7 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
+            $validatedData['image'] = $request->file('image')->store('barang-images');
             $validatedData['size'] = $request->size;
             $validatedData['ddr'] = null;
             $validatedData['socket'] = null;
@@ -171,7 +179,8 @@ class DashboardBarangController extends Controller
                 'stok' => 'required|numeric',
                 'nvme' => 'required',
                 'deskripsi' => 'required',
-                'berat' => 'required'
+                'berat' => 'required',
+                'image' => 'required|image'
             ]);
             $idmerk = 0;
             foreach ($listmerk as $key => $value) {
@@ -180,6 +189,7 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
+            $validatedData['image'] = $request->file('image')->store('barang-images');
 
         }
         else if($kategoripilihan == 'Power Supply'){
@@ -191,7 +201,8 @@ class DashboardBarangController extends Controller
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required',
-                'berat' => 'required'
+                'berat' => 'required',
+                'image' => 'required|image'
             ]);
 
             $idmerk = 0;
@@ -201,6 +212,7 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
+            $validatedData['image'] = $request->file('image')->store('barang-images');
             $validatedData['size'] = null;
             $validatedData['ddr'] = null;
             $validatedData['socket'] = null;
@@ -214,7 +226,8 @@ class DashboardBarangController extends Controller
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'deskripsi' => 'required',
-                'berat' => 'required'
+                'berat' => 'required',
+                'image' => 'required|image'
             ]);
 
             $idmerk = 0;
@@ -224,6 +237,7 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
+            $validatedData['image'] = $request->file('image')->store('barang-images');
             $validatedData['size'] = null;
             $validatedData['ddr'] = null;
             $validatedData['power'] = null;

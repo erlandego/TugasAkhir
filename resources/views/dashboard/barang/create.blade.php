@@ -8,7 +8,7 @@
     @endif
     <h2>Ini halaman create</h2>
 
-    <form method="post" action="/dashboard/barang">
+    <form method="post" action="/dashboard/barang" enctype="multipart/form-data">
         @csrf
         {{-- Nama Barang --}}
         <div class="form-group mt-2 mb-3">
@@ -163,10 +163,16 @@
         </div>
 
         {{-- upload gambar --}}
-        <div class="form-group mb-3" id="image">
+        <div class="form-group mb-3" id="divimage">
             <b><label for="image">Upload Gambar :</label></b>
-            <input class="form-control" type="file" id="formFile">
+            <input class="form-control" type="file" id="formFile" name='image'>
+            @error('image')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
+
         {{-- Deskripsi barang --}}
         @error('deskripsi')
             <p class="text-danger"> {{ $message }} </p>
@@ -206,6 +212,7 @@
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "Processor"){
                 document.getElementById("divsize").style.display = "none";
@@ -216,6 +223,7 @@
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "none";
                 document.getElementById('berat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "RAM"){
                 document.getElementById("divsize").style.display = "none";
@@ -226,6 +234,7 @@
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "VGA Card"){
                 document.getElementById("divsize").style.display = "none";
@@ -236,6 +245,7 @@
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "Motherboard"){
                 document.getElementById("divsize").style.display = "";
@@ -246,6 +256,7 @@
                 document.getElementById("divnvme").style.display = "";
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "Power Supply"){
                 document.getElementById("divsize").style.display = "none";
@@ -256,6 +267,7 @@
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else{
                 document.getElementById("divsize").style.display = "none";
@@ -266,7 +278,7 @@
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
-                // alert('masuk kesini');
+                document.getElementById('divimage').style.display = "";
             }
 
             //nanti ganti , nd boleh tembak langsung ID nya
