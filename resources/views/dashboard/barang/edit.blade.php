@@ -282,6 +282,20 @@
         </div>
     </div>
 
+    {{-- Menampilkan Gambar --}}
+    <img src="{{ asset('storage/' . $barang->image) }}" alt="{{ $barang->nama_barang }}" class="img-fluid mb-2" width="200" height="100">
+
+    {{-- upload gambar --}}
+    <div class="form-group mb-3" id="divimage">
+        <b><label for="image">Upload Gambar :</label></b>
+        <input class="form-control" type="file" id="formFile" name='image'>
+        @error('image')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+
     {{-- Deskripsi barang --}}
     @error('deskripsi')
         <p class="text-danger"> {{ $message }} </p>
@@ -318,6 +332,7 @@
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "Processor"){
                 document.getElementById("divsize").style.display = "none";
@@ -327,6 +342,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "RAM"){
                 document.getElementById("divsize").style.display = "none";
@@ -336,6 +352,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "VGA Card"){
                 document.getElementById("divsize").style.display = "none";
@@ -345,6 +362,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "Motherboard"){
                 document.getElementById("divsize").style.display = "";
@@ -354,6 +372,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "";
                 document.getElementById('divberat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else if(namakategori == "Power Supply"){
                 document.getElementById("divsize").style.display = "none";
@@ -363,6 +382,7 @@
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
+                document.getElementById('divimage').style.display = "";
             }
             else{
                 document.getElementById("divsize").style.display = "none";
@@ -372,7 +392,7 @@
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
-                // alert('masuk kesini');
+                document.getElementById('divimage').style.display = "";
             }
 
             //nanti ganti , nd boleh tembak langsung ID nya
