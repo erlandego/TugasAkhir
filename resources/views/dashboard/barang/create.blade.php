@@ -139,7 +139,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
                 </div>
-                <input id="harga" type="number" value="{{ old('harga') }}" class="form-control" aria-label="Small" name="harga" required>
+                <input id="harga" type="number" value="{{ old('harga') }}" class="form-control" aria-label="Small" name="harga">
             </div>
         </div>
 
@@ -147,7 +147,7 @@
         <div class="form-group mb-3">
             <b><label for="stok">Input Stok : </label></b>
             <div class="input-group input-group-sm mb-3">
-                <input id="stok" type="number" value="{{ old('stok') }}" class="form-control" aria-label="Small" name="stok" required>
+                <input id="stok" type="number" value="{{ old('stok') }}" class="form-control" aria-label="Small" name="stok">
             </div>
         </div>
 
@@ -155,7 +155,7 @@
         <div class="form-group mb-3" id="divberat">
             <b><label for="berat">Berat :</label></b>
             <div class="input-group input-group-sm mb-3">
-                <input id="berat" type="number" value="{{ old('berat') }}" class="form-control" aria-label="Small" name="berat" required>
+                <input id="berat" type="number" value="{{ old('berat') }}" class="form-control" aria-label="Small" name="berat">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Kg</span>
                 </div>
@@ -164,13 +164,14 @@
 
         {{-- upload gambar --}}
         <div class="form-group mb-3" id="divimage">
-            <b><label for="image">Upload Gambar :</label></b>
+            {{-- <b><label for="image">Upload Gambar :</label></b>
             <input class="form-control" type="file" id="formFile" name='image'>
             @error('image')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
-            @enderror
+            @enderror --}}
+            @livewire('upload-image')
         </div>
 
         {{-- Deskripsi barang --}}

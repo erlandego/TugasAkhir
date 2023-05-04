@@ -33,6 +33,10 @@ class Barang extends Model
         return $this->belongsTo(Slot::class);
     }
 
+    public function Image(){
+        return $this->hasMany(Image::class);
+    }
+
     public function sluggable(): array
     {
         return [
