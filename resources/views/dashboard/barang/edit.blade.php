@@ -283,15 +283,13 @@
     </div>
 
     {{-- Menampilkan Gambar --}}
-    {{-- <img src="{{ asset('storage/' . $barang->image) }}" alt="{{ $barang->nama_barang }}" class="img-fluid mb-2" width="200" height="100"> --}}
-    <div class="card mb-3" style="width: 10rem;">
-        <img class="card-img-top" src="{{ asset('storage/' . $barang->image) }}" alt="{{ $barang->nama_barang }}">
-        <div class="card-body" style="padding:5px">
-            <div class="isiancard" style="float: left;">
-                <a class="btn btn-danger btn-sm">Delete</a>
-            </div>
-        </div>
+    <div class="form-group mb-3" id="divimage">
+        @livewire('upload-image' , [
+            'dariedit' => true,
+            'barang' => $barang
+        ])
     </div>
+
 
     {{-- upload gambar --}}
     <div class="form-group mb-3" id="divimage">

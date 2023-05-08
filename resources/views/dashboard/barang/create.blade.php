@@ -164,14 +164,10 @@
 
         {{-- upload gambar --}}
         <div class="form-group mb-3" id="divimage">
-            {{-- <b><label for="image">Upload Gambar :</label></b>
-            <input class="form-control" type="file" id="formFile" name='image'>
-            @error('image')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror --}}
-            @livewire('upload-image')
+            @livewire('upload-image' , [
+                'dariedit' => false,
+                'barang' => null
+            ])
         </div>
 
         {{-- Deskripsi barang --}}

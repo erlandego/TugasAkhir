@@ -18,13 +18,11 @@
         </div>
     @endif
 
-    <form wire:submit.prevent='save'>
-        <input class="form-control" type="file" id="formFile" name='image' wire:model='image'>
-        <small id="imageHelp" class="form-text text-muted">Upload gambar terlebih dahulu lalu submit barang.</small><br>
-        @error('image')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
-    </form>
+    <input class="form-control" type="file" id="formFile" name='image' wire:model='image'>
+    <small id="imageHelp" class="form-text text-muted">Upload file dalam bentuk jpg atau png.</small><br>
+    @error('image')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
 </div>

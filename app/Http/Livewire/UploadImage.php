@@ -13,9 +13,13 @@ class UploadImage extends Component
     public $images;
     public $image;
     public $berhasil;
+    public $dariedit;
+    public $barang;
 
-    public function mount(){
+    public function mount($dariedit, $barang){
         $this->berhasil = false;
+        $this->dariedit = $dariedit;
+        $this->$barang = $barang;
     }
 
     public function updatedImage(){
@@ -28,11 +32,14 @@ class UploadImage extends Component
         $validatedData['image'] = $this->image->store('barang-images');
         $validatedData['id_barang'] = null;
         Image::create($validatedData);
-         $this->images = Image::where('id_barang', '=' , null)->get();
+        $this->images = Image::where('id_barang', '=' , null)->get();
     }
 
     public function render()
     {
+        if($this->dariedit == true){
+            $this->images = Image::where('id_barang', '=' , $this->barang->id)->get();
+        }
         return view('livewire.upload-image',[
             "images" => $this->images,
             "berhasil" => $this->berhasil

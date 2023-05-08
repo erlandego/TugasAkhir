@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Merk;
 use App\Models\Size;
 use App\Models\Slot;
@@ -232,8 +233,10 @@ class DashboardBarangController extends Controller
         }
 
         Barang::create($validatedData);
+        $id_barang = Barang::latest()->first();
+        Image::where('id_barang',null)->update(['id_barang' => $id_barang->id]);
         return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
-        //return $validatedData;
+        //return $id_barang->id;
     }
 
     /**
