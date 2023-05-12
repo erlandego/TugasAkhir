@@ -23,9 +23,9 @@ return new class extends Migration
             $table->longtext('deskripsi');
             $table->foreignId('merk_id');
             $table->float('berat')->nullable();
-            $table->foreignId('size')->nullable();
-            $table->foreignId('ddr')->nullable();
-            $table->foreignId('socket')->nullable();
+            $table->foreignId('size_id')->nullable();
+            $table->foreignId('slot_id')->nullable();
+            $table->foreignId('socket_id')->nullable();
             $table->integer('power')->nullable();
             $table->integer('nvme')->nullable();
             $table->timestamps();

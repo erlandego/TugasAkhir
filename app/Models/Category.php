@@ -13,4 +13,8 @@ class Category extends Model
     public function Barang(){
         return $this->hasMany(Barang::class);
     }
+
+    public function MerkCategory(){
+        return $this->hasMany(MerkCategory::class);
+    }
 }

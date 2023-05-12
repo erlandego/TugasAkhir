@@ -1,11 +1,7 @@
 @extends('dashboard.layout.dashboard')
 
 @section('container')
-    {{-- @dd($socketamd) --}}
-    @if(isset($kategoripilihan)){
-        @dd($kategoripilihan)
-    }
-    @endif
+    {{-- @dd($merkPro) --}}
     <h2>Ini halaman create</h2>
 
     <form method="post" action="/dashboard/barang" enctype="multipart/form-data">
@@ -38,12 +34,12 @@
             <div class="input-group input-group-sm mb-3">
                 <select class="form-control" id="merk" name="merk_id" onchange="ubahMerk()">
                     @foreach ($merkPro as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama_merk }}</option>
+                        <option value="{{ $item->Merk->id }}">{{ $item->Merk->nama_merk }}</option>
                     @endforeach
                 </select>
-                <div class="input-group-prepend">
+                {{-- <div class="input-group-prepend">
                     <button type="button" class="btn btn-primary" id="addnewmerk" onclick="addmerk()">Tambahkan Merk baru</button>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -281,11 +277,11 @@
             //nanti ganti , nd boleh tembak langsung ID nya
             if(idcat == 1){
                 document.getElementById('merk').innerHTML = "";
-                document.getElementById('merk').innerHTML = "@foreach($merkPro as $item) <option value='{{ $item->id }}'>{{ $item->nama_merk }}</option>  @endforeach";
+                document.getElementById('merk').innerHTML = "@foreach($merkPro as $item) <option value='{{ $item->Merk->id }}'>{{ $item->Merk->nama_merk }}</option>  @endforeach";
             }
             else{
                 document.getElementById('merk').innerHTML = "";
-                document.getElementById('merk').innerHTML = "@foreach($merkOth as $item) <option value='{{ $item->id }}'>{{ $item->nama_merk }}</option> @endforeach";
+                document.getElementById('merk').innerHTML = "@foreach($merkOth as $item) <option value='{{ $item->Merk->id }}'>{{ $item->Merk->nama_merk }}</option> @endforeach";
             }
         }
 

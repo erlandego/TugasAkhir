@@ -15,4 +15,8 @@ class Merk extends Model
         return $this->belongsTo(Barang::class);
     }
 
+    public function MerkCategory(){
+        return $this->hasMany(MerkCategory::class);
+    }
+
 }

@@ -11,6 +11,7 @@ use App\Models\Size;
 use App\Models\Slot;
 use App\Models\Socket;
 use App\Models\Merk;
+use App\Models\MerkCategory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -321,17 +322,56 @@ class DatabaseSeeder extends Seeder
         //Merk-------------------------------------------------------------------------------------------------------
         Merk::create([
             'nama_merk' => 'Intel',
-            'category_id' => 1,
         ]);
 
         Merk::create([
             'nama_merk' => 'AMD',
-            'category_id' => 1,
         ]);
 
         Merk::create([
             'nama_merk' => 'Samsung',
+        ]);
+
+        //Merk Categories
+        MerkCategory::create([
+            'merk_id' => 1,
+            'category_id' => 1
+        ]);
+
+        MerkCategory::create([
+            'merk_id' => 2,
+            'category_id' => 1
+        ]);
+
+        MerkCategory::create([
+            'merk_id' => 3,
             'category_id' => 2
         ]);
+
+        MerkCategory::create([
+            'merk_id' => 5,
+            'category_id' => 5
+        ]);
+
+        MerkCategory::create([
+            'merk_id' => 5,
+            'category_id' => 6
+        ]);
+
+        MerkCategory::create([
+            'merk_id' => 7,
+            'category_id' => 5
+        ]);
+
+        MerkCategory::create([
+            'merk_id' => 7,
+            'category_id' => 6
+        ]);
+
+        MerkCategory::create([
+            'merk_id' => 7,
+            'category_id' => 7
+        ]);
+
     }
 }

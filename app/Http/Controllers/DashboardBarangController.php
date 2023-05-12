@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Merk;
+use App\Models\MerkCategory;
 use App\Models\Size;
 use App\Models\Slot;
 use App\Models\Socket;
@@ -38,8 +39,8 @@ class DashboardBarangController extends Controller
         return view('dashboard.barang.create', [
             "title" => "Tambah barang",
             "barangs" => Category::all(),
-            "merkPro" => Merk::where('category_id',1)->get(),
-            "merkOth" => Merk::where('category_id' , '!=' , 1)->get(),
+            "merkPro" => MerkCategory::where('category_id',1)->get(),
+            "merkOth" => MerkCategory::where('category_id' , '!=' , 1)->get(),
             "listslot" => Slot::all(),
             "socketamd" => Socket::select('sockets.*')
             ->join('merks' , 'merks.id' , '=' , 'sockets.merk_id')
@@ -83,9 +84,9 @@ class DashboardBarangController extends Controller
                 'berat' => 'required',
             ]);
 
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = null;
-            $validatedData['socket'] = $request->socket;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = null;
+            $validatedData['socket_id'] = $request->socket;
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'RAM'){
@@ -107,9 +108,9 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = $request->ddr;
-            $validatedData['socket'] = null;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = $request->ddr;
+            $validatedData['socket_id'] = null;
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'VGA Card'){
@@ -130,9 +131,9 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = $request->ddr;
-            $validatedData['socket'] = null;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = $request->ddr;
+            $validatedData['socket_id'] = null;
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'Casing'){
@@ -153,9 +154,9 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
-            $validatedData['size'] = $request->size;
-            $validatedData['ddr'] = null;
-            $validatedData['socket'] = null;
+            $validatedData['size_id'] = $request->size;
+            $validatedData['slot_id'] = null;
+            $validatedData['socket_id'] = null;
             $validatedData['power'] = null;
             $validatedData['nvme'] = null;
         }
@@ -180,6 +181,9 @@ class DashboardBarangController extends Controller
                     $idmerk = $value->id;
                 }
             }
+            $validatedData['size_id'] = $request->size;
+            $validatedData['slot_id'] = $request->ddr;
+            $validatedData['socket_id'] = $request->socket;
             $validatedData['merk_id'] = $idmerk;
 
         }
@@ -202,9 +206,9 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = null;
-            $validatedData['socket'] = null;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = null;
+            $validatedData['socket_id'] = null;
             $validatedData['nvme'] = null;
         }
         else{
@@ -225,10 +229,10 @@ class DashboardBarangController extends Controller
                 }
             }
             $validatedData['merk_id'] = $idmerk;
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = null;
-            $validatedData['power'] = null;
-            $validatedData['socket'] = null;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = null;
+            $validatedData['power_id'] = null;
+            $validatedData['socket_id'] = null;
             $validatedData['nvme'] = null;
         }
 
@@ -262,8 +266,8 @@ class DashboardBarangController extends Controller
             'title' => 'Halaman Edit',
             'page' => 'List Barang' ,
             'categories' => Category::all(),
-            "merkPro" => Merk::where('category_id',1)->get(),
-            "merkOth" => Merk::where('category_id' , '!=' , 1)->get(),
+            "merkPro" => MerkCategory::where('category_id',1)->get(),
+            "merkOth" => MerkCategory::where('category_id' , '!=' , 1)->get(),
             "listslot" => Slot::all(),
             "socketamd" => Socket::select('sockets.*')
             ->join('merks' , 'merks.id' , '=' , 'sockets.merk_id')
@@ -313,9 +317,9 @@ class DashboardBarangController extends Controller
             }
             $validatedData = $request->validate($rules);
             $validatedData['slug'] = $request->slug;
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = null;
-            $validatedData['socket'] = $request->socket;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = null;
+            $validatedData['socket_id'] = $request->socket;
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'RAM'){
@@ -343,9 +347,9 @@ class DashboardBarangController extends Controller
 
             $validatedData['merk_id'] = $idmerk;
             $validatedData['slug'] = $request->slug;
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = $request->ddr;
-            $validatedData['socket'] = null;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = $request->ddr;
+            $validatedData['socket_id'] = null;
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'VGA Card'){
@@ -372,9 +376,9 @@ class DashboardBarangController extends Controller
             }
             $validatedData['merk_id'] = $idmerk;
             $validatedData['slug'] = $request->slug;
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = $request->ddr;
-            $validatedData['socket'] = null;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = $request->ddr;
+            $validatedData['socket_id'] = null;
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'Casing'){
@@ -400,9 +404,9 @@ class DashboardBarangController extends Controller
             }
             $validatedData['merk_id'] = $idmerk;
             $validatedData['slug'] = $request->slug;
-            $validatedData['size'] = $request->size;
-            $validatedData['ddr'] = null;
-            $validatedData['socket'] = null;
+            $validatedData['size_id'] = $request->size;
+            $validatedData['slot_id'] = null;
+            $validatedData['socket_id'] = null;
             $validatedData['power'] = null;
             $validatedData['nvme'] = null;
         }
@@ -432,6 +436,9 @@ class DashboardBarangController extends Controller
                     $idmerk = $value->id;
                 }
             }
+            $validatedData['size_id'] = $request->size;
+            $validatedData['slot_id'] = $request->ddr;
+            $validatedData['socket_id'] = $request->socket;
             $validatedData['merk_id'] = $idmerk;
             $validatedData['slug'] = $request->slug;
 
@@ -460,9 +467,9 @@ class DashboardBarangController extends Controller
             }
             $validatedData['merk_id'] = $idmerk;
             $validatedData['slug'] = $request->slug;
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = null;
-            $validatedData['socket'] = null;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = null;
+            $validatedData['socket_id'] = null;
             $validatedData['nvme'] = null;
         }
         else{
@@ -488,10 +495,10 @@ class DashboardBarangController extends Controller
             }
             $validatedData['merk_id'] = $idmerk;
             $validatedData['slug'] = $request->slug;
-            $validatedData['size'] = null;
-            $validatedData['ddr'] = null;
+            $validatedData['size_id'] = null;
+            $validatedData['slot_id'] = null;
             $validatedData['power'] = null;
-            $validatedData['socket'] = null;
+            $validatedData['socket_id'] = null;
             $validatedData['nvme'] = null;
         }
 
