@@ -1,4 +1,11 @@
 <div>
+    {{-- @if($berhasil == true){
+        alert()
+    }
+    @else{
+
+    }
+    @endif --}}
     <b><label for="image">Upload Gambar :</label></b>
     @if(isset($images))
         <div class="containercard">
@@ -7,7 +14,8 @@
                 <img class="card-img-top" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->image }}">
                 <div class="card-body" style="padding:5px">
                     <div class="isiancard" style="float: left;">
-                        <a href="/dashboard/barang/hapusgambar" class="btn btn-danger btn-sm" style="width:100%;">Delete</a>
+                        <input type="hidden" value="{{ $item->id }}">
+                        <button type="button" class="btn btn-danger btn-sm" wire:click.prevent="hapusgambar({{ $item->id }})" style="width:100%;">Delete</button>
                     </div>
                 </div>
             </div>

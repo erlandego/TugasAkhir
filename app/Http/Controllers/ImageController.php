@@ -81,6 +81,6 @@ class ImageController extends Controller
      */
     public function destroy(image $image)
     {
-        //
+        
     }
 }

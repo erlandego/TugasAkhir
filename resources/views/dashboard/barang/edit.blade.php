@@ -13,17 +13,16 @@
     }
 
     foreach ($merkPro as $key => $value) {
-        if($value->id == $barang->merk_id){
-            $merkproc = $value->nama_merk;
+        if($value->merk_id == $barang->merk_id){
+            $merkproc = $value->Merk->nama_merk;
         }
     }
 
     foreach ($merkOth as $key => $value) {
-        if($value->id == $barang->merk_id){
-            $merkbarang = $value->nama_merk;
+        if($value->merk_id == $barang->merk_id){
+            $merkbarang = $value->Merk->nama_merk;
         }
     }
-    //echo "<script>alert('".$merkbarang."')</script>";
 @endphp
 <h2 class="mt-2 mb-3">Halaman Edit</h2>
 <form method="post" action="/dashboard/barang/{{ $barang->slug }}">
@@ -74,10 +73,10 @@
             <select class="form-control" id="merk" name="merk_id" onchange="ubahMerk()">
                 @foreach ($merkPro as $item)
                     @if($item->id == $barang->merk_id){
-                        <option value="{{ $item->id }}" selected>{{ $item->nama_merk }}</option>
+                        <option value="{{ $item->Merk->id }}" selected>{{ $item->Merk->nama_merk }}</option>
                     }
                     @else{
-                        <option value="{{ $item->id }}">{{ $item->nama_merk }}</option>
+                        <option value="{{ $item->Merk->id }}">{{ $item->Merk->nama_merk }}</option>
                     }
                     @endif
                 @endforeach
@@ -117,11 +116,11 @@
     </div>
 
     {{-- Size --}}
-    <div class="form-group mb-3" id="divsize" @if($barang->size == null) {{ 'style=display:none' }} @endif>
+    <div class="form-group mb-3" id="divsize" @if($barang->size_id == null) {{ 'style=display:none' }} @endif>
         <b><label for="size">Ukuran Case</label></b>
         <select class="form-control" id="size" name="size">
             @foreach ($listsize as $item)
-                @if($item->id == $barang->size){
+                @if($item->id == $barang->size_id){
                     <option value="{{ $item->id }}" selected>{{ $item->nama_ukuran }}</option>
                 }
                 @else{
@@ -138,11 +137,11 @@
     </div>
 
     {{-- DDR --}}
-    <div class="form-group mb-3" id="divddr" @if($barang->ddr == null) {{ 'style=display:none' }} @endif>
+    <div class="form-group mb-3" id="divddr" @if($barang->slot_id == null) {{ 'style=display:none' }} @endif>
         <b><label for="ddr">DDR</label></b>
         <select class="form-control" id="ddr" name="ddr">
             @foreach ($listslot as $item)
-                @if($item->id == $barang->ddr){
+                @if($item->id == $barang->ddr_id){
                     <option value="{{ $item->id }}" selected>{{ $item->ddr }}</option>
                 }
                 @else{
@@ -159,13 +158,13 @@
     </div>
 
     {{-- Socket --}}
-    <div class="form-group mb-3" id="divsocket" @if($barang->socket == null) {{ 'style=display:none' }} @endif>
+    <div class="form-group mb-3" id="divsocket" @if($barang->socket_id == null) {{ 'style=display:none' }} @endif>
         <b><label for="socket">Socket</label></b>
         <div class="input-group input-group-sm mb-3">
             <select class="form-control" id="socket" name="socket">
                 @if($merkproc == 'Intel'){
                     @foreach ($socketintel as $item)
-                        @if($item->id == $barang->socket){
+                        @if($item->id == $barang->socket_id){
                             <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
                         }
                         @else{
@@ -176,7 +175,7 @@
                 }
                 @elseif($merkproc == 'AMD'){
                     @foreach ($socketamd as $item)
-                        @if($item->id == $barang->socket){
+                        @if($item->id == $barang->socket_id){
                             <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
                         }
                         @else{
@@ -284,23 +283,11 @@
 
     {{-- Menampilkan Gambar --}}
     <div class="form-group mb-3" id="divimage">
-        @livewire('upload-image' , [
-            'dariedit' => true,
-            'barang' => $barang
+        @livewire('edit-image' , [
+            'idbarang' => $barang->id
         ])
     </div>
 
-
-    {{-- upload gambar --}}
-    <div class="form-group mb-3" id="divimage">
-        <b><label for="image">Upload Gambar :</label></b>
-        <input class="form-control" type="file" id="formFile" name='image'>
-        @error('image')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
-    </div>
 
     {{-- Deskripsi barang --}}
     @error('deskripsi')
