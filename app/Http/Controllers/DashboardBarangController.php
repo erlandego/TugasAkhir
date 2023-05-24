@@ -166,9 +166,6 @@ class DashboardBarangController extends Controller
                 'category_id' => 'required',
                 'slug' => 'required|unique:barangs',
                 'power' =>'required|numeric',
-                'size' => 'required',
-                'ddr' => 'required',
-                'socket'=> 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'nvme' => 'required',
@@ -275,6 +272,7 @@ class DashboardBarangController extends Controller
             "socketintel" => Socket::select('sockets.*')
             ->join('merks' , 'merks.id' , '=' , 'sockets.merk_id')
             ->where('merks.nama_merk' , '=' , 'Intel')->get(),
+            "allsocket" => socket::all(),
             "listsize" => Size::all(),
             "barang" => $barang
         ]);
@@ -305,11 +303,11 @@ class DashboardBarangController extends Controller
                 'nama_barang' => 'max:255',
                 'category_id' => 'required',
                 'power' =>'required|numeric',
-                 'merk_id' => 'required',
-                 'harga' => 'required|numeric',
-                 'stok' => 'required|numeric',
-                 'deskripsi' => 'required',
-                 'berat' => 'required'
+                'merk_id' => 'required',
+                'harga' => 'required|numeric',
+                'stok' => 'required|numeric',
+                'deskripsi' => 'required',
+                'berat' => 'required'
             ];
 
             if($request->slug != $barang->slug){
@@ -319,7 +317,7 @@ class DashboardBarangController extends Controller
             $validatedData['slug'] = $request->slug;
             $validatedData['size_id'] = null;
             $validatedData['slot_id'] = null;
-            $validatedData['socket_id'] = $request->socket;
+            $validatedData['socket_id'] = $request->socket_id;
             $validatedData['nvme'] = 0;
         }
         else if($kategoripilihan == 'RAM'){
@@ -415,9 +413,6 @@ class DashboardBarangController extends Controller
                 'nama_barang' => 'max:255',
                 'category_id' => 'required',
                 'power' =>'required|numeric',
-                'size' => 'required',
-                'ddr' => 'required',
-                'socket'=> 'required',
                 'harga' => 'required|numeric',
                 'stok' => 'required|numeric',
                 'nvme' => 'required',

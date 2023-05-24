@@ -23,6 +23,7 @@
             $merkbarang = $value->Merk->nama_merk;
         }
     }
+    //dd($barang->socket_id);
 @endphp
 <h2 class="mt-2 mb-3">Halaman Edit</h2>
 <form method="post" action="/dashboard/barang/{{ $barang->slug }}">
@@ -136,6 +137,7 @@
         @enderror
     </div>
 
+
     {{-- DDR --}}
     <div class="form-group mb-3" id="divddr" @if($barang->slot_id == null) {{ 'style=display:none' }} @endif>
         <b><label for="ddr">DDR</label></b>
@@ -161,20 +163,34 @@
     <div class="form-group mb-3" id="divsocket" @if($barang->socket_id == null) {{ 'style=display:none' }} @endif>
         <b><label for="socket">Socket</label></b>
         <div class="input-group input-group-sm mb-3">
-            <select class="form-control" id="socket" name="socket">
-                @if($merkproc == 'Intel'){
-                    @foreach ($socketintel as $item)
-                        @if($item->id == $barang->socket_id){
-                            <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
-                        }
-                        @else{
-                            <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
-                        }
-                        @endif
-                    @endforeach
+            <select class="form-control" id="socket" name="socket_id">
+                @if($barang->Category->name == "Processor"){
+                    @if($merkproc == 'Intel'){
+                        @foreach ($socketintel as $item)
+                            @if($item->id == $barang->socket_id){
+                                <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
+                            }
+                            @else{
+                                <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
+                            }
+                            @endif
+                        @endforeach
+                    }
+                    @elseif($merkproc == 'AMD'){
+                        @foreach ($socketamd as $item)
+                            @if($item->id == $barang->socket_id){
+                                <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
+                            }
+                            @else{
+                                <option value="{{ $item->id }}">{{ $item->nama_socket }}</option>
+                            }
+                            @endif
+                        @endforeach
+                    }
+                    @endif
                 }
-                @elseif($merkproc == 'AMD'){
-                    @foreach ($socketamd as $item)
+                @else{
+                    @foreach ($allsocket as $item)
                         @if($item->id == $barang->socket_id){
                             <option value="{{ $item->id }}" selected>{{ $item->nama_socket }}</option>
                         }
@@ -283,8 +299,9 @@
 
     {{-- Menampilkan Gambar --}}
     <div class="form-group mb-3" id="divimage">
-        @livewire('edit-image' , [
-            'idbarang' => $barang->id
+        @livewire('upload-image' , [
+            'idbarang' => $barang->id,
+            'dariedit' => true
         ])
     </div>
 

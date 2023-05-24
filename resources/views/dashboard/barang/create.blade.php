@@ -162,7 +162,7 @@
         <div class="form-group mb-3" id="divimage">
             @livewire('upload-image' , [
                 'dariedit' => false,
-                'barang' => null
+                'idbarang' => null
             ])
         </div>
 

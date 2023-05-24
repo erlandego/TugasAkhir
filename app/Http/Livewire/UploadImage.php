@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\Barang;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class UploadImage extends Component
 {
@@ -14,12 +15,12 @@ class UploadImage extends Component
     public $image;
     public $berhasil;
     public $dariedit;
-    public $barang;
+    public $idbarang;
 
-    public function mount($dariedit, $barang){
+    public function mount($dariedit, $idbarang){
         $this->berhasil = false;
         $this->dariedit = $dariedit;
-        $this->$barang = $barang;
+        $this->idbarang = $idbarang;
     }
 
     public function updatedImage(){
@@ -29,18 +30,38 @@ class UploadImage extends Component
             'image' => 'image'
         ]);
 
-        $validatedData['image'] = $this->image->store('barang-images');
-        $validatedData['id_barang'] = null;
-        Image::create($validatedData);
+        if($this->dariedit == false){
+            $validatedData['image'] = $this->image->store('barang-images');
+            $validatedData['id_barang'] = null;
+            Image::create($validatedData);
+        }
+        else{
+            if($this->idbarang != null){
+                $validatedData['image'] = $this->image->store('barang-images');
+                $validatedData['id_barang'] = $this->idbarang;
+                Image::create($validatedData);
+            }
+        }
+    }
+
+    public function hapusgambar($idgambar){
+        $listimg = Image::find($idgambar);
+        $pathimg = $listimg->image;
+        Storage::delete($pathimg);
+        Image::destroy($idgambar);
+        $this->berhasil = true;
     }
 
     public function render()
     {
-        $this->images = Image::where('id_barang', '=' , null)->get();
+        if($this->dariedit == true){
+            $this->images = Image::where('id_barang', '=' , $this->idbarang)->get();
+        }
+        else{
+            $this->images = Image::where('id_barang', '=' , null)->get();
+        }
         return view('livewire.upload-image',[
             "images" => $this->images,
-            "berhasil" => $this->berhasil,
-            "barang2" => $this->barang
         ]);
     }
 }
