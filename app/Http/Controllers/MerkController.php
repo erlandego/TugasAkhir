@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Merk;
 use App\Http\Requests\StoreMerkRequest;
 use App\Http\Requests\UpdateMerkRequest;
+use App\Models\MerkCategory;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class MerkController extends Controller
 {
@@ -15,7 +17,11 @@ class MerkController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.merk.merk' , [
+            'page' => 'List Merk',
+            'title' => 'Admin | List Merk',
+            'listmerk' => MerkCategory::orderBy('category_id' , 'asc')->get()
+        ]);
     }
 
     /**
@@ -25,7 +31,10 @@ class MerkController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.merk.createmerk' , [
+            'title' => 'Admin | Create Merk',
+            'page' => 'List Merk'
+        ]);
     }
 
     /**

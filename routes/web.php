@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tes;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MerkController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [tes::class, 'index']);
@@ -44,3 +45,5 @@ Route::resource('/dashboard/barang', DashboardBarangController::class)->middlewa
 
 Route::resource('/dashboard/user' , DashboardUserController::class)->middleware('auth');
 Route::resource('/dashboard/image' , ImageController::class)->middleware('auth');
+
+Route::resource('/dashboard/merk' , MerkController::class)->middleware('auth');
