@@ -20,7 +20,8 @@ class DashboardMerkController extends Controller
         return view('dashboard.merk.merk' , [
             'page' => 'List Merk',
             'title' => 'Admin | List Merk',
-            'listmerk' => MerkCategory::orderBy('category_id' , 'asc')->get()
+            'listmerkcat' => MerkCategory::orderBy('category_id' , 'asc')->get() ,
+            'listmerk' => Merk::all()
         ]);
     }
 
@@ -69,7 +70,12 @@ class DashboardMerkController extends Controller
      */
     public function show(MerkCategory $merkCategory)
     {
-        //
+        return view('dashboard.merk.merk' , [
+            'page' => 'List Merk',
+            'title' => 'Admin | List Merk',
+            'listmerkcat' => MerkCategory::orderBy('category_id' , 'asc')->get() ,
+            'listmerk' => Merk::all()
+        ]);
     }
 
     /**
