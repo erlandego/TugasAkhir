@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardBarangController;
+use App\Http\Controllers\DashboardMerkController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
@@ -46,4 +47,4 @@ Route::resource('/dashboard/barang', DashboardBarangController::class)->middlewa
 Route::resource('/dashboard/user' , DashboardUserController::class)->middleware('auth');
 Route::resource('/dashboard/image' , ImageController::class)->middleware('auth');
 
-Route::resource('/dashboard/merk' , MerkController::class)->middleware('auth');
+Route::resource('/dashboard/merk' , DashboardMerkController::class)->middleware('auth');
