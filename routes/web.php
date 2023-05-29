@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardBarangController;
+use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardMerkController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\ImageController;
@@ -48,3 +49,4 @@ Route::resource('/dashboard/user' , DashboardUserController::class)->middleware(
 Route::resource('/dashboard/image' , ImageController::class)->middleware('auth');
 
 Route::resource('/dashboard/merk' , DashboardMerkController::class)->middleware('auth');
+Route::resource('/dashboard/category' , DashboardCategoryController::class)->middleware('auth');

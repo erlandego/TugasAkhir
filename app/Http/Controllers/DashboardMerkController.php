@@ -20,8 +20,8 @@ class DashboardMerkController extends Controller
         return view('dashboard.merk.merk' , [
             'page' => 'List Merk',
             'title' => 'Admin | List Merk',
-            'listmerkcat' => MerkCategory::orderBy('category_id' , 'asc')->get() ,
-            'listmerk' => Merk::all()
+            'listmerkcat' => MerkCategory::orderBy('category_id' , 'asc')->get(),
+            'listmerk' => Merk::latest()->paginate(5)
         ]);
     }
 
@@ -114,9 +114,11 @@ class DashboardMerkController extends Controller
         $hapus = [];
         $tambah = [];
 
-        // $validatedData = $request->validate([
-        //     'nama_merk' => 'required'
-        // ]);
+        $validatedData = $request->validate([
+            'nama_merk' => 'required'
+        ]);
+
+        Merk::where('id' , $merk->id)->update($validatedData);
 
         //cek 1
         foreach ($merkcat as $value) {
@@ -132,14 +134,12 @@ class DashboardMerkController extends Controller
             }
         }
 
-        $count = 1;
         //cek2
         foreach ($catpilihan as $value) {
             $cek = false;
             foreach ($merkcat as $item) {
                 if($value == $item->category_id){
                     $cek = true;
-                    $count++;
                 }
             }
             if($cek == false){
@@ -147,48 +147,22 @@ class DashboardMerkController extends Controller
             }
         }
 
-        print_r($tambah);
-        print "<br>";
-        print_r($hapus);
-        print "<br>";
-        print_r($catpilihan);
+        if($hapus != null || count($hapus) > 0){
+            foreach ($hapus as $value) {
+                MerkCategory::destroy($value);
+            }
+        }
 
-        // Merk::where('id' , $merk->id)->update($validatedData);
-        // if(count($merkcat) > count($catpilihan)){
-        //     foreach ($merkcat as  $value) {
-        //         $cek = false;
-        //         foreach ($catpilihan as $item) {
-        //             if($value->category_id == $item){
-        //                 $cek = true;
-        //                 array_push($ada , $value->id);
-        //             }
-        //         }
-        //         if($cek == false){
-        //             array_push($tidakada , $value->id);
-        //         }
-        //     }
-        // }
-        // else if(count($merkcat) < count($catpilihan)){
-        //     foreach ($catpilihan as $value) {
-        //         $cek = false;
-        //         foreach($merkcat as $item){
-        //             if($value == $item->id){
-        //                 $cek = true;
-        //                 array_push($ada , $item->id);
-        //             }
-        //         }
-        //         if($cek == false){
-        //             array_push($tidakada , $value->id);
-        //         }
-        //     }
-        // }
-        // else if(count($merkcat) == count($catpilihan)){
-        //     foreach ($merkcat as $value) {
-        //         # code...
-        //     }
-        // }
+        if($tambah != null || count($tambah) > 0){
+            foreach ($tambah as $value) {
+                MerkCategory::create([
+                    'merk_id' => $merk->id,
+                    'category_id' => $value
+                ]);
+            }
+        }
 
-        //return $ada;
+        return redirect('/dashboard/merk')->with('success' , 'Berhasil mengubah Merk');
     }
 
     /**
@@ -199,6 +173,13 @@ class DashboardMerkController extends Controller
      */
     public function destroy(Merk $merk)
     {
-        //
+        Merk::destroy($merk->id);
+        $merkhapus = MerkCategory::where('merk_id' , $merk->id)->get();
+
+        foreach ($merkhapus as $value) {
+            MerkCategory::destroy($value->id);
+        }
+
+        return redirect('/dashboard/merk')->with('success' , 'Berhasil menghapus merk');
     }
 }

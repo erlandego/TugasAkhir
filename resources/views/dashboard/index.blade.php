@@ -49,21 +49,27 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/dashboard/user">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
               List User
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/dashboard/socket">
               <span data-feather="users" class="align-text-bottom"></span>
               List Socket
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/dashboard/merk">
               <span data-feather="bar-chart-2" class="align-text-bottom"></span>
               List Merk
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard/category">
+              <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+              List Category
             </a>
           </li>
           <li class="nav-item">

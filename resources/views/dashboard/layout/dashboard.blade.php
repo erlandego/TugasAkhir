@@ -69,6 +69,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link @if($page == 'List Category') {{ "active" }} @endif" href="/dashboard/category">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              List Category
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link @if($page == 'List Transaksi') {{ "active" }} @endif" href="/dashboard/transaksi">
               <span data-feather="layers" class="align-text-bottom"></span>
               List Transaksi

@@ -6,18 +6,17 @@
     $catctr = 0;
 @endphp
 @if(session()->has('success'))
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success mt-4" role="alert">
             {{ session('success') }}
         </div>
 @endif
-<a class="btn btn-primary mt-4" href="/dashboard/merk/create"> Tambah Merk + </a>
 <div class="table-responsive">
-    <table class="table table-striped table-sm">
+    <table class="table table-striped table-sm mt-4">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nama Merk</th>
-          <th scope="col">Category Merk</th>
+          <th scope="col">Category</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -46,5 +45,9 @@
         @endforeach
       </tbody>
     </table>
+
+    {{ $listmerk->links() }}
+
+    <a class="btn btn-primary mt-4 mb-5" href="/dashboard/merk/create"> Tambah Merk + </a>
   </div>
 @endsection
