@@ -1,12 +1,13 @@
 @extends('dashboard.layout.dashboard')
 
 @section('container')
-<form method="post" action="/dashboard/category">
+<form method="post" action="/dashboard/category/{{ $category->id }}">
     @csrf
+    @method('put')
     <div class="form-group mb-3 mt-4">
-        <b><label for="name">Nama Category</label></b>
-        <input type="text" class="form-control" name="name" id="name">
-        <input type="hidden" name="slug" id="slug">
+        <b><label for="name"> Nama Category </label></b>
+        <input type="text" class="form-control" name="name" id="name" value="{{ $category->name }}">
+        <input type="hidden" name="slug" id="slug" value="{{ $category->slug }}">
     </div>
     @error('name')
         <div class="invalid-feedback">
@@ -14,7 +15,7 @@
         </div>
     @enderror
 
-    <button id="submit" class="btn btn-primary" type="submit">Tambah Category</button>
+    <button id="submit" class="btn btn-warning" type="submit">Edit Category</button>
 </form>
 <script>
     const slug = document.querySelector('#slug');

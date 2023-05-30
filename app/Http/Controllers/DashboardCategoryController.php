@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardCategoryController extends Controller
 {
@@ -44,7 +46,13 @@ class DashboardCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'slug' => 'unique:categories|required'
+        ]);
+        Category::create($validatedData);
+        return redirect('/dashboard/category')->with('success' , 'Berhasil Menambahkan category baru');
+        //return $request;
     }
 
     /**
@@ -55,7 +63,10 @@ class DashboardCategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('dashboard.category.detail' , [
+            'page' => 'List Category',
+            'title' => 'Admin | Category'
+        ]);
     }
 
     /**
@@ -66,7 +77,11 @@ class DashboardCategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.category.edit' , [
+            'page' => 'List Category',
+            'title' => 'Admin | Category' ,
+            'category' => $category
+        ]);
     }
 
     /**
@@ -78,7 +93,14 @@ class DashboardCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:categories'
+        ]);
+
+        Category::where('id' , $category->id)->update($validatedData);
+        return redirect('/dashboard/category')->with('success' , 'Berhasil Mengubah Category');
+        //return $request;
     }
 
     /**
@@ -89,6 +111,12 @@ class DashboardCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+        return redirect('/dashboard/category')->with('success' , 'Berhasil Menghapus Category');
+    }
+
+    public function checkSlug(Request $request){
+        $slug = SlugService::createSlug(Category::class, 'slug', $request->nama);
+        return response()->json(['slug' => $slug]);
     }
 }

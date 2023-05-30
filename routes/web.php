@@ -50,3 +50,4 @@ Route::resource('/dashboard/image' , ImageController::class)->middleware('auth')
 
 Route::resource('/dashboard/merk' , DashboardMerkController::class)->middleware('auth');
 Route::resource('/dashboard/category' , DashboardCategoryController::class)->middleware('auth');
+Route::get('/dashboard/categories/checkSlug' , [DashboardCategoryController::class , 'checkSlug']);
