@@ -19,6 +19,10 @@ class Category extends Model
         return $this->hasMany(MerkCategory::class);
     }
 
+    public function ImageCat(){
+        return $this->hasMany(ImageCat::class);
+    }
+
     public function sluggable(): array
     {
         return [

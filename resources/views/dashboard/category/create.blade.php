@@ -14,6 +14,13 @@
         </div>
     @enderror
 
+    <div class="form-group mb-3" id="divimage">
+        @livewire('upload-imagecat' , [
+            'idcat' => null,
+            'dariedit' => false
+        ])
+    </div>
+
     <button id="submit" class="btn btn-primary" type="submit">Tambah Category</button>
 </form>
 <script>

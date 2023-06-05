@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\ImageCat;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
@@ -51,6 +52,8 @@ class DashboardCategoryController extends Controller
             'slug' => 'unique:categories|required'
         ]);
         Category::create($validatedData);
+        $category_id = Category::latest()->first();
+        ImageCat::where('category_id' , null)->update(['category_id' => $category_id->id]);
         return redirect('/dashboard/category')->with('success' , 'Berhasil Menambahkan category baru');
         //return $request;
     }

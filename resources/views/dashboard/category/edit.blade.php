@@ -15,6 +15,13 @@
         </div>
     @enderror
 
+    <div class="form-group mb-3" id="divimage">
+        @livewire('upload-imagecat' , [
+            'idcat' => $category->id,
+            'dariedit' => true
+        ])
+    </div>
+
     <button id="submit" class="btn btn-warning" type="submit">Edit Category</button>
 </form>
 <script>

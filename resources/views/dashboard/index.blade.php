@@ -42,36 +42,50 @@
               Home
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="/dashboard/barang">
-              <span data-feather="file" class="align-text-bottom"></span>
+            <a class="nav-link" href="#" id="dropdownmaster">
+                <span data-feather="menu" class="align-text-bottom"></span>
+                Master
+                <span data-feather="chevron-down" class="align-text-bottom"></span>
+            </a>
+          </li>
+
+          <li class="nav-item anak bg-secondary">
+            <a class="nav-link" href="/dashboard/barang" style="color: white">
+              <span data-feather="user" class="align-text-bottom" style="stroke: white;"></span>
               List Barang
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboard/user">
-              <span data-feather="shopping-cart" class="align-text-bottom"></span>
+
+          <li class="nav-item anak bg-secondary">
+            <a class="nav-link" href="/dashboard/user" style="color: white">
+              <span data-feather="shopping-cart" class="align-text-bottom" style="stroke: white;"></span>
               List User
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboard/socket">
-              <span data-feather="users" class="align-text-bottom"></span>
+
+          <li class="nav-item anak bg-secondary">
+            <a class="nav-link" href="/dashboard/socket" style="color: white">
+              <span data-feather="users" class="align-text-bottom" style="stroke: white;"></span>
               List Socket
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboard/merk">
-              <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+
+          <li class="nav-item anak bg-secondary">
+            <a class="nav-link" href="/dashboard/merk" style="color: white">
+              <span data-feather="bar-chart-2" class="align-text-bottom" style="stroke: white;"></span>
               List Merk
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboard/category">
-              <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+
+          <li class="nav-item anak bg-secondary">
+            <a class="nav-link" href="/dashboard/category" style="color: white">
+              <span data-feather="bar-chart-2" class="align-text-bottom" style="stroke: white;"></span>
               List Category
             </a>
           </li>
+
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="layers" class="align-text-bottom"></span>
@@ -198,11 +212,38 @@
   </div>
 </div>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+<script src="../js/dashboard.js"></script>
+<script src="../js/main.js"></script>
 
-    <script src="js/dashboard.js"></script>
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script>
+    const parent = document.querySelector('#dropdownmaster');
+    var anak = document.getElementsByClassName('anak');
 
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-      <script src="dashboard.js"></script>
-  </body>
+    for (let index = 0; index < anak.length; index++) {
+        anak[index].style.display = "none";
+    }
+
+    parent.addEventListener('click' , function(){
+        if(anak[0].style.display == "none"){
+            for (let index = 0; index < anak.length; index++) {
+                anak[index].style.display = "";
+            }
+        }
+        else{
+            for (let index = 0; index < anak.length; index++) {
+                anak[index].style.display = "none";
+            }
+        }
+    });
+
+</script>
+</body>
 </html>
