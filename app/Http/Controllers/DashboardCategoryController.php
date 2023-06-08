@@ -18,6 +18,7 @@ class DashboardCategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         return view('dashboard.category.category' , [
             'title' => 'Admin | Category',
             'page' => 'List Category' ,
@@ -32,6 +33,7 @@ class DashboardCategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('admin');
         return view('dashboard.category.create' , [
             'title' => 'Admin | Category',
             'page' => 'List Category' ,
@@ -47,6 +49,7 @@ class DashboardCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $validatedData = $request->validate([
             'name' => 'required',
             'slug' => 'unique:categories|required'
@@ -66,6 +69,7 @@ class DashboardCategoryController extends Controller
      */
     public function show(Category $category)
     {
+        $this->authorize('admin');
         return view('dashboard.category.detail' , [
             'page' => 'List Category',
             'title' => 'Admin | Category'
@@ -80,6 +84,7 @@ class DashboardCategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        $this->authorize('admin');
         return view('dashboard.category.edit' , [
             'page' => 'List Category',
             'title' => 'Admin | Category' ,
@@ -96,6 +101,7 @@ class DashboardCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $this->authorize('admin');
         $validatedData = $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:categories'
@@ -114,6 +120,7 @@ class DashboardCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $this->authorize('admin');
         Category::destroy($category->id);
         return redirect('/dashboard/category')->with('success' , 'Berhasil Menghapus Category');
     }

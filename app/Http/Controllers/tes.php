@@ -63,6 +63,7 @@ class tes extends Controller
     }
 
     public function dashboard(){
+        $this->authorize('admin');
         return view('dashboard.index' , [
             'title' => 'Halaman Dashboard',
             'page' => 'Home',

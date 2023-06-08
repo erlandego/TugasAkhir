@@ -22,6 +22,7 @@ class DashboardBarangController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         return view('dashboard.barang.barang', [
             "title" => "Dashboard admin",
             "barangs" => Barang::all(),
@@ -36,6 +37,7 @@ class DashboardBarangController extends Controller
      */
     public function create()
     {
+        $this->authorize('admin');
         return view('dashboard.barang.create', [
             "title" => "Tambah barang",
             "barangs" => Category::all(),
@@ -61,6 +63,7 @@ class DashboardBarangController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('admin');
         $listcat = Category::select('id','name')->get();
         $listmerk = Merk::all();
         $kategoripilihan = "";
@@ -248,7 +251,7 @@ class DashboardBarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        //
+        $this->authorize('admin');
     }
 
     /**
@@ -259,6 +262,7 @@ class DashboardBarangController extends Controller
      */
     public function edit(Barang $barang)
     {
+        $this->authorize('admin');
         return view('dashboard.barang.edit' , [
             'title' => 'Halaman Edit',
             'page' => 'List Barang' ,
@@ -287,7 +291,7 @@ class DashboardBarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-
+        $this->authorize('admin');
         $listcat = Category::select('id','name')->get();
         $listmerk = Merk::all();
         $kategoripilihan = "";
@@ -510,6 +514,7 @@ class DashboardBarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
+        $this->authorize('admin');
         Barang::destroy($barang->id);
         return redirect('/dashboard/barang')->with('success' , 'Barang telah dihapus!');
     }

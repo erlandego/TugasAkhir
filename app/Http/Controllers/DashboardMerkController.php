@@ -17,6 +17,7 @@ class DashboardMerkController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         return view('dashboard.merk.merk' , [
             'page' => 'List Merk',
             'title' => 'Admin | List Merk',
@@ -90,6 +91,7 @@ class DashboardMerkController extends Controller
      */
     public function edit(Merk $merk)
     {
+        $this->authorize('admin');
         return view('dashboard.merk.edit' , [
             "page" => 'List Merk',
             "title" => 'Admin | Edit Merk',
@@ -109,6 +111,7 @@ class DashboardMerkController extends Controller
      */
     public function update(Request $request, Merk $merk)
     {
+        $this->authorize('admin');
         $merkcat = MerkCategory::where('merk_id' , $merk->id)->get();
         $catpilihan = $request->category;
         $hapus = [];
@@ -147,6 +150,7 @@ class DashboardMerkController extends Controller
             }
         }
 
+        //execute
         if($hapus != null || count($hapus) > 0){
             foreach ($hapus as $value) {
                 MerkCategory::destroy($value);
@@ -173,6 +177,7 @@ class DashboardMerkController extends Controller
      */
     public function destroy(Merk $merk)
     {
+        $this->authorize('admin');
         Merk::destroy($merk->id);
         $merkhapus = MerkCategory::where('merk_id' , $merk->id)->get();
 
