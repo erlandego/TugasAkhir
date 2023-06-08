@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardBarangController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardMerkController;
+use App\Http\Controllers\DashboardSocketController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
@@ -51,3 +52,5 @@ Route::resource('/dashboard/image' , ImageController::class)->middleware('auth')
 Route::resource('/dashboard/merk' , DashboardMerkController::class)->middleware('auth');
 Route::resource('/dashboard/category' , DashboardCategoryController::class)->middleware('auth');
 Route::get('/dashboard/categories/checkSlug' , [DashboardCategoryController::class , 'checkSlug']);
+
+Route::resource('/dashboard/socket' , DashboardSocketController::class)->middleware('auth');
