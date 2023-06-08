@@ -28,9 +28,9 @@
             @endforeach
         </select>
         @error('merk_id')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
+            <p class="text-danger">
+                @php echo $message @endphp
+            </p>
         @enderror
     </div>
 
