@@ -16,11 +16,13 @@ class UploadImage extends Component
     public $berhasil;
     public $dariedit;
     public $idbarang;
+    public $gambarlebih;
 
     public function mount($dariedit, $idbarang){
         $this->berhasil = false;
         $this->dariedit = $dariedit;
         $this->idbarang = $idbarang;
+        $this->gambarlebih = false;
     }
 
     public function updatedImage(){
@@ -31,15 +33,29 @@ class UploadImage extends Component
         ]);
 
         if($this->dariedit == false){
-            $validatedData['image'] = $this->image->store('barang-images');
-            $validatedData['id_barang'] = null;
-            Image::create($validatedData);
+            $arrsementara = Image::where('id_barang', '=' , null)->get();
+            $hitung = $arrsementara->count();
+            if($hitung < 4){
+                $validatedData['image'] = $this->image->store('barang-images');
+                $validatedData['id_barang'] = null;
+                Image::create($validatedData);
+            }
+            else if($hitung >= 4){
+                $this->gambarlebih = true;
+            }
         }
         else{
-            if($this->idbarang != null){
-                $validatedData['image'] = $this->image->store('barang-images');
-                $validatedData['id_barang'] = $this->idbarang;
-                Image::create($validatedData);
+            $arrsementara = Image::where('id_barang', '=' , $this->idbarang)->get();
+            $hitung = $arrsementara->count();
+            if($hitung < 4){
+                if($this->idbarang != null){
+                    $validatedData['image'] = $this->image->store('barang-images');
+                    $validatedData['id_barang'] = $this->idbarang;
+                    Image::create($validatedData);
+                }
+            }
+            else if($hitung >= 4){
+                $this->gambarlebih = true;
             }
         }
     }
@@ -62,6 +78,7 @@ class UploadImage extends Component
         }
         return view('livewire.upload-image',[
             "images" => $this->images,
+            'gambarlebih' => $this->gambarlebih,
         ]);
     }
 }

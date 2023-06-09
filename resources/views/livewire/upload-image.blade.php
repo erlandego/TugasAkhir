@@ -16,10 +16,15 @@
     @endif
 
     <input class="form-control" type="file" id="formFile" name='image' wire:model='image'>
+    @if($gambarlebih == true)
+        <b><p class="text-danger">
+            Tidak boleh mengupload lebih dari 4 Gambar
+        </p></b>
+    @endif
     <small id="imageHelp" class="form-text text-muted">Upload file dalam bentuk jpg atau png.</small><br>
     @error('image')
-        <div class="invalid-feedback">
+        <b><p class="text-danger">
             {{ $message }}
-        </div>
+        </p></b>
     @enderror
 </div>

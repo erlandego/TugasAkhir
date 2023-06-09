@@ -30,6 +30,7 @@ class UploadImagecat extends Component
         ]);
 
         if($this->dariedit == false){
+            //$hitung =
             $validatedData['image'] = $this->image->store('category-images');
             $validatedData['category_id'] = null;
             ImageCat::create($validatedData);

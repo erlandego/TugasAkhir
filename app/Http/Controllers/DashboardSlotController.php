@@ -44,7 +44,12 @@ class DashboardSlotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'ddr' => 'required|unique:slots'
+        ]);
+
+        Slot::create($validatedData);
+        return redirect('/dashboard/slot')->with('Success' , 'Berhasil menambahkan slot');
     }
 
     /**
@@ -66,7 +71,11 @@ class DashboardSlotController extends Controller
      */
     public function edit(Slot $slot)
     {
-        //
+        return view('dashboard.slot.edit' , [
+            "title" => 'Admin | Slot',
+            'page' => 'List Slot',
+            'slot' => $slot
+        ]);
     }
 
     /**
@@ -78,7 +87,12 @@ class DashboardSlotController extends Controller
      */
     public function update(Request $request, Slot $slot)
     {
-        //
+        $validatedData = $request->validate([
+            'ddr' => 'required|unique:slots'
+        ]);
+
+        Slot::where('id' , $slot->id)->update($validatedData);
+        return redirect('/dashboard/slot')->with('success' , 'Berhasil Mengedit slot');
     }
 
     /**

@@ -1,12 +1,12 @@
 @extends('dashboard.layout.dashboard')
 
 @section('container')
-<h2 class="mb-3 mt-2">Tambah Slot Baru</h2>
-<form method="post" action="/dashboard/slot">
+<form method="post" action="/dashboard/slot/{{ $slot->id }}">
     @csrf
-    <div class="form-group mb-3">
+    @method('put')
+    <div class="form-group mt-3 mb-3">
         <b><label for="ddr">Nama Slot</label></b>
-        <input type="text" class="form-control" id="ddr" name="ddr">
+        <input type="text" class="form-control" id="ddr" name="ddr" value="{{ $slot->ddr }}">
         @error('ddr')
             <b><p class="text-danger">
                 {{ $message }}
@@ -14,6 +14,6 @@
         @enderror
     </div>
 
-    <button type="submit" class="btn btn-primary">Tambahkan slot</button>
+    <button class="btn btn-warning" type="submit">Edit</button>
 </form>
 @endsection
