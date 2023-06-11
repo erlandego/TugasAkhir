@@ -102,10 +102,15 @@ class DashboardCategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $this->authorize('admin');
-        $validatedData = $request->validate([
+        $rules = [
             'name' => 'required',
-            'slug' => 'required|unique:categories'
-        ]);
+        ];
+
+        if($request->name != $category->name){
+            $rules['slug'] = 'required|unique:categories';
+        }
+
+        $validatedData = $request->validate($rules);
 
         Category::where('id' , $category->id)->update($validatedData);
         return redirect('/dashboard/category')->with('success' , 'Berhasil Mengubah Category');

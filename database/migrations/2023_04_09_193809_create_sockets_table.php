@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('sockets', function (Blueprint $table) {
             $table->id();
             $table->string('nama_socket');
+            $table->string('slug')->unique();
             $table->foreignId('merk_id');
             $table->timestamps();
         });

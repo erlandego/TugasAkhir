@@ -253,83 +253,101 @@ class DatabaseSeeder extends Seeder
 
         //Size------------------------------------------------------------------------------------------------------
         Size::create([
-            'nama_ukuran' => 'ATX'
+            'nama_ukuran' => 'ATX',
+            'slug' => 'atx'
         ]);
 
         Size::create([
-            'nama_ukuran' => 'Mini ATX'
+            'nama_ukuran' => 'Mini ATX',
+            'slug' => 'mini-atx'
         ]);
 
         Size::create([
-            'nama_ukuran' => 'Micro ATX'
+            'nama_ukuran' => 'Micro ATX',
+            'slug' => 'micro-atx'
         ]);
 
         //Slots------------------------------------------------------------------------------------------------------
         Slot::create([
-            'ddr' => 'DDR1'
+            'ddr' => 'DDR1',
+            'slug' => 'ddr1'
         ]);
 
         Slot::create([
-            'ddr' => 'DDR2'
+            'ddr' => 'DDR2',
+            'slug' => 'ddr2'
         ]);
 
         Slot::create([
-            'ddr' => 'DDR3'
+            'ddr' => 'DDR3',
+            'slug' => 'ddr3'
         ]);
 
         Slot::create([
-            'ddr' => 'DDR4'
+            'ddr' => 'DDR4',
+            'slug' => 'ddr4'
         ]);
 
         Slot::create([
-            'ddr' => 'DDR3L'
+            'ddr' => 'DDR3L',
+            'slug' => 'ddr3l'
         ]);
 
         Slot::create([
-            'ddr' => 'DDR4L'
+            'ddr' => 'DDR4L',
+            'slug' => 'ddr4l'
         ]);
 
         Slot::create([
-            'ddr' => 'DDR5'
+            'ddr' => 'DDR5',
+            'slug' => 'ddr5'
         ]);
 
         //Socket----------------------------------------------------------------------------------------------------
         Socket::create([
             'nama_socket' => 'LGA1151',
+            'slug' => 'lga1151',
             'merk_id' => 1
         ]);
 
         Socket::create([
             'nama_socket' => 'LGA1200',
+            'slug' => 'lga1200',
             'merk_id' => 1
         ]);
 
         Socket::create([
             'nama_socket' => 'AM4',
+            'slug' => 'am4',
             'merk_id' => 2
         ]);
 
         Socket::create([
             'nama_socket' => 'AM5',
+            'slug' => 'am5',
             'merk_id' => 2
         ]);
 
         Socket::create([
             'nama_socket' => 'LGA1700',
+            'slug' => 'lga1700',
             'merk_id' => 1
         ]);
 
         //Merk-------------------------------------------------------------------------------------------------------
         Merk::create([
             'nama_merk' => 'Intel',
+            'slug' => 'intel'
         ]);
 
         Merk::create([
             'nama_merk' => 'AMD',
+            'slug' => 'amd'
         ]);
 
         Merk::create([
             'nama_merk' => 'Samsung',
+            'slug' => 'samsung'
         ]);
 
         //Merk Categories
@@ -366,11 +384,6 @@ class DatabaseSeeder extends Seeder
         MerkCategory::create([
             'merk_id' => 7,
             'category_id' => 6
-        ]);
-
-        MerkCategory::create([
-            'merk_id' => 7,
-            'category_id' => 7
         ]);
 
     }

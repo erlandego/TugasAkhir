@@ -1,7 +1,7 @@
 @extends('dashboard.layout.dashboard')
 
 @section('container')
-<form method="post" action="/dashboard/category/{{ $category->id }}">
+<form method="post" action="/dashboard/category/{{ $category->slug }}">
     @csrf
     @method('put')
     <div class="form-group mb-3 mt-4">

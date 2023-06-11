@@ -50,7 +50,7 @@
         </div>
 
         {{-- Tambah Merk --}}
-        <div class="form-group mb-3" id="divmerkbaru">
+        {{-- <div class="form-group mb-3" id="divmerkbaru">
             <b><label for="merkbaru">Tambah Merk baru</label></b>
             <input type="text" class="form-control" id="merkbaru" name="merkbaru">
             <select class="form-control" id="merkcategory" name="merkcategory">
@@ -59,7 +59,7 @@
                 @endforeach
             </select>
             <button type="button" class="btn btn-primary" onclick="tambahmerk()">Tambah</button>
-        </div>
+        </div> --}}
 
         {{-- Size --}}
         <div class="form-group mb-3" id="divsize">
@@ -95,7 +95,7 @@
         </div>
 
         {{-- Add Socket --}}
-        <div class="form-group mb-3" id="divsocketbaru">
+        {{-- <div class="form-group mb-3" id="divsocketbaru">
             <b><label for="socketbaru">Input Socket baru : </label></b>
             <input type="text" class="form-control" id="socketbaru" name="socketbaru" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -107,7 +107,7 @@
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" onclick="tambahsocket()" type="button">Tambah</button>
             </div>
-        </div>
+        </div> --}}
 
         {{-- Power --}}
         <div class="form-group mb-3" id="divpower">
