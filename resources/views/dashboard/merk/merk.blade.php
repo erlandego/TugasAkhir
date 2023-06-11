@@ -33,11 +33,11 @@
                 @endforeach
             </td>
             <td>
-                <form action="/dashboard/merk/{{ $item->id }}" method="post">
+                <form action="/dashboard/merk/{{ $item->slug }}" method="post">
                     @method('delete')
                     @csrf
                     <button class="btn btn-danger" onclick="return confirm('Apakah yakin ingin menghapus ?')">Delete</button>
-                    <a href="/dashboard/merk/{{ $item->id }}/edit" class="btn btn-warning">Edit</a>
+                    <a href="/dashboard/merk/{{ $item->slug }}/edit" class="btn btn-warning">Edit</a>
                 </form>
             </td>
             <?php $ctr+= 1; $catctr = 0 ?>

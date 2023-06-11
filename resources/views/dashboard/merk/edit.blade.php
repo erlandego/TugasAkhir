@@ -2,7 +2,7 @@
 
 @section('container')
     @php $cari = 0; @endphp
-    <form method="post" action="/dashboard/merk/{{ $merk->id }}">
+    <form method="post" action="/dashboard/merk/{{ $merk->slug }}">
     @csrf
     @method('put')
     {{-- Nama Merk --}}
@@ -10,6 +10,7 @@
         <div class="form-group">
             <b><label for="nama_merk">Nama Merk</label></b>
             <input type="text" class="form-control" id=nama_merk name="nama_merk" value="{{ $merk->nama_merk }}" required>
+            <input type="hidden" id="slug" name="slug">
         </div>
         @error('nama_merk')
             <div class="invalid-feedback">
@@ -44,4 +45,15 @@
 
     <button type="submit" class="btn btn-warning">Edit +</button>
     </form>
+
+    <script>
+        const slug = document.querySelector('#slug');
+        const nama_merk = document.querySelector('#nama_merk');
+
+        nama_merk.addEventListener('keyup' , function(){
+            fetch('/dashboard/merks/checkSlug?nama=' + nama_merk.value)
+                .then(response => response.json())
+                .then(data => slug.value = data.slug)
+        });
+    </script>
 @endsection

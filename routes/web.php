@@ -51,9 +51,13 @@ Route::resource('/dashboard/user' , DashboardUserController::class)->middleware(
 Route::resource('/dashboard/image' , ImageController::class)->middleware('auth');
 
 Route::resource('/dashboard/merk' , DashboardMerkController::class)->middleware('auth');
+Route::get('/dashboard/merks/checkSlug' , [DashboardMerkController::class , 'checkSlug']);
+
 Route::resource('/dashboard/category' , DashboardCategoryController::class)->middleware('auth');
 Route::get('/dashboard/categories/checkSlug' , [DashboardCategoryController::class , 'checkSlug']);
 
 Route::resource('/dashboard/socket' , DashboardSocketController::class)->middleware('auth');
+Route::get('/dashboard/sockets/checkSlug' , [DashboardSocketController::class , 'checkSlug']);
 
 Route::resource('/dashboard/slot' , DashboardSlotController::class)->middleware('auth');
+Route::get('/dashboard/slots/checkSlug' , [DashboardSlotController::class , 'checkSlug']);

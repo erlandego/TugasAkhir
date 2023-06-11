@@ -24,12 +24,12 @@
             <td>{{ $item->nama_socket }}</td>
             <td>{{ $item->Merk->nama_merk }}</td>
             <td>
-                <form action="/dashboard/socket/{{ $item->id }}" method="post">
+                <form action="/dashboard/socket/{{ $item->slug }}" method="post">
                     @method('delete')
                     @csrf
                     <button class="btn btn-danger" onclick="return confirm('Apakah yakin ingin menghapus ?')">Delete</button>
-                    <a href="/dashboard/socket/{{ $item->id }}/edit" class="btn btn-warning">Edit</a>
-                    <a href="/dashboard/socket/{{ $item->id }}" class="btn btn-primary">Detail</a>
+                    <a href="/dashboard/socket/{{ $item->slug }}/edit" class="btn btn-warning">Edit</a>
+                    <a href="/dashboard/socket/{{ $item->slug }}" class="btn btn-primary">Detail</a>
                 </form>
             </td>
             <?php $ctr+= 1;?>

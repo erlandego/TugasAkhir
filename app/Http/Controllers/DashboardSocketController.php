@@ -7,6 +7,7 @@ use App\Models\MerkCategory;
 use App\Models\Merk;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardSocketController extends Controller
 {
@@ -56,7 +57,8 @@ class DashboardSocketController extends Controller
         $this->authorize('admin');
         $validatedData = $request->validate([
             'nama_socket' => 'required',
-            'merk_id' => 'required'
+            'merk_id' => 'required',
+            'slug' => 'required|unique:sockets'
         ]);
 
         Socket::create($validatedData);
@@ -103,10 +105,16 @@ class DashboardSocketController extends Controller
     public function update(Request $request, Socket $socket)
     {
         $this->authorize('admin');
-        $validatedData = $request->validate([
+        $rules = [
             'nama_socket' => 'required',
             'merk_id' => 'required'
-        ]);
+        ];
+
+        if($request->nama_socket != $socket->nama_socket){
+            $rules['slug'] = 'required|unique:sockets';
+        }
+
+        $validatedData = $request->validate($rules);
 
         Socket::where('id' , $socket->id)->update($validatedData);
 
@@ -125,5 +133,10 @@ class DashboardSocketController extends Controller
         Socket::destroy($socket->id);
 
         return redirect('/dashboard/socket')->with('success' , 'Berhasil Menghapus Socket');
+    }
+
+    public function checkSlug(Request $request){
+        $slug = SlugService::createSlug(Socket::class, 'slug', $request->nama);
+        return response()->json(['slug' => $slug]);
     }
 }

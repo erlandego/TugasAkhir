@@ -7,6 +7,7 @@ use App\Models\MerkCategory;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardMerkController extends Controller
 {
@@ -51,7 +52,8 @@ class DashboardMerkController extends Controller
     {
         $this->authorize('admin');
         Merk::create([
-            'nama_merk' => $request->nama_merk
+            'nama_merk' => $request->nama_merk,
+            'slug' => $request->slug
         ]);
         $idbaru = Merk::all()->last()->id;
         for ($i=0; $i < count($request->category) ; $i++) {
@@ -117,9 +119,14 @@ class DashboardMerkController extends Controller
         $hapus = [];
         $tambah = [];
 
-        $validatedData = $request->validate([
+        $rules = [
             'nama_merk' => 'required'
-        ]);
+        ];
+
+        if($request->nama_merk != $merk->nama_merk){
+            $rules['slug'] = 'required|unique:merks';
+        }
+        $validatedData = $request->validate($rules);
 
         Merk::where('id' , $merk->id)->update($validatedData);
 
@@ -186,5 +193,10 @@ class DashboardMerkController extends Controller
         }
 
         return redirect('/dashboard/merk')->with('success' , 'Berhasil menghapus merk');
+    }
+
+    public function checkSlug(Request $request){
+        $slug = SlugService::createSlug(Merk::class, 'slug', $request->nama);
+        return response()->json(['slug' => $slug]);
     }
 }

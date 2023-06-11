@@ -22,12 +22,12 @@
         <td>{{ $ctr }}</td>
         <td>{{ $item->ddr }}</td>
         <td>
-            <form action="/dashboard/slot/{{ $item->id }}" method="post">
+            <form action="/dashboard/slot/{{ $item->slug }}" method="post">
                 @method('delete')
                 @csrf
                 <button class="btn btn-danger" onclick="return confirm('Apakah yakin ingin menghapus ?')">Delete</button>
-                <a href="/dashboard/slot/{{ $item->id }}/edit" class="btn btn-warning">Edit</a>
-                <a href="/dashboard/slot/{{ $item->id }}" class="btn btn-primary">Detail</a>
+                <a href="/dashboard/slot/{{ $item->slug }}/edit" class="btn btn-warning">Edit</a>
+                <a href="/dashboard/slot/{{ $item->slug }}" class="btn btn-primary">Detail</a>
             </form>
         </td>
         <?php $ctr+= 1;?>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Slot;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardSlotController extends Controller
 {
@@ -45,7 +46,8 @@ class DashboardSlotController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'ddr' => 'required|unique:slots'
+            'ddr' => 'required|unique:slots',
+            'slug' => 'required|unique:slots'
         ]);
 
         Slot::create($validatedData);
@@ -87,9 +89,15 @@ class DashboardSlotController extends Controller
      */
     public function update(Request $request, Slot $slot)
     {
-        $validatedData = $request->validate([
-            'ddr' => 'required|unique:slots'
-        ]);
+        $rules = [
+            'ddr' => 'required'
+        ];
+
+        if($request->ddr != $slot->ddr){
+            $rules['slug'] = 'required|unique:slots';
+        }
+
+        $validatedData = $request->validate($rules);
 
         Slot::where('id' , $slot->id)->update($validatedData);
         return redirect('/dashboard/slot')->with('success' , 'Berhasil Mengedit slot');
@@ -106,5 +114,10 @@ class DashboardSlotController extends Controller
         $this->authorize('admin');
         Slot::destroy($slot->id);
         return redirect('/dashboard/slot')->with('success' , 'Berhasil menghapus slot');
+    }
+
+    public function checkSlug(Request $request){
+        $slug = SlugService::createSlug(Slot::class, 'slug', $request->nama);
+        return response()->json(['slug' => $slug]);
     }
 }
