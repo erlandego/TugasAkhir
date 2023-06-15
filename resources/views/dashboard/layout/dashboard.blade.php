@@ -94,6 +94,13 @@
             </a>
           </li>
 
+          <li class="nav-item anak bg-secondary">
+            <a class="nav-link" href="/dashboard/size" style="color: white">
+              <span data-feather="bar-chart-2" class="align-text-bottom" style="stroke: white;"></span>
+              List Size
+            </a>
+          </li>
+
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
           <span>Saved reports</span>
           <a class="link-secondary" href="#" aria-label="Add a new report">
