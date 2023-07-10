@@ -33,6 +33,7 @@
             color: white;
         } */
     </style>
+    @livewireStyles
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
@@ -142,5 +143,6 @@
         </div>
     </div>
     <!-- Footer End -->
+    @livewireScripts
 </body>
 </html>

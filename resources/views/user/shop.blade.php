@@ -173,7 +173,10 @@
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
                                 <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                @livewire('add-cart',[
+                                    "user" => auth()->user()->id,
+                                    "barang" => $item->id
+                                ])
                             </div>
                         </div>
                     </div>
