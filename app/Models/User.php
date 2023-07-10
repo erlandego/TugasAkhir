@@ -33,6 +33,10 @@ class User extends Authenticatable
         return $this->hasMany(address::class);
     }
 
+    public function Cart(){
+        return $this->hasOne(Cart::class);
+    }
+
     public function scopeFilter($query , array $filters){
 
         // if(isset($filters['search']) ? $filters['search'] : false){

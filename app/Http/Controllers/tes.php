@@ -6,6 +6,7 @@ use App\Models\address;
 use App\Models\Barang;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class tes extends Controller
@@ -69,6 +70,20 @@ class tes extends Controller
             'page' => 'Home',
             'barangs' => Barang::first()->paginate(5),
             'users' => User::first()->paginate(5)
+        ]);
+    }
+
+    public function cart(){
+        return view('user.cart' , [
+            'title' => 'Rakit PC | Cart'
+        ]);
+    }
+
+    public function shop(){
+        return view('user.shop' , [
+            'title' => 'Rakit PC | Shop',
+            'barangs' => Barang::all(),
+            'images' => Image::all()
         ]);
     }
 }

@@ -37,6 +37,10 @@ class Barang extends Model
         return $this->hasMany(Image::class);
     }
 
+    public function Cart(){
+        return $this->belongsTo(Cart::class);
+    }
+
     public function sluggable(): array
     {
         return [

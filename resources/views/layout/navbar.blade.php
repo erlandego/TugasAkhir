@@ -58,7 +58,11 @@
             </div>
             @auth
             <div class="navbar-nav ml-auto py-0">
-                <a href="/" class="nav-item nav-link">Welcome Erland</a>
+                @php
+                    $yglogin = auth()->user()->name;
+                    $arr = explode(' ',trim($yglogin));
+                @endphp
+                <a href="/" class="nav-item nav-link">Welcome {{ $arr[0]; }}</a>
             </div>
             @else
             <div class="navbar-nav ml-auto py-0">
