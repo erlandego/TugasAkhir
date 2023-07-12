@@ -7,6 +7,7 @@ use App\Models\Barang;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Image;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class tes extends Controller
@@ -75,7 +76,9 @@ class tes extends Controller
 
     public function cart(){
         return view('user.cart' , [
-            'title' => 'Rakit PC | Cart'
+            'title' => 'Rakit PC | Cart',
+            'cart' => Cart::all(),
+            'img' => Image::all()
         ]);
     }
 

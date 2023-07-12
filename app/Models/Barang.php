@@ -38,7 +38,7 @@ class Barang extends Model
     }
 
     public function Cart(){
-        return $this->belongsTo(Cart::class);
+        return $this->hasMany(Cart::class);
     }
 
     public function sluggable(): array

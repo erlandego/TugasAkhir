@@ -8,30 +8,48 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="{{ asset('img/favicon.ico') }}" rel="icon" type="text/css">
+    <link href="img/favicon.ico" rel="icon" type="text/css">
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="{{ asset('https://fonts.gstatic.com') }}" type="text/css">
-    <link href="{{ URL::asset('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap') }}" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" type="text/css">
 
     <!-- Font Awesome -->
-    <link href="{{ URL::asset('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap') }}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" type="text/css">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/6bd86ebf4a.js" crossorigin="anonymous"></script>
 
     <style>
-        /* .navbar-light .navbar-nav .nav-link:hover,
-        .navbar-light .navbar-nav .nav-link.active {
-            color: grey;
+        .alert{
+            background: #5beb5b;
+            color: black;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 20px;
         }
 
-        .navbar-light .navbar-nav .nav-link{
+        .alert .close-btn{
+            position: absolute;
+            background: #4be81c;
+            right: 0px;
+            top:50%;
+            transform: translateY(-50%);
+            padding: 20px 18px;
+            cursor: pointer;
+        }
+
+        .close-btn .fa-times:hover{
             color: white;
-        } */
+        }
+
     </style>
     @livewireStyles
 </head>
@@ -45,8 +63,8 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="shop.html" class="nav-item nav-link">Shop</a>
+                <a href="/" class="nav-item nav-link active">Home</a>
+                <a href="/shop" class="nav-item nav-link">Shop</a>
                 <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>

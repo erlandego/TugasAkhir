@@ -11,7 +11,7 @@ class Cart extends Model
     protected $guarded = ["id"];
 
     public function Barang(){
-        return $this->hasMany(Barang::class);
+        return $this->belongsTo(Barang::class);
     }
 
     public function User(){

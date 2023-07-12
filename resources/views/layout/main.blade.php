@@ -27,7 +27,7 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
 
-
+    <script src="https://kit.fontawesome.com/6bd86ebf4a.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Topbar Start -->
@@ -85,7 +85,7 @@
                     <i class="fas fa-heart text-info"></i>
                     <span class="badge">0</span>
                 </a>
-                <a href="" class="btn border">
+                <a href="/cart" class="btn border">
                     <i class="fas fa-shopping-cart text-info"></i>
                     <span class="badge">0</span>
                 </a>
