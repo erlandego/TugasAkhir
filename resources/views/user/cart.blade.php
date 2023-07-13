@@ -24,23 +24,13 @@
                         <tr>
                             <td class="align-middle">@foreach($img as $item2) @if($item->Barang->id == $item2->id_barang) <img src="{{ asset('storage/' . $item2->image) }}" alt="" style="width: 50px;"> @break @endif @endforeach </td>
                             <td class="align-middle"> {{ $item->Barang->nama_barang }} </td>
-                            <td class="align-middle">Rp{{ $item->Barang->harga }}</td>
+                            <td class="align-middle">Rp{{ number_format($item->Barang->harga) }}</td>
                             <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ $item->qty }}">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                @livewire('qty-edit' , [
+                                    'qty' => $item->qty
+                                ])
                             </td>
-                            <td class="align-middle">$150</td>
+                            <td class="align-middle">{{ number_format($item->total) }}</td>
                             <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
                         </tr>
                         @endif

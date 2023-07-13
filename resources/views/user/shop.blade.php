@@ -181,7 +181,8 @@
                                 <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
                                 @livewire('add-cart',[
                                     "user" => auth()->user()->id,
-                                    "barang" => $item->id
+                                    "barang" => $item->id,
+                                    "harga" => $item->harga
                                 ])
                             </div>
                         </div>

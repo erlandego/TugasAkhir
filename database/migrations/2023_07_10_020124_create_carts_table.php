@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('barang_id');
             $table->integer('qty');
+            $table->bigInteger('total');
             $table->timestamps();
         });
     }
