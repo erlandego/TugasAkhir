@@ -1,0 +1,3 @@
+<div>
+    Rp{{ $total }}
+</div>

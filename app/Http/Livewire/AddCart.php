@@ -23,7 +23,9 @@ class AddCart extends Component
         Cart::create([
             "user_id" => $this->user,
             "barang_id" => $this->barang,
+            "rakitan_id" => null,
             "total" => $this->harga,
+            "type" => "barang",
             "qty" => 1
         ]);
         $this->tes = true;
