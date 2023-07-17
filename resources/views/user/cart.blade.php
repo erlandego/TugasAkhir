@@ -15,35 +15,31 @@
                             <th>#</th>
                             <th>Products</th>
                             <th>Price</th>
-                            <th>Total</th>
                             <th>Quantity</th>
+                            <th>Total</th>
                             <th>Remove</th>
                         </tr>
                     </thead>
                     <tbody class="align-middle">
                         @php $index = 0; @endphp
                         @foreach($cart as $item)
-                        @if($item->user_id == auth()->user()->id)
-                        <tr>
-                            <td class="align-middle">@foreach($img as $item2) @if($item->Barang->id == $item2->id_barang) <img src="{{ asset('storage/' . $item2->image) }}" alt="" style="width: 50px;"> @break @endif @endforeach </td>
-                            <td class="align-middle"> {{ $item->Barang->nama_barang }} </td>
-                            <td class="align-middle">Rp{{ number_format($item->Barang->harga) }}</td>
-                            <td class="align-middle">
+                            @if($item->user_id == auth()->user()->id)
+                                @php
+                                    foreach ($img as $value) {
+                                        if($item->Barang->id == $value->id_barang){
+                                            $gambar = $value->image;
+                                        }
+                                    }
+                                @endphp
                                 @livewire('edit-qty' , [
                                     'qty' => $item->qty,
                                     'idcart' => $item->id,
                                     'harga' => $item->Barang->harga,
                                     'total' => $item->total,
+                                    'namabarang' => $item->Barang->nama_barang,
+                                    'gambar' => $gambar
                                 ], key($index))
-                            </td>
-                            <td class="align-middle">
-                                @livewire('totalitem' , [
-                                    'total' => $item->total
-                                ], key($index))
-                            </td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        @endif
+                            @endif
                         @php $index++; @endphp
                         @endforeach
                         {{-- <tr>
