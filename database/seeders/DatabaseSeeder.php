@@ -386,5 +386,7 @@ class DatabaseSeeder extends Seeder
             'category_id' => 6
         ]);
 
+        $this->call(ProvinsiSeeder::class);
+        $this->call(CitySeeder::class);
     }
 }

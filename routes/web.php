@@ -68,3 +68,4 @@ Route::get('dashboard/sizes/checkSlug' , [DashboardSizeController::class , 'chec
 
 Route::get('/cart' , [tes::class , 'cart']);
 Route::get('/shop' , [tes::class , 'shop']);
+Route::get('/alamat' , [tes::class , 'address']);

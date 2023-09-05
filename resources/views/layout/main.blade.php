@@ -162,9 +162,11 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @if(auth()->user()->is_admin == 1)
                                     <a class="dropdown-item" href="/dashboard">Dashboard</a>
-                                    @endif
                                     <div class="dropdown-divider"></div>
+                                    @endif
                                   <a class="dropdown-item" href="#">Profile</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="/alamat">Address</a>
                                   <div class="dropdown-divider"></div>
                                   <form action="/logout" method="post">
                                     @csrf

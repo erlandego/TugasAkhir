@@ -1,5 +1,4 @@
 @extends('layout.main')
-
 @section('container')
 <!-- Featured Start -->
 <div class="container-fluid pt-5">
