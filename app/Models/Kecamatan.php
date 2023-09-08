@@ -17,4 +17,8 @@ class Kecamatan extends Model
     public function Provinsi(){
         return $this->belongsTo(Provinsi::class);
     }
+
+    public function address(){
+        return $this->hasMany(address::class);
+    }
 }

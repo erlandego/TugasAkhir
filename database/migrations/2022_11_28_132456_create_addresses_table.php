@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignID('user_id');
+            $table->foreignId('user_id');
             $table->string('alamat');
-            $table->string('provinsi');
-            $table->string('kabupaten');
-            $table->string('kecamatan');
-            $table->string('kelurahan');
-            $table->string('kodepos');
+            $table->foreignId('provinsi_id');
+            $table->foreignId('city_id');
+            $table->foreignId('kecamatan_id');
+            $table->string('nama');
+            $table->boolean('utama')->nullable();
             $table->timestamps();
         });
     }

@@ -93,121 +93,121 @@ class DatabaseSeeder extends Seeder
         address::create([
             'user_id' => 1,
             'alamat' => "Jl.P.Diponegoro no 162-164",
-            'provinsi' => "Sulawesi Selatan",
-            'kabupaten' => "Makassar",
-            'kecamatan' => 'bontoala',
-            'kelurahan' => 'bontoala parang',
-            'kodepos' => "90157"
+            'provinsi_id' => 28,
+            'city_id' => 254,
+            'kecamatan_id' => 3588,
+            'nama' => 'Alamat Makassar',
+            'utama' => false
         ]);
 
         address::create([
             'user_id' => 1,
             'alamat' => "Jl.Telaga Indah no 1 , Komp Taman Kahyangan",
-            'provinsi' => "Sulawesi Selatan",
-            'kabupaten' => "Makassar",
-            'kecamatan' => 'Tamalate',
-            'kelurahan' => 'Maccini Sombala',
-            'kodepos' => "90157"
+            'provinsi_id' => 28,
+            'city_id' => 254,
+            'kecamatan_id' => 3597,
+            'nama' => 'Alamat Tanjung',
+            'utama' => false
         ]);
 
         address::create([
             'user_id' => 3,
             'alamat' => "Vetran Utara",
-            'provinsi' => "Sulawesi Selatan",
-            'kabupaten' => "Makassar",
-            'kecamatan' => 'Makassar',
-            'kelurahan' => 'Barana',
-            'kodepos' => "90145"
+            'provinsi_id' => 28,
+            'city_id' => 254,
+            'kecamatan_id' => 3589,
+            'nama' => 'Alamat Makassar',
+            'utama' => false
         ]);
 
         address::create([
             'user_id' => 3,
             'alamat' => "Green House Homestay",
-            'provinsi' => "Jawa Timur",
-            'kabupaten' => "Sidoarjo",
-            'kecamatan' => 'Waru',
-            'kelurahan' => 'Waru',
-            'kodepos' => "61256"
+            'provinsi_id' => 11,
+            'city_id' => 409,
+            'kecamatan_id' => 5647,
+            'nama' => 'Alamat Sidoarjo',
+            'utama' => true
         ]);
 
         address::create([
             'user_id' => 2,
             'alamat' => "Jl.Ternate No 1",
-            'provinsi' => "Sulawesi Selatan",
-            'kabupaten' => "Makassar",
-            'kecamatan' => 'Wajo',
-            'kelurahan' => 'Melayu Baru',
-            'kodepos' => "90171"
+            'provinsi_id' => 28,
+            'city_id' => 254,
+            'kecamatan_id' => 3600,
+            'nama' => 'Alamat Makassar',
+            'utama' => false,
         ]);
 
         address::create([
             'user_id' => 2,
             'alamat' => "Jl.Ngagel Jaya Tengah",
-            'provinsi' => "Jawa Timur",
-            'kabupaten' => "Surabaya",
-            'kecamatan' => 'Gubeng',
-            'kelurahan' => 'Baratajaya',
-            'kodepos' => "60284"
+            'provinsi_id' => 11,
+            'city_id' => 444,
+            'kecamatan_id' => 6138,
+            'nama' => 'Alamat Surabaya',
+            'utama' => true,
         ]);
 
         address::create([
             'user_id' => 1,
             'alamat' => "Jl.Ngagel Madya VIII",
-            'provinsi' => "Jawa Timur",
-            'kabupaten' => "Surabaya",
-            'kecamatan' => 'Gubeng',
-            'kelurahan' => 'Baratajaya',
-            'kodepos' => "60284"
+            'provinsi_id' => 11,
+            'city_id' => 444,
+            'kecamatan_id' => 6138,
+            'nama' => 'Alamat Surabaya',
+            'utama' => true,
         ]);
 
         address::create([
             'user_id' => 7,
             'alamat' => "Jl.Gunung Merapi no 172",
-            'provinsi' => "Sulawesi Selatan",
-            'kabupaten' => "Makassar",
-            'kecamatan' => 'Ujung Pandang',
-            'kelurahan' => 'Pisang Selatan',
-            'kodepos' => "90157"
+            'provinsi_id' => 28,
+            'city_id' => 254,
+            'kecamatan_id' => 3598,
+            'nama' => 'Alamat 1',
+            'utama' => true
         ]);
 
         address::create([
             'user_id' => 6,
             'alamat' => "Jl.Ngagel Wasana IV no 10",
-            'provinsi' => "Jawa Timur",
-            'kabupaten' => "Surabaya",
-            'kecamatan' => 'Gubeng',
-            'kelurahan' => 'Baratajaya',
-            'kodepos' => "60284"
+            'provinsi_id' => 11,
+            'city_id' => 444,
+            'kecamatan_id' => 6138,
+            'nama' => 'Alamat Surabaya',
+            'utama' => true,
         ]);
 
         address::create([
             'user_id' => 5,
             'alamat' => "Jl.Virgo no 9",
-            'provinsi' => "Jawa Timur",
-            'kabupaten' => "Surabaya",
-            'kecamatan' => 'Kalijudan',
-            'kelurahan' => 'Kalijudan',
-            'kodepos' => "90157"
+            'provinsi_id' => 11,
+            'city_id' => 444,
+            'kecamatan_id' => 6155,
+            'nama' => 'Alamat Surabaya',
+            'utama' => true,
         ]);
 
         address::create([
             'user_id' => 4,
             'alamat' => "Jl.Petemon 2",
-            'provinsi' => "Jawa Timur",
-            'kabupaten' => "Surabaya",
-            'kecamatan' => 'Tegal Sari',
-            'kelurahan' => 'Tegal Sari',
-            'kodepos' => "90157"
+            'provinsi_id' => 11,
+            'city_id' => 444,
+            'kecamatan_id' => 6157,
+            'nama' => 'Alamat Petemon',
+            'utama' => true
         ]);
 
         address::create([
             'user_id' => 7,
             'alamat' => "Jl.Rungkut Mejoyo",
-            'provinsi' => "Jawa Timur",
-            'kabupaten' => "Surabaya",
-            'kecamatan' => 'Rungkut',
-            'kelurahan' => 'Rungkut',
-            'kodepos' => "90157"
+            'provinsi_id' => 11,
+            'city_id' => 444,
+            'kecamatan_id' => 6148,
+            'nama' => 'Alamat 2',
+            'utama' => true
         ]);
 
         //Category--------------------------------------------------------------------------------------------

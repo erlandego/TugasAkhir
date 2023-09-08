@@ -13,4 +13,16 @@ class address extends Model
     public function User(){
         return $this->BelongsTo(User::class);
     }
+
+    public function Kecamatan(){
+        return $this->belongsTo(Kecamatan::class);
+    }
+
+    public function City(){
+        return $this->belongsTo(City::class);
+    }
+
+    public function Provinsi(){
+        return $this->belongsTo(Provinsi::class);
+    }
 }

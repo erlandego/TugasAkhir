@@ -17,4 +17,8 @@ class Provinsi extends Model
     public function Kecamatan(){
         return $this->hasMany(Kecamatan::class);
     }
+
+    public function address(){
+        return $this->hasMany(address::class);
+    }
 }
