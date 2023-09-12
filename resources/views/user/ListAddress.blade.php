@@ -7,7 +7,7 @@
     $arr = explode(' ',trim($yglogin));
 @endphp
     <h2 class="m-5">{{ $arr[0] }}'s Address</h2>
-    <button class="btn btn-primary" href="">Tambahkan alamat baru</button>
+    <a class="btn btn-primary ml-5" href="/alamat/create">Tambahkan alamat baru</a>
     @livewire('ganti-alamat' , [
         'alamat' => $alamat,
         'iduser' => $iduser

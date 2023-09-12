@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\DashboardBarangController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardMerkController;
@@ -68,4 +69,5 @@ Route::get('dashboard/sizes/checkSlug' , [DashboardSizeController::class , 'chec
 
 Route::get('/cart' , [tes::class , 'cart']);
 Route::get('/shop' , [tes::class , 'shop']);
-Route::get('/alamat' , [tes::class , 'address']);
+
+Route::resource('/alamat' , AddressController::class);

@@ -42,14 +42,13 @@ class tes extends Controller
 
         // curl_close($curl);
 
-        $url_city = "https://api.rajaongkir.com/starter/province?key=75d865264b1f6579f82b21fc982b73f4";
-        $json_str = file_get_contents($url_city);
-        $json_obj = json_decode($json_str);
+        // $url_city = "https://api.rajaongkir.com/starter/province?key=75d865264b1f6579f82b21fc982b73f4";
+        // $json_str = file_get_contents($url_city);
+        // $json_obj = json_decode($json_str);
 
         return view("index" , [
             "title" => "Home",
             "categories" => Category::first()->paginate(6),
-            "tes" => $json_obj
         ]);
     }
 

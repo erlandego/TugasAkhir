@@ -21,7 +21,7 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/6bd86ebf4a.js" crossorigin="anonymous"></script>
 
