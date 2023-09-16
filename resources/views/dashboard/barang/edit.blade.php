@@ -23,7 +23,7 @@
             $merkbarang = $value->Merk->nama_merk;
         }
     }
-    //dd($barang->socket_id);
+    //dd($barang);
 @endphp
 <h2 class="mt-2 mb-3">Halaman Edit</h2>
 <form method="post" action="/dashboard/barang/{{ $barang->slug }}">

@@ -26,6 +26,12 @@
     <script src="https://kit.fontawesome.com/6bd86ebf4a.js" crossorigin="anonymous"></script>
 
     <style>
+
+        .button-group{
+            display: flex;
+            flex-direction: row;
+        }
+
         .alert{
             background: #5beb5b;
             color: black;

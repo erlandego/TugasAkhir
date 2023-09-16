@@ -11,9 +11,17 @@
                     {{ $item->City->city_name }} <br>
                     {{ $item->Kecamatan->subdistrict_name }}
                 </p>
-                @if($item->utama == 0)
-                    <button class="btn btn-primary" wire:click='utama({{ $item->id }})'>Jadikan Alamat Utama</button>
-                @endif
+                <div class="button-group">
+                    @if($item->utama == 0)
+                        <button class="btn btn-primary" wire:click='utama({{ $item->id }})'>Jadikan Alamat Utama</button>
+                    @endif
+                    <form action="/alamat/{{ $item->id }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <button class="btn btn-danger ml-2" onclick="return confirm('Apakah yakin ingin menghapus ?')">Delete</button>
+                        <a href="/alamat/{{ $item->id }}/edit" class="btn btn-warning">Edit</a>
+                    </form>
+                </div>
             </div>
         </div>
     @endif
