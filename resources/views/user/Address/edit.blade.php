@@ -1,7 +1,7 @@
 @extends('layout.navbar')
 @section('container')
     <h2 class="ml-5"></h2>
-    <form method="post" action='/alamat'>
+    <form method="post" action='/alamat/{{ $alamat->id }}'>
         @csrf
         @method('put')
 

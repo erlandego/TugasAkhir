@@ -11,8 +11,6 @@
 
         @livewire('pilih-alamat' , [
             'listprovinsi' => $listprovinsi,
-            'dariedit' => false,
-            'alamat' => null
         ])
 
         <div class="form-group ml-5 mt-2">

@@ -1,5 +1,16 @@
 <?php
-
+    if(isset(auth()->user()->id)){
+        $iduser = auth()->user()->id;
+    }
+    else{
+        $iduser = 0;
+    }
+    $jumlahcart = 0;
+    foreach ($listcart as $value) {
+        if($value->user_id == $iduser){
+            $jumlahcart++;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,7 +98,7 @@
                 </a>
                 <a href="/cart" class="btn border">
                     <i class="fas fa-shopping-cart text-info"></i>
-                    <span class="badge">0</span>
+                    <span class="badge">{{ $jumlahcart }}</span>
                 </a>
             </div>
         </div>

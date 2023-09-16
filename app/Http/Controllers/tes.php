@@ -48,6 +48,7 @@ class tes extends Controller
 
         return view("index" , [
             "title" => "Home",
+            'listcart' => Cart::all(),
             "categories" => Category::first()->paginate(6),
         ]);
     }

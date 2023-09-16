@@ -12,13 +12,11 @@ class PilihAlamat extends Component
     protected $listkabupaten;
     protected $listkecamatan;
     public $provinsi;
-    public $provinsipilihan;
-    public $kabupatenpilihan;
     public $kabupaten;
     public $ctr;
     public $checkkab;
 
-    public function mount($listprovinsi , $dariedit , $alamat){
+    public function mount($listprovinsi){
         $this->listprovinsi = $listprovinsi;
         $this->checkkab = false;
         // $this->listkabupaten = [];
@@ -42,7 +40,6 @@ class PilihAlamat extends Component
             'listprovinsi' => $this->listprovinsi,
             'listkabupaten' => $this->listkabupaten,
             'listkecamatan' => $this->listkecamatan,
-            'alamat' => $this->alamat,
             'checkkab' => $this->checkkab,
         ]);
     }

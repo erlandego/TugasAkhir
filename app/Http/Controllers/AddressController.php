@@ -90,9 +90,18 @@ class AddressController extends Controller
      * @param  \App\Models\address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, address $address)
+    public function update(Request $request, address $alamat)
     {
-        //
+        $validatedData = $request->validate([
+            'alamat' => 'max:255|required',
+            'provinsi_id' => 'required',
+            'city_id' => 'required',
+            'kecamatan_id' => 'required',
+            'nama' => 'required'
+        ]);
+
+        address::where('id' , $alamat->id)->update($validatedData);
+        return redirect('/alamat')->with('success' , 'Alamat telah di update');
     }
 
     /**
@@ -101,8 +110,9 @@ class AddressController extends Controller
      * @param  \App\Models\address  $address
      * @return \Illuminate\Http\Response
      */
-    public function destroy(address $address)
+    public function destroy(address $alamat)
     {
-        //
+        address::destroy($alamat->id);
+        return redirect('/alamat')->with('success' , 'Alamat telah dihapus');
     }
 }
