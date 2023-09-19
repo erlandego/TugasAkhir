@@ -36,6 +36,7 @@ class EditQty extends Component
             'qty' => $this->qty,
             'total' => $total
         ]);
+        $this->emit('updateSub');
     }
 
     public function kurang(){
@@ -46,11 +47,13 @@ class EditQty extends Component
             'qty' => $this->qty,
             'total' => $total
         ]);
+        $this->emit('updateSub');
     }
 
     public function hapus(){
         Cart::destroy($this->idcart);
         $this->hapus = true;
+        $this->emit('updateSub');
     }
 
     public function render()

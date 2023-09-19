@@ -4,6 +4,26 @@
 
     @php
         $index = 0;
+        $checkutama = false;
+        $provinsipilihan;
+        $kabupatenpilihan;
+
+        foreach ($listaddress as $value) {
+            if($value->utama == 1){
+                $checkutama = true;
+                $provinsipilihan = $value->provinsi_id;
+                $kabupatenpilihan = $value->city_id;
+            }
+        }
+
+        //Cek Total Berat
+        $totalberat = 0;
+        foreach ($cart as $value) {
+            if($value->user_id == auth()->user()->id){
+                $totalberat += $value->Barang->berat;
+            }
+        }
+
     @endphp
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
@@ -45,35 +65,42 @@
                     </tbody>
                 </table>
             </div>
+
+            @livewire('update-subtotal' , [
+                'userid' => auth()->user()->id
+            ])
+        </div>
+
+        <div class="row px-xl-5">
+            @livewire('pilih-shipping' , [
+                'provinsi' => $provinsipilihan,
+                'kabupaten' => $kabupatenpilihan,
+                'berat' => $totalberat,
+                'checkutama' => $checkutama
+            ])
+
+            @livewire('pilih-paket')
+
             <div class="col-lg-4">
-                <form class="mb-5" action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
-                        </div>
-                    </div>
-                </form>
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                        <h4 class="font-weight-semi-bold m-0">Alamat Pengiriman</h4>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">$150</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
-                        </div>
-                    </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
-                        </div>
-                        <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                        @if($checkutama == false)
+                            <h6>Anda belum memilih alamat</h6>
+                            <a href="/alamat" class="btn btn-primary"> Pilih Alamat </a>
+                        @else
+                            @foreach ($listaddress as $item)
+                                @if($item->utama == 1)
+                                    <b>{{ $item->alamat }}</b><br>
+                                    {{ $item->Kecamatan->subdistrict_name }}<br>
+                                    {{ $item->City->city_name }}<br>
+                                    {{ $item->Provinsi->nama_provinsi }}<br>
+                                @endif
+                            @endforeach
+                            <a href="/alamat" class="btn btn-primary mt-2">Ubah Alamat</a>
+                        @endif
                     </div>
                 </div>
             </div>

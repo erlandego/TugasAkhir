@@ -109,9 +109,10 @@ class tes extends Controller
 
     public function cart(){
         return view('user.cart' , [
-            'title' => 'Rakit PC | Cart',
+            'title' => 'Cart',
             'cart' => Cart::all(),
-            'img' => Image::all()
+            'img' => Image::all(),
+            'listaddress' => address::where('user_id' , '=' , auth()->user()->id)->get()
         ]);
     }
 

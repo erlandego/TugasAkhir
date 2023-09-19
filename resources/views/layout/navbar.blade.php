@@ -56,6 +56,14 @@
             color: white;
         }
 
+        .shipping{
+            width: 100%;
+            height: 200px;
+            margin: 5px;
+            border-style: solid;
+            border-color: grey;
+        }
+
     </style>
     @livewireStyles
 </head>
