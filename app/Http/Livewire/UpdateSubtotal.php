@@ -9,6 +9,7 @@ class UpdateSubtotal extends Component
 {
     public $userid;
     public $shipping;
+    public $totalall;
     protected $listeners = ['updateSub' => 'render' , 'ubahShippingprice' => 'ubahShippingprice'];
 
     public function mount($userid){
@@ -26,10 +27,12 @@ class UpdateSubtotal extends Component
         foreach ($listcart as $value) {
             $total += $value->total;
         }
+        $this->totalall = $total + $this->shipping;
 
         return view('livewire.update-subtotal' , [
             'subtotal' => $total,
             'shipping' => $this->shipping,
+            'totalall' => $this->totalall
         ]);
     }
 }

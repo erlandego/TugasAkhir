@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Cart;
 
 class PilihShipping extends Component
 {
@@ -12,16 +13,33 @@ class PilihShipping extends Component
     public $kabupaten;
     public $berat;
     public $checkutama;
+    protected $listeners = ['Unselect' => 'Unselect'];
 
     public function mount($provinsi , $kabupaten , $berat , $checkutama){
         $this->shipping = "";
         $this->provinsi = $provinsi;
         $this->kabupaten = $kabupaten;
-        $this->berat = $berat * 1000;
         $this->checkutama = $checkutama;
+        $this->berat = 0;
+        $listcart = Cart::where('user_id' , '=' , auth()->user()->id)->get();
+        foreach ($listcart as $value) {
+            $this->berat += $value->berat;
+        }
+        $this->berat *= 1000;
+    }
+
+    public function Unselect(){
+        $this->shipping = "";
     }
 
     public function updatedShipping(){
+        $this->berat = 0;
+        $listcart = Cart::where('user_id' , '=' , auth()->user()->id)->get();
+        foreach ($listcart as $value) {
+            $this->berat += $value->berat;
+        }
+        
+        $this->berat *= 1000;
         if($this->checkutama == true){
             $curl = curl_init();
 

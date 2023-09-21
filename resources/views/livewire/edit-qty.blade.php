@@ -10,6 +10,7 @@
                 </button>
             </div>
             <input type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ $qty }}" disabled>
+            <input type="hidden" value="{{ $berat }}">
             <div class="input-group-btn">
                 <button wire:click='tambah' class="btn btn-sm btn-primary btn-plus">
                     <i class="fa fa-plus"></i>
@@ -19,5 +20,6 @@
     </td>
     <td class="align-middle">Rp{{ number_format($total) }}</td>
     <td wire:click="hapus" class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+    {{-- @php hitungberat() @endphp --}}
 </tr>
 

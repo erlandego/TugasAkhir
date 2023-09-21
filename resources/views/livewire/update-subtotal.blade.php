@@ -25,10 +25,9 @@
             <div class="card-footer border-secondary bg-transparent">
                 <div class="d-flex justify-content-between mt-2">
                     <h5 class="font-weight-bold">Total</h5>
-                    <h5 class="font-weight-bold">$160</h5>
+                    <h5 class="font-weight-bold">Rp{{ number_format($totalall) }}</h5>
                 </div>
                 <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
             </div>
-            @if(isset($tes)) @dd($tes) @endif
         </div>
     </div>

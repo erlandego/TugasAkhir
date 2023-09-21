@@ -182,7 +182,8 @@
                                 @livewire('add-cart',[
                                     "user" => auth()->user()->id,
                                     "barang" => $item->id,
-                                    "harga" => $item->harga
+                                    "harga" => $item->harga,
+                                    "berat" => $item->berat
                                 ])
                             </div>
                         </div>

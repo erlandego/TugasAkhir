@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('rakitan_id')->nullable();
             $table->string('type');
             $table->integer('qty');
+            $table->integer('berat');
             $table->bigInteger('total');
             $table->timestamps();
         });

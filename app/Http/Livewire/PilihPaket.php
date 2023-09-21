@@ -13,7 +13,7 @@ class PilihPaket extends Component
     public $berat;
     public $shipping;
     public $courier;
-    protected $listeners = ['pilihPaket'];
+    protected $listeners = ['pilihPaket' , 'emptyResponse' => 'emptyResponse'];
 
     public function mount(){
         $this->checker = false;
@@ -23,6 +23,10 @@ class PilihPaket extends Component
         $temp = (object)$response;
         $temp2 = json_encode($temp);
         $this->response = json_decode($temp2);
+    }
+
+    public function emptyResponse(){
+        $this->response = null;
     }
 
     public function requlang($destination,$weight,$courier){

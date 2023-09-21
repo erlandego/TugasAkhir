@@ -11,12 +11,14 @@ class AddCart extends Component
     public $barang;
     public $user;
     public $harga;
+    public $berat;
 
-    public function mount($barang , $user , $harga){
+    public function mount($barang , $user , $harga , $berat){
         $this->barang = $barang;
         $this->user = $user;
         $this->tes = false;
         $this->harga = $harga;
+        $this->berat = $berat;
     }
 
     public function addtocart(){
@@ -26,6 +28,7 @@ class AddCart extends Component
             "rakitan_id" => null,
             "total" => $this->harga,
             "type" => "barang",
+            "berat" => $this->berat,
             "qty" => 1
         ]);
         $this->tes = true;

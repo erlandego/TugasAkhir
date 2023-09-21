@@ -16,8 +16,9 @@ class EditQty extends Component
     public $namabarang;
     public $gambar;
     public $hapus;
+    public $berat;
 
-    public function mount($qty , $idcart , $harga , $total , $namabarang , $gambar){
+    public function mount($qty , $idcart , $harga , $total , $namabarang , $berat , $gambar){
         $this->qty = $qty;
         $this->qty2 = $qty;
         $this->idcart = $idcart;
@@ -26,28 +27,39 @@ class EditQty extends Component
         $this->namabarang = $namabarang;
         $this->gambar = $gambar;
         $this->hapus = false;
+        $this->berat = $berat;
     }
 
     public function tambah(){
         $this->qty += 1;
         $total = $this->harga * $this->qty;
+        $totalberat = $this->berat * $this->qty;
+        $this->berat = $totalberat;
         $this->total = $total;
         Cart::where('id' , $this->idcart)->update([
             'qty' => $this->qty,
-            'total' => $total
+            'total' => $total,
+            'berat' => $totalberat
         ]);
         $this->emit('updateSub');
+        $this->emit('Unselect');
+        $this->emit('emptyResponse');
     }
 
     public function kurang(){
+        $totalberat = $this->berat / $this->qty;
         $this->qty -= 1;
         $total = $this->harga * $this->qty;
+        $this->berat = $totalberat;
         $this->total = $total;
         Cart::where('id' , $this->idcart)->update([
             'qty' => $this->qty,
-            'total' => $total
+            'total' => $total,
+            'berat' => $totalberat
         ]);
         $this->emit('updateSub');
+        $this->emit('Unselect');
+        $this->emit('emptyResponse');
     }
 
     public function hapus(){
@@ -63,7 +75,8 @@ class EditQty extends Component
             'total' => $this->total,
             'namabarang' => $this->namabarang,
             'gambar' => $this->gambar,
-            'hapus' => $this->hapus
+            'hapus' => $this->hapus,
+            'berat' => $this->berat
         ]);
     }
 }

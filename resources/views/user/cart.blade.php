@@ -19,10 +19,10 @@
         //Cek Total Berat
         $totalberat = 0;
         foreach ($cart as $value) {
-            if($value->user_id == auth()->user()->id){
-                $totalberat += $value->Barang->berat;
+                if($value->user_id == auth()->user()->id){
+                    $totalberat += $value->berat;
+                }
             }
-        }
 
     @endphp
     <!-- Cart Start -->
@@ -57,6 +57,7 @@
                                     'harga' => $item->Barang->harga,
                                     'total' => $item->total,
                                     'namabarang' => $item->Barang->nama_barang,
+                                    'berat' => $item->berat,
                                     'gambar' => $gambar
                                 ], key($index))
                             @endif
