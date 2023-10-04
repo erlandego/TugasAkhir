@@ -24,6 +24,13 @@
                 }
             }
 
+        $userid = auth()->user()->id;
+        $listbeli = [];
+        foreach ($cart as $value) {
+            if($value->user_id == auth()->user()->id){
+                array_push($listbeli , $value);
+            }
+        }
     @endphp
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
@@ -73,6 +80,8 @@
         </div>
 
         <div class="row px-xl-5">
+
+            {{-- Pilih Shipping --}}
             @livewire('pilih-shipping' , [
                 'provinsi' => $provinsipilihan,
                 'kabupaten' => $kabupatenpilihan,
@@ -80,8 +89,10 @@
                 'checkutama' => $checkutama
             ])
 
+            {{-- Pilih Paket Shipping --}}
             @livewire('pilih-paket')
 
+            {{-- Alamat User --}}
             <div class="col-lg-4">
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">

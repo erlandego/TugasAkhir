@@ -71,3 +71,5 @@ Route::get('/cart' , [tes::class , 'cart'])->middleware('auth');
 Route::get('/shop' , [tes::class , 'shop']);
 
 Route::resource('/alamat' , AddressController::class);
+
+Route::post('/checkout' , [tes::class , 'checkout']);

@@ -130,4 +130,10 @@ class tes extends Controller
             'alamat' => address::all()
         ]);
     }
+
+    public function checkout(Request $request){
+        return view('user.checkout' , [
+            'title' => 'Checkout'
+        ]);
+    }
 }

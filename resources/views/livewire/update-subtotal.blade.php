@@ -27,7 +27,16 @@
                     <h5 class="font-weight-bold">Total</h5>
                     <h5 class="font-weight-bold">Rp{{ number_format($totalall) }}</h5>
                 </div>
-                <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                <form action="/checkout" method="POST">
+                    @csrf
+                    <input type="hidden" value="{{ auth()->user()->id }}" name="user_id" id="user_id">
+                    <input type="hidden" value="{{ $listbeli }}" name="listbeli" id="listbeli">
+                    <input type="hidden" value="{{ $todaydate }}" name="tanggalpembelian" id="tanggalpembelian">
+                    <input type="hidden" value="unpaid" name="status" id="status">
+                    <input type="hidden" value="{{ $subtotal }}" name="subtotal" id="subtotal">
+                    <input type="hidden" value="{{ $shipping }}" name="shipping" id="shipping">
+                    <button type="submit" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                </form>
             </div>
         </div>
     </div>
