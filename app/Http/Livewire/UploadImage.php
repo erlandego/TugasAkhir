@@ -71,10 +71,10 @@ class UploadImage extends Component
     public function render()
     {
         if($this->dariedit == true){
-            $this->images = Image::where('id_barang', '=' , $this->idbarang)->get();
+            $this->images = Image::where('barang_id', '=' , $this->idbarang)->get();
         }
         else{
-            $this->images = Image::where('id_barang', '=' , null)->get();
+            $this->images = Image::where('barang_id', '=' , null)->get();
         }
         return view('livewire.upload-image',[
             "images" => $this->images,

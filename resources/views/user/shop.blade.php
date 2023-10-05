@@ -165,7 +165,7 @@
                         <div class="card product-item border-0 mb-4">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                                 @foreach ($images as $item2)
-                                    @if($item->id == $item2->id_barang)
+                                    @if($item->id == $item2->barang_id)
                                         <img class="img-fluid w-100" src="{{ asset('storage/' . $item2->image) }}" alt="">
                                         @break
                                     @endif

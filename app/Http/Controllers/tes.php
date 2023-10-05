@@ -132,8 +132,14 @@ class tes extends Controller
     }
 
     public function checkout(Request $request){
+        $alamat = address::where('id' , '=' , $request->addresspilihan)->get();
+        $barangbeli = explode("|" , $request->listbeli);
         return view('user.checkout' , [
-            'title' => 'Checkout'
+            'title' => 'Checkout',
+            'alamat' => $alamat,
+            'barangbeli' => $barangbeli,
+            'cart' => Cart::all(),
+            'img' => Image::all()
         ]);
     }
 }

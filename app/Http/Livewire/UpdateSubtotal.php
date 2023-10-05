@@ -13,10 +13,12 @@ class UpdateSubtotal extends Component
     public $totalall;
     public $listbeli;
     public $todaydate;
+    public $addresspilihan;
     protected $listeners = ['updateSub' => 'render' , 'ubahShippingprice' => 'ubahShippingprice'];
 
-    public function mount($userid){
+    public function mount($userid , $addresspilihan){
         $this->userid = $userid;
+        $this->addresspilihan = $addresspilihan;
     }
 
     public function ubahShippingprice($paket){
@@ -36,7 +38,7 @@ class UpdateSubtotal extends Component
 
         //Menambahkan list beli
         foreach ($listcart as $value) {
-            array_push($list , $value);
+            array_push($list , $value->id);
         }
 
         $this->listbeli = implode("|" , $list);
@@ -48,7 +50,8 @@ class UpdateSubtotal extends Component
             'shipping' => $this->shipping,
             'totalall' => $this->totalall,
             'listbeli' => $this->listbeli,
-            'todaydate' => $this->todaydate
+            'todaydate' => $this->todaydate,
+            'addresspilihan' => $this->addresspilihan
         ]);
     }
 }

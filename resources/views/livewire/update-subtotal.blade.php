@@ -35,6 +35,7 @@
                     <input type="hidden" value="unpaid" name="status" id="status">
                     <input type="hidden" value="{{ $subtotal }}" name="subtotal" id="subtotal">
                     <input type="hidden" value="{{ $shipping }}" name="shipping" id="shipping">
+                    <input type="hidden" value="{{ $addresspilihan }}" name="addresspilihan" id="addresspilihan">
                     <button type="submit" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
                 </form>
             </div>

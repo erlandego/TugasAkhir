@@ -7,12 +7,14 @@
         $checkutama = false;
         $provinsipilihan;
         $kabupatenpilihan;
+        $addresspilihan;
 
         foreach ($listaddress as $value) {
             if($value->utama == 1){
                 $checkutama = true;
                 $provinsipilihan = $value->provinsi_id;
                 $kabupatenpilihan = $value->city_id;
+                $addresspilihan = $value->id;
             }
         }
 
@@ -31,6 +33,8 @@
                 array_push($listbeli , $value);
             }
         }
+
+        $gambar = "";
     @endphp
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
@@ -53,7 +57,7 @@
                             @if($item->user_id == auth()->user()->id)
                                 @php
                                     foreach ($img as $value) {
-                                        if($item->Barang->id == $value->id_barang){
+                                        if($item->Barang->id == $value->barang_id){
                                             $gambar = $value->image;
                                         }
                                     }
@@ -75,7 +79,8 @@
             </div>
 
             @livewire('update-subtotal' , [
-                'userid' => auth()->user()->id
+                'userid' => auth()->user()->id,
+                'addresspilihan' => $addresspilihan
             ])
         </div>
 
