@@ -36,6 +36,8 @@
                     <input type="hidden" value="{{ $subtotal }}" name="subtotal" id="subtotal">
                     <input type="hidden" value="{{ $shipping }}" name="shipping" id="shipping">
                     <input type="hidden" value="{{ $addresspilihan }}" name="addresspilihan" id="addresspilihan">
+                    <input type="hidden" value="{{ $kurir }}" name="kurir" id="kurir">
+                    <input type="hidden" value="{{ $paket }}" name="paket" id="paket">
                     <button type="submit" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
                 </form>
             </div>

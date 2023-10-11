@@ -25,4 +25,8 @@ class address extends Model
     public function Provinsi(){
         return $this->belongsTo(Provinsi::class);
     }
+
+    public function Hjual(){
+        return $this->hasMany(Hjual::class);
+    }
 }

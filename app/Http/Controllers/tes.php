@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Cart;
+use App\Models\Hjual;
+use App\Models\Djual;
 use Illuminate\Http\Request;
 
 class tes extends Controller
@@ -134,6 +136,14 @@ class tes extends Controller
     public function checkout(Request $request){
         $alamat = address::where('id' , '=' , $request->addresspilihan)->get();
         $barangbeli = explode("|" , $request->listbeli);
+        $user_id = $request->user_id;
+        $status = $request->status;
+        $subtotal = $request->subtotal;
+        $shipping = $request->shipping;
+        $provinsi = $alamat[0]->provinsi_id;
+        $kota = $alamat[0]->city_id;
+        $kecamatan = $alamat[0]->kecamatan_id;
+        $address = $alamat[0]->id;
         return view('user.checkout' , [
             'title' => 'Checkout',
             'alamat' => $alamat,

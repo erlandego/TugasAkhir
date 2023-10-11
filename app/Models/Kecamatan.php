@@ -21,4 +21,8 @@ class Kecamatan extends Model
     public function address(){
         return $this->hasMany(address::class);
     }
+
+    public function Hjual(){
+        return $this->hasMany(Hjual::class);
+    }
 }
