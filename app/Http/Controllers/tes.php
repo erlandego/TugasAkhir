@@ -134,6 +134,7 @@ class tes extends Controller
     }
 
     public function checkout(Request $request){
+        //get semua variable
         $alamat = address::where('id' , '=' , $request->addresspilihan)->get();
         $barangbeli = explode("|" , $request->listbeli);
         $user_id = $request->user_id;
@@ -144,6 +145,40 @@ class tes extends Controller
         $kota = $alamat[0]->city_id;
         $kecamatan = $alamat[0]->kecamatan_id;
         $address = $alamat[0]->id;
+        $kurir = $request->kurir;
+        $paket = $request->paket;
+
+        //insert ke Hjual
+        Hjual::create([
+            'user_id' => $user_id,
+            'total_belanja' => $subtotal,
+            'total_shipping' => $shipping,
+            'kurir_pengiriman' => $kurir,
+            'paket_pengiriman' => $$paket,
+            'address_id' => $address,
+            'provinsi_id' => $provinsi,
+            'city_id' => $kota,
+            'kecamatan_id' => $kecamatan,
+            'status' => $status
+        ]);
+
+        //insert ke Djual
+        $idhjual = Hjual::latest()->first()->id;
+        $cart = Cart::all();
+        foreach ($cart as $value) {
+            foreach ($barangbeli as $value2) {
+                if($value->id == $value2){
+                    Djual::create([
+                        'hjual_id' => $idhjual,
+                        'barang_id' => $value->barang_id,
+                        'subtotal' => $value->$total,
+                        'qty' => $value->qty,
+                        'berat' => $value->berat
+                    ]);
+                }
+            }
+        }
+
         return view('user.checkout' , [
             'title' => 'Checkout',
             'alamat' => $alamat,

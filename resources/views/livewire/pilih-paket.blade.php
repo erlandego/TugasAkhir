@@ -8,7 +8,7 @@
                         @if($response != null)
                             @foreach ($response->rajaongkir->results[0]->costs as $item)
                                 <div class="form-check mb-3">
-                                    <input class="form-check-input" type="radio" name="radiopaket" id="{{ $item->service }}" value="{{ $item->cost[0]->value }}" wire:model="paket" wire:click="requlang('{{ $response->rajaongkir->query->destination }}','{{ $response->rajaongkir->query->weight }}','{{ $response->rajaongkir->query->courier }}')">
+                                    <input class="form-check-input" type="radio" name="radiopaket" id="{{ $item->service }}" value="{{ $item->cost[0]->value."|".$item->description }}" wire:model="paket" wire:click="requlang('{{ $response->rajaongkir->query->destination }}','{{ $response->rajaongkir->query->weight }}','{{ $response->rajaongkir->query->courier }}')">
                                     <label class="form-check-label" for="{{ $item->service }}">
                                         <h5>{{ $item->service }}</h5>
                                         {{ $item->description }} <br>

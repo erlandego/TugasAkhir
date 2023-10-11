@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('djuals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('djual_id');
+            $table->foreignId('hjual_id');
             $table->foreignId('barang_id');
             $table->foreignId('rakitan_id')->nullable();
             $table->integer('subtotal');

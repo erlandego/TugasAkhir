@@ -38,7 +38,7 @@ class PilihShipping extends Component
         foreach ($listcart as $value) {
             $this->berat += $value->berat;
         }
-        
+
         $this->berat *= 1000;
         if($this->checkutama == true){
             $curl = curl_init();
@@ -63,7 +63,7 @@ class PilihShipping extends Component
             $response2 = json_decode($response);
 
             $this->response = $response2;
-            $this->emit('pilihPaket' , $this->response);
+            $this->emit('pilihPaket' , $this->response , $this->shipping);
         }else{
             session()->flash('message', 'Alamat utama belum di tentukan');
         }

@@ -14,15 +14,21 @@ class UpdateSubtotal extends Component
     public $listbeli;
     public $todaydate;
     public $addresspilihan;
+    public $paket;
+    public $kurir;
     protected $listeners = ['updateSub' => 'render' , 'ubahShippingprice' => 'ubahShippingprice'];
 
     public function mount($userid , $addresspilihan){
         $this->userid = $userid;
         $this->addresspilihan = $addresspilihan;
+        $this->kurir = "";
     }
 
-    public function ubahShippingprice($paket){
-        $this->shipping = $paket;
+    public function ubahShippingprice($paket , $kurir){
+        $arrtemp = explode('|',$paket);
+        $this->shipping = $arrtemp[0];
+        $this->paket = $arrtemp[1];
+        $this->kurir = $kurir;
     }
 
     public function render()
@@ -51,7 +57,9 @@ class UpdateSubtotal extends Component
             'totalall' => $this->totalall,
             'listbeli' => $this->listbeli,
             'todaydate' => $this->todaydate,
-            'addresspilihan' => $this->addresspilihan
+            'addresspilihan' => $this->addresspilihan,
+            'paket' => $this->paket,
+            'kurir' => $this->kurir
         ]);
     }
 }

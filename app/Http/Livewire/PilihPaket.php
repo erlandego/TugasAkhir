@@ -13,16 +13,18 @@ class PilihPaket extends Component
     public $berat;
     public $shipping;
     public $courier;
+    public $kurir;
     protected $listeners = ['pilihPaket' , 'emptyResponse' => 'emptyResponse'];
 
     public function mount(){
         $this->checker = false;
     }
 
-    public function pilihPaket($response){
+    public function pilihPaket($response , $shipping){
         $temp = (object)$response;
         $temp2 = json_encode($temp);
         $this->response = json_decode($temp2);
+        $this->kurir = $shipping;
     }
 
     public function emptyResponse(){
@@ -60,7 +62,7 @@ class PilihPaket extends Component
     }
 
     public function updatedPaket(){
-        $this->emit('ubahShippingprice' , $this->paket);
+        $this->emit('ubahShippingprice' , $this->paket , $this->kurir);
     }
 
     public function render()
@@ -71,7 +73,7 @@ class PilihPaket extends Component
             'shipping' => $this->paket,
             'berat' => $this->berat,
             'kabupaten' => $this->kabupaten,
-            'courier' => $this->courier,
+            // 'courier' => $this->courier,
         ]);
     }
 }
