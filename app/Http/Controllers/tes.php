@@ -147,6 +147,16 @@ class tes extends Controller
         $address = $alamat[0]->id;
         $kurir = $request->kurir;
         $paket = $request->paket;
+        $email = "";
+        $nama = "";
+
+        $listuser = User::all();
+        foreach ($listuser as $value) {
+            if($value->id == $user_id){
+                $email = $value->email;
+                $nama = $value->name;
+            }
+        }
 
         //insert ke Hjual
         Hjual::create([
@@ -154,7 +164,7 @@ class tes extends Controller
             'total_belanja' => $subtotal,
             'total_shipping' => $shipping,
             'kurir_pengiriman' => $kurir,
-            'paket_pengiriman' => $$paket,
+            'paket_pengiriman' => $paket,
             'address_id' => $address,
             'provinsi_id' => $provinsi,
             'city_id' => $kota,
@@ -171,7 +181,7 @@ class tes extends Controller
                     Djual::create([
                         'hjual_id' => $idhjual,
                         'barang_id' => $value->barang_id,
-                        'subtotal' => $value->$total,
+                        'subtotal' => $value->total,
                         'qty' => $value->qty,
                         'berat' => $value->berat
                     ]);
@@ -179,12 +189,58 @@ class tes extends Controller
             }
         }
 
+        //Kosongkan cart
+        foreach ($barangbeli as $value) {
+            Cart::destroy($value);
+        }
+
+        //Payment
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $idhjual,
+                'gross_amount' => $subtotal + $shipping,
+            ),
+            'customer_details' => array(
+                'first_name' => $nama,
+                'email' => $email,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+
+        //Masukkan snaptoken
+        Hjual::where('id' , $idhjual)->update([
+            'snap_token' => $snapToken
+        ]);
+
         return view('user.checkout' , [
             'title' => 'Checkout',
             'alamat' => $alamat,
             'barangbeli' => $barangbeli,
-            'cart' => Cart::all(),
-            'img' => Image::all()
+            'hjual' => $idhjual,
+            'listdjual' => Djual::all(),
+            'img' => Image::all(),
+            'snapToken' => $snapToken
         ]);
+    }
+
+    public function callback(Request $request){
+        $serverKey = config('midtrans.server_key');
+        $hashed = hash("sha512" , $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
+        if($hashed == $request->signature_key){
+            if($request->transaction_status == 'capture'){
+                Hjual::where('id' , $request->order_id)->update(['status' => 'Paid']);
+            }
+        }
     }
 }

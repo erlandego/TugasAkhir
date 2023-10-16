@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('provinsi_id');
             $table->foreignId('city_id');
             $table->foreignId('kecamatan_id');
+            $table->string('snap_token')->nullable();
             $table->string('status');
             $table->timestamps();
         });
