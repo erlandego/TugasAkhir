@@ -105,7 +105,7 @@
     </div>
 
     {{-- Tambah Merk --}}
-    <div class="form-group mb-3" id="divmerkbaru" style="display:none">
+    {{-- <div class="form-group mb-3" id="divmerkbaru" style="display:none">
         <b><label for="merkbaru">Tambah Merk baru</label></b>
         <input type="text" class="form-control" id="merkbaru" name="merkbaru">
         <select class="form-control" id="merkcategory" name="merkcategory">
@@ -114,7 +114,7 @@
             @endforeach
         </select>
         <button type="button" class="btn btn-primary" onclick="tambahmerk()">Tambah</button>
-    </div>
+    </div> --}}
 
     {{-- Size --}}
     <div class="form-group mb-3" id="divsize" @if($barang->size_id == null) {{ 'style=display:none' }} @endif>
@@ -214,7 +214,7 @@
     </div>
 
     {{-- Add Socket --}}
-    <div class="form-group mb-3" id="divsocketbaru" style="displaynone">
+    {{-- <div class="form-group mb-3" id="divsocketbaru" style="displaynone">
         <b><label for="socketbaru">Input Socket baru : </label></b>
         <input type="text" class="form-control" id="socketbaru" name="socketbaru" aria-label="Recipient's username" aria-describedby="basic-addon2">
         <div class="input-group-append">
@@ -226,7 +226,7 @@
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" onclick="tambahsocket()" type="button">Tambah</button>
         </div>
-    </div>
+    </div> --}}
 
     {{-- Power --}}
     <div class="form-group mb-3" id="divpower" @if($barang->power == null) {{ 'style=display:none' }} @endif>
@@ -326,8 +326,8 @@
 
         //document.getElementById('merk2').value = {{ $merkbarang }};
 
-        document.getElementById("divsocketbaru").style.display = "none";
-        document.getElementById('divmerkbaru').style.display = "none";
+        //document.getElementById("divsocketbaru").style.display = "none";
+        //document.getElementById('divmerkbaru').style.display = "none";
         // //Karena intel merk pertama yang muncul
         // document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
 
@@ -429,30 +429,30 @@
         }
 
 
-        function tambahsocket(){
-            var namasocketbaru = document.getElementById('socketbaru').value;
-            var socketbarumerk = document.getElementById('socketbarumerk').value;
-            fetch('/dashboard/barang/tambahsocket?namasocketbaru='+ namasocketbaru + "&socketbarumerk=" + socketbarumerk)
-                .then(response => response.json())
-                .then(location.reload())
-        }
+        // function tambahsocket(){
+        //     var namasocketbaru = document.getElementById('socketbaru').value;
+        //     var socketbarumerk = document.getElementById('socketbarumerk').value;
+        //     fetch('/dashboard/barang/tambahsocket?namasocketbaru='+ namasocketbaru + "&socketbarumerk=" + socketbarumerk)
+        //         .then(response => response.json())
+        //         .then(location.reload())
+        // }
 
-        function addsocket(){
-            document.getElementById('divsocketbaru').style.display = "";
-        }
+        // function addsocket(){
+        //     document.getElementById('divsocketbaru').style.display = "";
+        // }
 
-        function tambahmerk(){
-            var namamerkbaru = document.getElementById('merkbaru').value;
-            var kategorimerkbaru = document.getElementById('merkcategory').value;
-            fetch('/dashboard/barang/tambahmerk?namamerkbaru=' + namamerkbaru + '&kategorimerkbaru=' + kategorimerkbaru)
-                .then(response => response.json())
-                .then(alert('Berhasil menambahkan merk baru'))
-                .then(location.reload())
-        }
+        // function tambahmerk(){
+        //     var namamerkbaru = document.getElementById('merkbaru').value;
+        //     var kategorimerkbaru = document.getElementById('merkcategory').value;
+        //     fetch('/dashboard/barang/tambahmerk?namamerkbaru=' + namamerkbaru + '&kategorimerkbaru=' + kategorimerkbaru)
+        //         .then(response => response.json())
+        //         .then(alert('Berhasil menambahkan merk baru'))
+        //         .then(location.reload())
+        // }
 
-        function addmerk() {
-            document.getElementById('divmerkbaru').style.display = "";
-        }
+        // function addmerk() {
+        //     document.getElementById('divmerkbaru').style.display = "";
+        // }
 
         function listgroupclick(merk){
             var pilih = document.getElementById(merk).innerHTML;

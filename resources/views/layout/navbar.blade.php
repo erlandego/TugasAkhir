@@ -34,6 +34,33 @@
 
     <style>
 
+        .popup{
+            display: flex;
+            width: 1050px;
+            height: 500px;
+            background-color: white;
+            flex-wrap: wrap;
+            margin: 20px;
+            border: 5px solid;
+            top: 12%;
+            padding: 10px;
+            margin-left: 12%;
+            position: fixed;
+            z-index: 100;
+            overflow: scroll;
+        }
+
+        .popup-content{
+            margin: 0px;
+            padding: 20px;
+            width: 300px;
+            height: auto;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
         .button-group{
             display: flex;
             flex-direction: row;

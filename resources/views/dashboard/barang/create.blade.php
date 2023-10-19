@@ -85,12 +85,12 @@
         <div class="form-group mb-3" id="divsocket">
             <b><label for="socket">Socket</label></b>
             <div class="input-group input-group-sm mb-3">
-                <select class="form-control" id="socket" name="socket">
+                <select class="form-control" id="socket" name="socket" onchange="ubahmerk()">
 
                 </select>
-                <div class="input-group-prepend">
+                {{-- <div class="input-group-prepend">
                     <button type="button" class="btn btn-primary" id="addnewsocket" onclick="addsocket()">Tambahkan Socket baru</button>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -187,8 +187,6 @@
         document.getElementById("divsize").style.display = "none";
         document.getElementById("divddr").style.display = "none";
         document.getElementById("divnvme").style.display = "none";
-        document.getElementById("divsocketbaru").style.display = "none";
-        document.getElementById('divmerkbaru').style.display = "none";
         document.getElementById('divmerk2').style.display = "none";
         //Karena intel merk pertama yang muncul
         document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
@@ -298,30 +296,30 @@
         }
 
 
-        function tambahsocket(){
-            var namasocketbaru = document.getElementById('socketbaru').value;
-            var socketbarumerk = document.getElementById('socketbarumerk').value;
-            fetch('/dashboard/barang/tambahsocket?namasocketbaru='+ namasocketbaru + "&socketbarumerk=" + socketbarumerk)
-                .then(response => response.json())
-                .then(location.reload())
-        }
+        // function tambahsocket(){
+        //     var namasocketbaru = document.getElementById('socketbaru').value;
+        //     var socketbarumerk = document.getElementById('socketbarumerk').value;
+        //     fetch('/dashboard/barang/tambahsocket?namasocketbaru='+ namasocketbaru + "&socketbarumerk=" + socketbarumerk)
+        //         .then(response => response.json())
+        //         .then(location.reload())
+        // }
 
-        function addsocket(){
-            document.getElementById('divsocketbaru').style.display = "";
-        }
+        // function addsocket(){
+        //     document.getElementById('divsocketbaru').style.display = "";
+        // }
 
-        function tambahmerk(){
-            var namamerkbaru = document.getElementById('merkbaru').value;
-            var kategorimerkbaru = document.getElementById('merkcategory').value;
-            fetch('/dashboard/barang/tambahmerk?namamerkbaru=' + namamerkbaru + '&kategorimerkbaru=' + kategorimerkbaru)
-                .then(response => response.json())
-                .then(alert('Berhasil menambahkan merk baru'))
-                .then(location.reload())
-        }
+        // function tambahmerk(){
+        //     var namamerkbaru = document.getElementById('merkbaru').value;
+        //     var kategorimerkbaru = document.getElementById('merkcategory').value;
+        //     fetch('/dashboard/barang/tambahmerk?namamerkbaru=' + namamerkbaru + '&kategorimerkbaru=' + kategorimerkbaru)
+        //         .then(response => response.json())
+        //         .then(alert('Berhasil menambahkan merk baru'))
+        //         .then(location.reload())
+        // }
 
-        function addmerk() {
-            document.getElementById('divmerkbaru').style.display = "";
-        }
+        // function addmerk() {
+        //     document.getElementById('divmerkbaru').style.display = "";
+        // }
 
         function listgroupclick(merk){
             var pilih = document.getElementById(merk).innerHTML;
@@ -371,6 +369,7 @@
             fetch('/dashboard/barang/checkSlug?nama=' + nama.value)
                 .then(response => response.json())
                 .then(data => slug.value = data.slug)
+            //slug.value = "woy";
         });
 
     </script>

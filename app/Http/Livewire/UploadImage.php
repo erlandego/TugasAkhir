@@ -33,7 +33,7 @@ class UploadImage extends Component
         ]);
 
         if($this->dariedit == false){
-            $arrsementara = Image::where('id_barang', '=' , null)->get();
+            $arrsementara = Image::where('barang_id', '=' , null)->get();
             $hitung = $arrsementara->count();
             if($hitung < 4){
                 $validatedData['image'] = $this->image->store('barang-images');
@@ -45,7 +45,7 @@ class UploadImage extends Component
             }
         }
         else{
-            $arrsementara = Image::where('id_barang', '=' , $this->idbarang)->get();
+            $arrsementara = Image::where('barang_id', '=' , $this->idbarang)->get();
             $hitung = $arrsementara->count();
             if($hitung < 4){
                 if($this->idbarang != null){

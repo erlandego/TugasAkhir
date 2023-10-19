@@ -238,7 +238,7 @@ class DashboardBarangController extends Controller
 
         Barang::create($validatedData);
         $id_barang = Barang::latest()->first();
-        Image::where('id_barang',null)->update(['id_barang' => $id_barang->id]);
+        Image::where('barang_id',null)->update(['barang_id' => $id_barang->id]);
         return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
         //return $id_barang->id;
     }

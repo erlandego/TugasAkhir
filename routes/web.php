@@ -70,6 +70,7 @@ Route::get('dashboard/sizes/checkSlug' , [DashboardSizeController::class , 'chec
 Route::get('/cart' , [tes::class , 'cart'])->middleware('auth');
 Route::get('/shop' , [tes::class , 'shop']);
 
-Route::resource('/alamat' , AddressController::class);
+Route::resource('/alamat' , AddressController::class)->middleware('auth');
 
-Route::post('/checkout' , [tes::class , 'checkout']);
+Route::post('/checkout' , [tes::class , 'checkout'])->middleware('auth');
+Route::get('/rakitan' , [tes::class , 'rakitan']);

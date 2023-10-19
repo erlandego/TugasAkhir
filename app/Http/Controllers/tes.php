@@ -243,4 +243,12 @@ class tes extends Controller
             }
         }
     }
+
+    public function rakitan(){
+        return view('user.rakitan' , [
+            'title' => 'rakitan',
+            'image' => Image::all(),
+            'barang' => Barang::all()
+        ]);
+    }
 }
