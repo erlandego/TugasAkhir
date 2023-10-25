@@ -28,6 +28,9 @@ return new class extends Migration
             $table->foreignId('socket_id')->nullable();
             $table->integer('power')->nullable();
             $table->integer('nvme')->nullable();
+            $table->integer('dimm')->nullable();
+            $table->integer('m2')->nullable();
+            $table->integer('sata')->nullable();
             $table->timestamps();
         });
     }

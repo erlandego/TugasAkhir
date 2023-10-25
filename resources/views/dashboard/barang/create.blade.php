@@ -128,6 +128,30 @@
             </div>
         </div>
 
+        {{-- Dimmm --}}
+        <div class="form-group mb-3" id="divdimm">
+            <b><label for="dimm">Jumlah Slot DIMM</label></b>
+            <div class="input-group input-group-sm mb-3">
+                <input id="dimm" type="number" value="{{ old('dimm') }}" class="form-control" aria-label="Small" name="dimm">
+            </div>
+        </div>
+
+        {{-- M.2 --}}
+        <div class="form-group mb-3" id="divm2">
+            <b><label for="m2">Jumlah Slot M.2</label></b>
+            <div class="input-group input-group-sm mb-3">
+                <input id="m2" type="number" value="{{ old('m2') }}" class="form-control" aria-label="Small" name="m2">
+            </div>
+        </div>
+
+        {{-- SATA --}}
+        <div class="form-group mb-3" id="divsata">
+            <b><label for="sata">Jumlah Slot SATA</label></b>
+            <div class="input-group input-group-sm mb-3">
+                <input id="sata" type="number" value="{{ old('sata') }}" class="form-control" aria-label="Small" name="sata">
+            </div>
+        </div>
+
         {{-- Harga Barang --}}
         <div class="form-group mb-3">
             <b><label for="harga">Harga Barang</label></b>
@@ -188,6 +212,9 @@
         document.getElementById("divddr").style.display = "none";
         document.getElementById("divnvme").style.display = "none";
         document.getElementById('divmerk2').style.display = "none";
+        document.getElementById('divdimm').style.display = "none";
+        document.getElementById('divm2').style.display = "none";
+        document.getElementById('divsata').style.display = "none";
         //Karena intel merk pertama yang muncul
         document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
 
@@ -204,6 +231,9 @@
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else if(namakategori == "Processor"){
                 document.getElementById("divsize").style.display = "none";
@@ -215,6 +245,9 @@
                 document.getElementById('divmerk2').style.display = "none";
                 document.getElementById('berat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else if(namakategori == "RAM"){
                 document.getElementById("divsize").style.display = "none";
@@ -226,6 +259,9 @@
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else if(namakategori == "VGA Card"){
                 document.getElementById("divsize").style.display = "none";
@@ -237,6 +273,9 @@
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else if(namakategori == "Motherboard"){
                 document.getElementById("divsize").style.display = "";
@@ -248,6 +287,12 @@
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "";
+                document.getElementById('divm2').style.display = "";
+                document.getElementById('divsata').style.display = "";
+
+                document.getElementById('socket').innerHTML = "";
+                document.getElementById('socket').innerHTML = "@foreach($listsocket as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
             }
             else if(namakategori == "Power Supply"){
                 document.getElementById("divsize").style.display = "none";
@@ -259,6 +304,9 @@
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else{
                 document.getElementById("divsize").style.display = "none";
@@ -270,6 +318,9 @@
                 document.getElementById('divmerk2').style.display = "";
                 document.getElementById('berat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
 
             //nanti ganti , nd boleh tembak langsung ID nya

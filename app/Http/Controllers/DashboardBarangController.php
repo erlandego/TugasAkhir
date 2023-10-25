@@ -51,7 +51,8 @@ class DashboardBarangController extends Controller
             ->join('merks' , 'merks.id' , '=' , 'sockets.merk_id')
             ->where('merks.nama_merk' , '=' , 'Intel')->get(),
             "listsize" => Size::all(),
-            "page" => "List Barang"
+            "page" => "List Barang",
+            "listsocket" => Socket::all()
         ]);
     }
 
@@ -174,6 +175,9 @@ class DashboardBarangController extends Controller
                 'nvme' => 'required',
                 'deskripsi' => 'required',
                 'berat' => 'required',
+                'dimm' => 'required|numeric',
+                'm2' => 'required|numeric',
+                'sata' => 'required|numeric'
             ]);
             $idmerk = 0;
             foreach ($listmerk as $key => $value) {
