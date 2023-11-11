@@ -10,6 +10,8 @@ use App\Models\MerkCategory;
 use App\Models\Size;
 use App\Models\Slot;
 use App\Models\Socket;
+use App\Models\Rekomendasi;
+use App\Models\BarangRekomendasi;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -52,7 +54,8 @@ class DashboardBarangController extends Controller
             ->where('merks.nama_merk' , '=' , 'Intel')->get(),
             "listsize" => Size::all(),
             "page" => "List Barang",
-            "listsocket" => Socket::all()
+            "listsocket" => Socket::all(),
+            "rekomendasi" => Rekomendasi::all()
         ]);
     }
 
@@ -70,7 +73,7 @@ class DashboardBarangController extends Controller
         $kategoripilihan = "";
         $validatedData = [];
         foreach ($listcat as $key => $value) {
-            if($key+1 == $request->category_id){
+            if($value->id == $request->category_id){
                 $kategoripilihan = $value->name;
             }
         }
@@ -241,10 +244,27 @@ class DashboardBarangController extends Controller
         }
 
         Barang::create($validatedData);
+
+        //Insert Picture
         $id_barang = Barang::latest()->first();
         Image::where('barang_id',null)->update(['barang_id' => $id_barang->id]);
+        //-----------------------------------------------------------------------------------------
+
+        //insert Rekomendasi
+        if($request->rekomendasi != null || count($request->rekomendasi) != 0){
+            foreach ($request->rekomendasi as $value) {
+                BarangRekomendasi::create([
+                    'barang_id' => $id_barang,
+                    'rekomendasi_id' => $value
+                ]);
+            }
+        }
+        else{
+            return back()->with('rekomendasi', 'Rekomendasi harus di pilih');
+        }
+        //-----------------------------------------------------------------------------------------
+
         return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
-        //return $id_barang->id;
     }
 
     /**
@@ -282,6 +302,8 @@ class DashboardBarangController extends Controller
             ->where('merks.nama_merk' , '=' , 'Intel')->get(),
             "allsocket" => socket::all(),
             "listsize" => Size::all(),
+            "rekomendasi" => Rekomendasi::all(),
+            "BarangRekomendasi" => BarangRekomendasi::where('barang_id' , $barang->id)->get(),
             "barang" => $barang
         ]);
     }
@@ -425,7 +447,10 @@ class DashboardBarangController extends Controller
                 'stok' => 'required|numeric',
                 'nvme' => 'required',
                 'deskripsi' => 'required',
-                'berat' => 'required'
+                'berat' => 'required',
+                'dimm' => 'required|numeric',
+                'm2' => 'required|numeric',
+                'sata' => 'required|numeric'
             ];
 
             if($request->slug != $barang->slug){
@@ -503,6 +528,59 @@ class DashboardBarangController extends Controller
             $validatedData['power'] = null;
             $validatedData['socket_id'] = null;
             $validatedData['nvme'] = null;
+        }
+
+        $rekpilihan = $request->rekomendasi;
+        $barangrek = BarangRekomendasi::where('barang_id' , $barang->id);
+        $hapus = [];
+        $tambah = [];
+
+        if($rekpilihan != null || count($rekpilihan) != 0){
+            //cek 1
+            foreach ($barangrek as $value) {
+                $cek = false;
+                foreach ($rekpilihan as $value2) {
+                    if($value2 == $value->rekomendasi_id){
+                        $cek = true;
+                    }
+                }
+                if($cek == false){
+                    array_push($hapus , $value->id);
+                }
+            }
+
+            //cek 2
+            foreach ($rekpilihan as $value){
+                $cek = false;
+                foreach ($barangrek as $value2) {
+                    if($value == $value2->rekomendasi_id){
+                        $cek = true;
+                    }
+                }
+                if($cek == false){
+                    array_push($tambah , $value);
+                }
+            }
+
+            //execute
+            if($hapus != null || count($hapus) != 0){
+                foreach ($hapus as $value) {
+                    BarangRekomendasi::destroy($value);
+                }
+            }
+
+            if($tambah != null || count($tambah) != 0){
+                foreach ($tambah as $value) {
+                    BarangRekomendasi::create([
+                        'barang_id' => $barang->id,
+                        'rekomendasi_id' => $value
+                    ]);
+                }
+            }
+
+        }
+        else{
+            return back()->with('rekomendasi', 'Rekomendasi harus di pilih');
         }
 
         //return $validatedData;

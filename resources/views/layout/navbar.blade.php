@@ -34,6 +34,17 @@
 
     <style>
 
+        .rekomendasi{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 10px;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            padding-left: 5%;
+            margin-top: 25px;
+        }
+
         .popup{
             display: flex;
             width: 1050px;

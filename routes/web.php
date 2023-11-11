@@ -26,6 +26,7 @@ use App\Http\Controllers\tes;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MerkController;
+use App\Http\Controllers\RakitanController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [tes::class, 'index']);
@@ -73,4 +74,8 @@ Route::get('/shop' , [tes::class , 'shop']);
 Route::resource('/alamat' , AddressController::class)->middleware('auth');
 
 Route::post('/checkout' , [tes::class , 'checkout'])->middleware('auth');
+
 Route::get('/rakitan' , [tes::class , 'rakitan']);
+Route::post('/tambahrakitan' , [tes::class , 'tambahrakitan']);
+
+Route::get('/rekomendasi' , [tes::class , 'rekomendasi']);

@@ -388,5 +388,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ProvinsiSeeder::class);
         $this->call(CitySeeder::class);
+        $this->call(RekomendasiSeeder::class);
     }
 }

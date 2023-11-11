@@ -41,6 +41,10 @@ class User extends Authenticatable
         return $this->hasMany(Hjual::class);
     }
 
+    public function Rakitan(){
+        return $this->hasMany(Rakitan::class);
+    }
+
     public function scopeFilter($query , array $filters){
 
         // if(isset($filters['search']) ? $filters['search'] : false){

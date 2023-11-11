@@ -13,26 +13,39 @@ class FormRakit extends Component
     private $gambar;
     private $proc;
     public $processor;
+    public $processorcheck;
+    public $processorPrice;
     private $indikator;
     public $socket;
 
     private $motherboard;
     public $motherboardID;
+    public $motherboardPrice;
+    public $motherboardcheck;
 
     private $ram;
     public $ramID;
+    public $ramPrice;
+    public $ramcheck;
+    public $ramQty;
 
     private $vga;
     public $vgaID;
+    public $vgaPrice;
+    public $vgacheck;
 
     private $fan;
     public $fanID;
+    public $fanPrice;
 
     private $case;
     public $caseID;
+    public $casePrice;
 
     private $psu;
     public $psuID;
+    public $psuPrice;
+    public $psucheck;
 
     private $hide;
     public $slot;
@@ -41,6 +54,7 @@ class FormRakit extends Component
     public $m2;
     public $nvme;
     public $totalpower;
+    public $totalharga;
 
     public function mount($gambar , $barang){
         $this->barang = $barang;
@@ -57,6 +71,21 @@ class FormRakit extends Component
         $this->dimm = "";
         $this->m2 = "";
         $this->nvme = "";
+        $this->totalpower = 0;
+        $this->processorcheck = false;
+        $this->motherboardcheck = false;
+        $this->ramcheck = false;
+        $this->vgacheck = false;
+        $this->psucheck = false;
+        $this->processorPrice = 0;
+        $this->motherboardPrice = 0;
+        $this->ramPrice = 0;
+        $this->vgaPrice = 0;
+        $this->fanPrice = 0;
+        $this->casePrice = 0;
+        $this->psuPrice = 0;
+        $this->totalharga = 0;
+        $this->ramQty = 0;
     }
 
     public function processor(){
@@ -67,12 +96,16 @@ class FormRakit extends Component
         $this->indikator = "processor";
     }
 
+
     public function motherboard(){
         $cat = Category::where('name' , 'motherboard')->get();
         $idcat = $cat[0]->id;
 
         if($this->socket != "" || $this->socket != null){
             $this->motherboard = Barang::where('category_id' , $idcat)->where('socket_id' , '=' , $this->socket)->get();
+        }
+        else{
+            $this->motherboard = Barang::where('category_id' , $idcat);
         }
 
         //dd($this->socket);
@@ -86,6 +119,9 @@ class FormRakit extends Component
 
         if($this->slot != "" || $this->slot != null){
             $this->ram = Barang::where('category_id' , $idcat)->where('slot_id' , $this->slot)->get();
+        }
+        else{
+            $this->ram = Barang::where('category_id' , $idcat);
         }
 
         $this->indikator = "ram";
@@ -114,6 +150,9 @@ class FormRakit extends Component
         if ($this->size != "" || $this->size != null) {
             $this->case = Barang::where('category_id' , $idcat)->where('size_id' , $this->size)->get();
         }
+        else{
+            $this->case = Barang::where('category_id' , $idcat);
+        }
 
         $this->indikator = "case";
     }
@@ -122,23 +161,63 @@ class FormRakit extends Component
         $cat = Category::where('name' , 'Power Supply')->get();
         $idcat = $cat[0]->id;
 
-        $this->psu = Barang::where('category_id' , $idcat)->where('power' , '>' , $this->power)->get();
+        $this->psu = Barang::where('category_id' , $idcat)->where('power' , '>=' , $this->totalpower)->get();
 
         $this->indikator = 'psu';
     }
 
-    public function hide($power){
+    public function hitungtotal(){
+        $this->totalharga = $this->processorPrice + $this->motherboardPrice + $this->ramPrice + $this->vgaPrice + $this->fanPrice + $this->casePrice + $this->psuPrice;
+    }
+
+    public function updatedRamQty(){
+        $this->ramPrice = $this->ramPrice * $this->ramQty;
+        $this->hide = true;
+    }
+
+    public function hide($power , $indikator){
+
         $this->hide = true;
 
-        if($power == null){
-            $this->totalpower += 0;
-        }else{
-            $this->totalpower += $power;
+        if($indikator == "processor"){
+            if($this->processorcheck == false){
+                $pwr = $this->totalpower + $power;
+                $this->totalpower = $pwr;
+                $this->processorcheck = true;
+            }
+        }
+        else if($indikator == "motherboard"){
+            if($this->motherboardcheck == false){
+                $pwr = $this->totalpower + $power;
+                $this->totalpower = $pwr;
+                $this->motherboardcheck = true;
+            }
+        }
+        else if($indikator == "ram"){
+            if($this->ramcheck == false){
+                $pwr = $this->totalpower + $power;
+                $this->totalpower = $pwr;
+                $this->ramcheck = true;
+            }
+        }
+        else if($indikator == "vga"){
+            if($this->vgacheck == false){
+                $pwr = $this->totalpower + $power;
+                $this->totalpower = $pwr;
+                $this->vgacheck = true;
+            }
+        }
+        else if($indikator == "psu"){
+            if($this->processorcheck == false){
+                $this->processorcheck = true;
+            }
         }
     }
 
     public function render()
     {
+        $this->hitungtotal();
+
         return view('livewire.form-rakit' , [
             'barang' => $this->barang,
             'image' => Image::all(),
@@ -151,7 +230,10 @@ class FormRakit extends Component
             'vga' => $this->vga,
             'fan' => $this->fan,
             'case' => $this->case,
-            'psu' => $this->psu
+            'psu' => $this->psu,
+            'totalpower' => $this->totalpower,
+            'totalharga' => $this->totalharga,
+            'ramQty' => $this->ramQty
         ]);
     }
 }

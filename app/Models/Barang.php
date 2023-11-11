@@ -45,6 +45,14 @@ class Barang extends Model
         return $this->hasMany(Djual::class);
     }
 
+    public function Drakitan(){
+        return $this->hasMany(Drakitan::class);
+    }
+
+    public function BarangRekomendasi(){
+        return $this->hasMany(BarangRekomendasi::class);
+    }
+
     public function sluggable(): array
     {
         return [

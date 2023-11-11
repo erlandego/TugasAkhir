@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\address;
 use App\Models\Barang;
+use App\Models\BarangRekomendasi;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Cart;
 use App\Models\Hjual;
 use App\Models\Djual;
+use App\Models\Rakitan;
+use App\Models\Drakitan;
+use App\Models\Rekomendasi;
 use Illuminate\Http\Request;
 
 class tes extends Controller
@@ -244,11 +248,101 @@ class tes extends Controller
         }
     }
 
+    public function daftarrakitan(Request $request){
+        return view('user.listrakitan' , [
+            'title' => "List Rakitan",
+            'listrakitan' => Rakitan::where('')
+        ]);
+    }
+
     public function rakitan(){
         return view('user.rakitan' , [
             'title' => 'rakitan',
             'image' => Image::all(),
             'barang' => Barang::all()
+        ]);
+    }
+
+    public function tambahrakitan(Request $request){
+        if(isset($_POST["save"])){
+            Rakitan::create([
+                'nama_rakitan' => $request->nama_rakitan,
+                'user_id' => auth()->user()->id,
+                'totalharga' => $request->totalharga
+            ]);
+
+            $idrakitan = Rakitan::latest()->first()->id;
+
+            //Processor
+            Drakitan::create([
+                'barang_id' => $request->processorID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->processorPrice,
+                'qty' => 1
+            ]);
+
+            //Motherboard
+            Drakitan::create([
+                'barang_id' => $request->motherboardID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->motherboardPrice,
+                'qty' => 1
+            ]);
+
+            //ram
+            Drakitan::create([
+                'barang_id' => $request->ramID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->ramPrice,
+                'qty' => $request->ramQty
+            ]);
+
+            //vga
+            Drakitan::create([
+                'barang_id' => $request->vgaID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->vgaPrice,
+                'qty' => 1
+            ]);
+
+            //fan
+            Drakitan::create([
+                'barang_id' => $request->fanID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->fanPrice,
+                'qty' => 1
+            ]);
+
+            //Case
+            Drakitan::create([
+                'barang_id' => $request->caseID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->casePrice,
+                'qty' => 1
+            ]);
+
+            //psu
+            Drakitan::create([
+                'barang_id' => $request->psuID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->psuPrice,
+                'qty' => 1
+            ]);
+
+            return redirect('/')->with('success' , 'Rakitan berhasil di save');
+        }
+
+
+        if(isset($_POST["cart"])){
+            return "Cart";
+        }
+    }
+
+    public function rekomendasi(){
+        return view('user.rekomendasi',[
+            'title' => 'Rekomendasi',
+            'rekomendasi' => Rekomendasi::all(),
+            'BarangRekomendasi' => BarangRekomendasi::all()
         ]);
     }
 }

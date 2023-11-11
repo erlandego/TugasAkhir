@@ -13,9 +13,9 @@
             <input type="hidden" id="slug" name="slug">
         </div>
         @error('nama_merk')
-            <div class="invalid-feedback">
+            <p class="text-danger">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
     </div>
 
@@ -37,9 +37,9 @@
             @php $cari = 0 @endphp
         @endforeach
         @error('category')
-            <div class="invalid-feedback">
+            <p class="text-danger">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
     </div>
 

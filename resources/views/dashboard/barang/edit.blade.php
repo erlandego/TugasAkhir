@@ -1,11 +1,11 @@
 @extends('dashboard.layout.dashboard')
 
 @section('container')
-
 @php
     $kategoribarang;
     $merkproc ="";
     $merkbarang = "";
+    $cari = 0;
     foreach ($categories as $key => $value) {
         if($barang->category_id == $value->id){
             $kategoribarang = $value->name;
@@ -34,15 +34,15 @@
       <b><label for="nama_barang">Nama Barang </label></b>
       <input type="text" class="form-control @error('nama_barang') is-invalid @enderror" id="nama_barang" name="nama_barang" value="{{ $barang->nama_barang }}" placeholder="Masukkan nama barang" autofocus>
       @error('nama_barang')
-        <div class="invalid-feedback">
+        <p class="text-danger">
             {{ $message }}
-        </div>
+        </p>
       @enderror
       <input type="hidden" class="form-control" id="slug" name="slug" value="{{ $barang->slug }}">
       @error('slug')
-        <div class="invalid-feedback">
+        <p class="text-danger">
             {{ $message }}
-        </div>
+        </p>
       @enderror
     </div>
 
@@ -61,9 +61,9 @@
         @endforeach
       </select>
       @error('category_id')
-        <div class="invalid-feedback">
+        <p class="text-danger">
             {{ $message }}
-        </div>
+        </p>
       @enderror
     </div>
 
@@ -87,9 +87,9 @@
             </div>
         </div>
         @error('merk_id')
-            <div class="invalid-feedback">
+            <p class="text-danger">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
     </div>
 
@@ -98,9 +98,9 @@
         <b><label for="merk2">Merk</label></b>
         @livewire('search-merk' , ['barang' => $barang , 'checker' => true])
         @error('merk_id')
-            <div class="invalid-feedback">
+            <p class="text-danger">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
     </div>
 
@@ -131,9 +131,9 @@
             @endforeach
         </select>
         @error('size')
-            <div class="invalid-feedback">
+            <p class="text-danger">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
     </div>
 
@@ -153,9 +153,9 @@
             @endforeach
         </select>
         @error('ddr')
-            <div class="invalid-feedback">
+            <p class="text-danger">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
     </div>
 
@@ -207,9 +207,9 @@
             </div>
         </div>
         @error('socket')
-            <div class="invalid-feedback">
+            <p class="text-danger">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
     </div>
 
@@ -238,9 +238,9 @@
             </div>
         </div>
         @error('power')
-            <div class="invalid-feedback">
+            <p class="text-danger">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
     </div>
 
@@ -251,10 +251,34 @@
             <input id="nvme" type="number" value="{{ $barang->nvme }}" class="form-control" aria-label="Small" name="nvme">
         </div>
         @error('nvme')
-            <div class="invalid-feedback">
+            <p class="text-danger">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
+    </div>
+
+    {{-- Dimmm --}}
+    <div class="form-group mb-3" id="divdimm" @if($barang->dimm == null) {{ 'style=display:none' }} @endif>
+        <b><label for="dimm">Jumlah Slot DIMM</label></b>
+        <div class="input-group input-group-sm mb-3">
+            <input id="dimm" type="number" value="{{ $barang->dimm }}" class="form-control" aria-label="Small" name="dimm">
+        </div>
+    </div>
+
+    {{-- M.2 --}}
+    <div class="form-group mb-3" id="divm2" @if($barang->m2 == null) {{ 'style=display:none' }} @endif>
+        <b><label for="m2">Jumlah Slot M.2</label></b>
+        <div class="input-group input-group-sm mb-3">
+            <input id="m2" type="number" value="{{ $barang->m2 }}" class="form-control" aria-label="Small" name="m2">
+        </div>
+    </div>
+
+    {{-- SATA --}}
+    <div class="form-group mb-3" id="divsata" @if($barang->sata == null) {{ 'style=display:none' }} @endif>
+        <b><label for="sata">Jumlah Slot SATA</label></b>
+        <div class="input-group input-group-sm mb-3">
+            <input id="sata" type="number" value="{{ $barang->sata }}" class="form-control" aria-label="Small" name="sata">
+        </div>
     </div>
 
     {{-- Harga Barang --}}
@@ -297,6 +321,28 @@
         </div>
     </div>
 
+    {{-- Rekomendasi --}}
+    <div class="form-group mb-3" id="divrekomendasi">
+        <b><label for="rekomendasi">Direkomendasikan untuk :</label></b>
+        @foreach($rekomendasi as $item)
+            @foreach($BarangRekomendasi as $item2)
+                @if($item->id == $item2->rekomendasi_id && $item2->barang_id == $barang->id)
+                    @php $cari = 1; @endphp
+                @endif
+            @endforeach
+            <div class="form-check">
+                <input id="rekomendasi" type="checkbox" class="form-check-input" name="rekomendasi[]" value="{{ $item->id }}" id="{{ $item->nama_rekomendasi }}" @if($cari == 1) checked @endif>
+                <label class="form-check-label" for="{{ $item->nama_rekomendasi }}">
+                    {{ $item->nama_rekomendasi }}
+                </label>
+            </div>
+            @php $cari = 0; @endphp
+        @endforeach
+        @if(session()->has('rekomendasi'))
+            <p class="text-danger">{{ session($rekomendasi) }}</p>
+        @endif
+    </div>
+
     {{-- Menampilkan Gambar --}}
     <div class="form-group mb-3" id="divimage">
         @livewire('upload-image' , [
@@ -324,85 +370,109 @@
         const kategori = document.querySelector('#category_id');
         const merk = document.querySelector('#merk');
 
-        //document.getElementById('merk2').value = {{ $merkbarang }};
-
-        //document.getElementById("divsocketbaru").style.display = "none";
-        //document.getElementById('divmerkbaru').style.display = "none";
-        // //Karena intel merk pertama yang muncul
-        // document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
+        //Karena intel merk pertama yang muncul
+        //document.getElementById('socket').innerHTML = "@foreach($socketintel as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
 
         function muncul(){
             var namakategori = kategori.options[kategori.selectedIndex].text;
             var idcat = kategori.value;
             if(namakategori == "Casing"){
                 document.getElementById("divsize").style.display = "";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
+                document.getElementById("divmerk2").style.display = "";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else if(namakategori == "Processor"){
                 document.getElementById("divsize").style.display = "none";
                 document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk2").style.display = "none";
                 document.getElementById("divsocket").style.display = "";
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else if(namakategori == "RAM"){
                 document.getElementById("divsize").style.display = "none";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
+                document.getElementById("divmerk2").style.display = "";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else if(namakategori == "VGA Card"){
                 document.getElementById("divsize").style.display = "none";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
+                document.getElementById("divmerk2").style.display = "";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else if(namakategori == "Motherboard"){
                 document.getElementById("divsize").style.display = "";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
+                document.getElementById("divmerk2").style.display = "";
                 document.getElementById("divsocket").style.display = "";
                 document.getElementById("divddr").style.display = "";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "";
                 document.getElementById('divberat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "";
+                document.getElementById('divm2').style.display = "";
+                document.getElementById('divsata').style.display = "";
             }
             else if(namakategori == "Power Supply"){
                 document.getElementById("divsize").style.display = "none";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
+                document.getElementById("divmerk2").style.display = "";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
             else{
                 document.getElementById("divsize").style.display = "none";
-                document.getElementById("divmerk").style.display = "";
+                document.getElementById("divmerk").style.display = "none";
+                document.getElementById("divmerk2").style.display = "";
                 document.getElementById("divsocket").style.display = "none";
                 document.getElementById("divddr").style.display = "none";
                 document.getElementById("divpower").style.display = "none";
                 document.getElementById("divnvme").style.display = "none";
                 document.getElementById('divberat').style.display = "";
                 document.getElementById('divimage').style.display = "";
+                document.getElementById('divdimm').style.display = "none";
+                document.getElementById('divm2').style.display = "none";
+                document.getElementById('divsata').style.display = "none";
             }
 
             //nanti ganti , nd boleh tembak langsung ID nya
@@ -426,6 +496,7 @@
                 document.getElementById('socket').innerHTML = "";
                 document.getElementById('socket').innerHTML = "@foreach($socketamd as $item)<option value='{{ $item->id }}'>{{ $item->nama_socket }}</option> @endforeach";
             }
+
         }
 
 

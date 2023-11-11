@@ -1,6 +1,11 @@
 @extends('layout.main')
 @section('container')
 <!-- Featured Start -->
+@if(session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+@endif
 <div class="container-fluid pt-5">
     <div class="row px-xl-5 pb-3">
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
@@ -251,7 +256,7 @@
 
 
 <!-- Products Start -->
-<div class="container-fluid pt-5">
+{{-- <div class="container-fluid pt-5">
     <div class="text-center mb-4">
         <h2 class="section-title px-5"><span class="px-2">Just Arrived</span></h2>
     </div>
@@ -393,7 +398,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Products End -->
 
 

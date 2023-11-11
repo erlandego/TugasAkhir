@@ -182,6 +182,22 @@
             </div>
         </div>
 
+        {{-- Rekomendasi --}}
+        <div class="form-group mb-3" id="divrekomendasi">
+            <b><label for="rekomendasi">Direkomendasikan untuk :</label></b>
+            @foreach($rekomendasi as $item)
+                <div class="form-check">
+                    <input id="rekomendasi" type="checkbox" class="form-check-input" name="rekomendasi[]" value="{{ $item->id }}" id="{{ $item->nama_rekomendasi }}">
+                    <label class="form-check-label" for="{{ $item->nama_rekomendasi }}">
+                        {{ $item->nama_rekomendasi }}
+                    </label>
+                </div>
+            @endforeach
+            @if(session()->has('rekomendasi'))
+                <p class="text-danger">{{ session($rekomendasi) }}</p>
+            @endif
+        </div>
+
         {{-- upload gambar --}}
         <div class="form-group mb-3" id="divimage">
             @livewire('upload-image' , [
