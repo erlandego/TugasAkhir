@@ -44,7 +44,12 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ $item }}</h5>
                       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                      <form method="post" action="/form-rekomendasi">
+                        @csrf
+                        <input type="hidden" class="form-control" name="rekomendasi" value="gaming">
+                        <input type="hidden" class="form-control" name="paket" value="{{ $item }}">
+                        <button type="submit" class="btn btn-primary">Pilih</button>
+                      </form>
                     </div>
                 </div>
             @endforeach
@@ -54,7 +59,12 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ $item }}</h5>
                       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                      <form method="post" action="/form-rekomendasi">
+                        @csrf
+                        <input type="hidden" class="form-control" name="rekomendasi" value="school">
+                        <input type="hidden" class="form-control" name="paket" value="{{ $item }}">
+                        <button type="submit" class="btn btn-primary">Pilih</button>
+                      </form>
                     </div>
                 </div>
             @endforeach
@@ -64,7 +74,12 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ $item }}</h5>
                       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                      <form method="post" action="/form-rekomendasi">
+                        @csrf
+                        <input type="hidden" class="form-control" name="rekomendasi" value="home">
+                        <input type="hidden" class="form-control" name="paket" value="{{ $item }}">
+                        <button type="submit" class="btn btn-primary">Pilih</button>
+                      </form>
                     </div>
                 </div>
             @endforeach
@@ -74,7 +89,12 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ $item }}</h5>
                       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                      <form method="post" action="/form-rekomendasi">
+                        @csrf
+                        <input type="hidden" class="form-control" name="rekomendasi" value="design">
+                        <input type="hidden" class="form-control" name="paket" value="{{ $item }}">
+                        <button type="submit" class="btn btn-primary">Pilih</button>
+                      </form>
                     </div>
                 </div>
             @endforeach

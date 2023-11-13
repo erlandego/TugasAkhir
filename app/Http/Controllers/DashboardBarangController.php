@@ -253,10 +253,11 @@ class DashboardBarangController extends Controller
         //insert Rekomendasi
         if($request->rekomendasi != null || count($request->rekomendasi) != 0){
             foreach ($request->rekomendasi as $value) {
-                BarangRekomendasi::create([
-                    'barang_id' => $id_barang,
-                    'rekomendasi_id' => $value
-                ]);
+                // BarangRekomendasi::create([
+                //     'barang_id' => $id_barang,
+                //     'rekomendasi_id' => $value,
+                // ]);
+                $this->insertrekomendasi($id_barang->id , $value);
             }
         }
         else{
@@ -264,7 +265,8 @@ class DashboardBarangController extends Controller
         }
         //-----------------------------------------------------------------------------------------
 
-        return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
+        //return $request->rekomendasi;
+        //return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
     }
 
     /**
@@ -466,7 +468,7 @@ class DashboardBarangController extends Controller
             }
             $validatedData['size_id'] = $request->size;
             $validatedData['slot_id'] = $request->ddr;
-            $validatedData['socket_id'] = $request->socket;
+            $validatedData['socket_id'] = $request->socket_id;
             $validatedData['merk_id'] = $idmerk;
             $validatedData['slug'] = $request->slug;
 
@@ -531,7 +533,7 @@ class DashboardBarangController extends Controller
         }
 
         $rekpilihan = $request->rekomendasi;
-        $barangrek = BarangRekomendasi::where('barang_id' , $barang->id);
+        $barangrek = BarangRekomendasi::where('barang_id' , $barang->id)->get();
         $hapus = [];
         $tambah = [];
 
@@ -583,7 +585,7 @@ class DashboardBarangController extends Controller
             return back()->with('rekomendasi', 'Rekomendasi harus di pilih');
         }
 
-        //return $validatedData;
+        //return $request;
         Barang::where('id' , $barang->id)->update($validatedData);
         return redirect('/dashboard/barang')->with('success' , 'Barang telah di update');
     }
@@ -604,6 +606,13 @@ class DashboardBarangController extends Controller
     public function checkSlug(Request $request){
         $slug = SlugService::createSlug(Barang::class, 'slug', $request->nama);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function insertrekomendasi($barangid , $rekomendasi_id){
+        BarangRekomendasi::create([
+            'barang_id' => $barangid,
+            'rekomendasi_id' => $rekomendasi_id
+        ]);
     }
 
     // public function tambahsocket(Request $request){

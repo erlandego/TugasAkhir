@@ -6,11 +6,14 @@ use Livewire\Component;
 use App\Models\Barang;
 use App\Models\Category;
 use App\Models\Image;
+use PDO;
 
 class FormRakit extends Component
 {
     private $barang;
     private $gambar;
+    public $rekomendasi;
+    public $paket;
     private $proc;
     public $processor;
     public $processorcheck;
@@ -56,9 +59,11 @@ class FormRakit extends Component
     public $totalpower;
     public $totalharga;
 
-    public function mount($gambar , $barang){
+    public function mount($gambar , $barang , $rekomendasi , $paket){
         $this->barang = $barang;
         $this->gambar = $gambar;
+        $this->rekomendasi = $rekomendasi;
+        $this->paket = $paket;
         $this->indikator = "";
         $this->proc = null;
         $this->processor = "";
@@ -88,70 +93,637 @@ class FormRakit extends Component
         $this->ramQty = 0;
     }
 
-    public function processor(){
-        $cat = Category::where('name' , 'processor')->get();
+    public function RekomendasiProc(){
+        if($this->rekomendasi == 'gaming'){
+            if($this->paket == 'High Spec'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i9%');
+                    $query->orWhere('nama_barang','LIKE','%i7%');
+                    $query->orWhere('nama_barang','LIKE','%AM5%');
+                })->get();
+            }
+            else if($this->paket == 'Mid Range'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i7%');
+                    $query->orWhere('nama_barang','LIKE','%i5%');
+                    $query->orWhere('nama_barang','LIKE','%AM4%');
+                })->get();
+            }
+            else if($this->paket == 'Low Budget'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i5%');
+                    $query->orWhere('nama_barang','LIKE','%i3%');
+                    $query->orWhere('nama_barang','LIKE','%AM4%');
+                })->where('harga' , '<' , 2000000)->get();
+            }
+        }
+        else if($this->rekomendasi == 'school'){
+            if($this->paket == 'Elementary'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i5%');
+                    $query->orWhere('nama_barang','LIKE','%i3%');
+                    $query->orWhere('nama_barang','LIKE','%AM4%');
+                })->get();
+            }
+            else if($this->paket == 'Highschool'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i5%');
+                    $query->orWhere('nama_barang','LIKE','%AM4%');
+                });
+            }
+        }
+        else if($this->rekomendasi == 'home-office'){
+            if($this->paket == 'Multi Tasking'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i5%');
+                    $query->orWhere('nama_barang','LIKE','%i3%');
+                    $query->orWhere('nama_barang','LIKE','%AM4%');
+                })->get();
+            }
+            else if($this->paket == 'Browsing and Watch'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i3%');
+                    $query->orWhere('nama_barang','LIKE','%AM4%');
+                })->get();
+            }
+        }
+        else if($this->rekomendasi == 'design'){
+            if($this->paket == 'Graphic Designer'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i7%');
+                    $query->orWhere('nama_barang','LIKE','%i5%');
+                    $query->orWhere('nama_barang','LIKE','%AM4%');
+                })->get();
+            }
+            else if($this->paket == 'Video Editor'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i7%');
+                    $query->orWhere('nama_barang','LIKE','%i5%');
+                    $query->orWhere('nama_barang','LIKE','%AM4%');
+                })->get();
+            }
+            else if($this->paket == 'Animator'){
+                $cat = Category::where('name' , 'processor')->get();
+                $idcat = $cat[0]->id;
+                $this->proc = Barang::where('category_id' , $idcat)->where(function($query){
+                    $query->orWhere('nama_barang','LIKE','%i9%');
+                    $query->orWhere('nama_barang','LIKE','%i7%');
+                    $query->orWhere('nama_barang','LIKE','%AM5%');
+                })->get();
+            }
+        }
+    }
+
+    public function RekomendasiMotherboard(){
+        $cat = Category::where('name' , 'motherboard')->get();
+        $idcat = $cat[0]->id;
+        if ($this->socket != "" || $this->socket != null) {
+            if($this->rekomendasi == "gaming"){
+                if($this->paket == 'High Spec'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->distinct()->get();
+                }
+                else if($this->paket == 'Mid Range'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)
+                    ->where('harga' , '<' , 3000000)->distinct()->get();
+                }
+                else if($this->paket == 'Low Budget'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)
+                    ->where('harga' , '<' , 2000000)->distinct()->get();
+                }
+            }
+            else if($this->rekomendasi == "school"){
+                if($this->paket == 'Elementary'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'School')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->distinct()->get();
+                }
+                else if($this->paket == 'Highschool'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'School')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->distinct()->get();
+                }
+            }
+            else if($this->rekomendasi == "home-office"){
+                if($this->paket == 'Multi Tasking'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Home Office')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->distinct()->get();
+                }
+                else if($this->paket == 'Browsing and Watch'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Home Office')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->distinct()->get();
+                }
+            }
+            else if($this->rekomendasi == "design"){
+                if($this->paket == 'Graphic Designer'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->distinct()->get();
+                }
+                else if($this->paket == 'Video Editor'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->distinct()->get();
+                }
+                else if($this->paket == 'Animator'){
+                    $this->motherboard = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->distinct()->get();
+                }
+            }
+        }
+    }
+
+    public function RekomendasiRam(){
+        $cat = Category::where('name' , 'RAM')->get();
+        $idcat = $cat[0]->id;
+        if($this->slot != null || $this->slot != ""){
+            if($this->rekomendasi == "gaming"){
+                if($this->paket == 'High Spec'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%16GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%32GB%');
+                    })->where('slot_id' , $this->slot)->get();
+                }
+                else if($this->paket == 'Mid Range'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%16GB%');
+                    })->where('slot_id' , $this->slot)->get();
+                }
+                else if($this->paket == 'Low Budget'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                    })->where('slot_id' , $this->slot)->where('harga' , '<' , 1000000)->get();
+                }
+            }
+            else if($this->rekomendasi == "school"){
+                if($this->paket == 'Elementary'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%4GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                    })->where('slot_id' , $this->slot)->get();
+                }
+                else if($this->paket == 'Highschool'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%16GB%');
+                    })->where('slot_id' , $this->slot)->get();
+                }
+            }
+            else if($this->rekomendasi == "home-office"){
+                if($this->paket == 'Multi Tasking'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%16GB%');
+                    })->where('slot_id' , $this->slot)->get();
+                }
+                else if($this->paket == 'Browsing and Watch'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%4GB%');
+                    })->where('slot_id' , $this->slot)->get();
+                }
+            }
+            else if($this->rekomendasi == "design"){
+                if($this->paket == 'Graphic Designer'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%16GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%32GB%');
+                    })->where('slot_id' , $this->slot)->get();
+                }
+                else if($this->paket == 'Video Editor'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%16GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%32GB%');
+                    })->where('slot_id' , $this->slot)->get();
+                }
+                else if($this->paket == 'Animator'){
+                    $this->ram = Barang::where('category_id' , $idcat)->where(function($query){
+                        $query->orWhere('nama_barang' , 'LIKE' , '%8GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%16GB%');
+                        $query->orWhere('nama_barang' , 'LIKE' , '%32GB%');
+                    })->where('slot_id' , $this->slot)->get();
+                }
+            }
+        }
+    }
+
+    public function RekomendasiVGA(){
+        $cat = Category::where('name' , 'VGA Card')->get();
         $idcat = $cat[0]->id;
 
-        $this->proc = Barang::where('category_id' , $idcat)->get();
-        $this->indikator = "processor";
+        if($this->rekomendasi == "gaming"){
+            if($this->paket == 'High Spec'){
+                $this->vga = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->where(function($query){
+                        $query->orWhere('barangs.nama_barang' , 'LIKE' , '%RTX 20%');
+                        $query->orWhere('barangs.nama_barang' , 'LIKE' , '%RTX 30%');
+                    })->distinct()->get();
+            }
+            else if($this->paket == 'Mid Range'){
+                $this->vga = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->where(function($query){
+                        $query->orWhere('barangs.nama_barang' , 'LIKE' , '%RTX 20%');
+                    })->distinct()->get();
+            }
+            else if($this->paket == 'Low Budget'){
+                $this->vga = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->where(function($query){
+                        $query->orWhere('barangs.nama_barang' , 'LIKE' , '%GTX 16%');
+                    })->distinct()->get();
+            }
+        }
+        else if($this->rekomendasi == "school"){
+            if($this->paket == 'Elementary'){
+                $this->vga = [];
+            }
+            else if($this->paket == 'Highschool'){
+                $this->vga = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'School')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->where(function($query){
+                        $query->orWhere('barangs.nama_barang' , 'LIKE' , '%GTX 16%');
+                    })->distinct()->get();
+            }
+        }
+        else if($this->rekomendasi == "home-office"){
+            if($this->paket == 'Multi Tasking'){
+                $this->vga = [];
+            }
+            else if($this->paket == 'Browsing and Watch'){
+                $this->vga = [];
+            }
+        }
+        else if($this->rekomendasi == "design"){
+            if($this->paket == 'Graphic Designer'){
+                $this->vga = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->where(function($query){
+                        $query->orWhere('barangs.nama_barang' , 'LIKE' , '%RTX 20%');
+                    })->distinct()->get();
+            }
+            else if($this->paket == 'Video Editor'){
+                $this->vga = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->where(function($query){
+                        $query->orWhere('barangs.nama_barang' , 'LIKE' , '%RTX 20%');
+                    })->distinct()->get();
+            }
+            else if($this->paket == 'Animator'){
+                $this->vga = Barang::select("barangs.*")
+                    ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                    ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                    ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                    ->where('barangs.category_id' , $idcat)
+                    ->where('barangs.socket_id' , $this->socket)->where(function($query){
+                        $query->orWhere('barangs.nama_barang' , 'LIKE' , '%RTX 40%');
+                        $query->orWhere('barangs.nama_barang' , 'LIKE' , '%RTX 30%');
+                    })->distinct()->get();
+            }
+        }
+    }
+
+    public function RekomendasiFan(){
+        $cat = Category::where('name' , 'CPU Cooler')->get();
+        $idcat = $cat[0]->id;
+
+        if($this->rekomendasi == "gaming"){
+            if($this->paket == 'High Spec'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                ->where('barangs.category_id' , $idcat)->orWhere('harga' , '>' , 1000000)->get();
+            }
+            else if($this->paket == 'Mid Range'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                ->where('barangs.category_id' , $idcat)->where('harga' , '<' , 1000000)->get();
+            }
+            else if($this->paket == 'Low Budget'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                ->where('barangs.category_id' , $idcat)->where('harga' , '<' , 500000)->get();
+            }
+        }
+        else if($this->rekomendasi == "school"){
+            if($this->paket == 'Elementary'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'School')
+                ->where('barangs.category_id' , $idcat)->get();
+            }
+            else if($this->paket == 'Highschool'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'School')
+                ->where('barangs.category_id' , $idcat)->get();
+            }
+        }
+        else if($this->rekomendasi == "home-office"){
+            if($this->paket == 'Multi Tasking'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Home Office')
+                ->where('barangs.category_id' , $idcat)->get();
+            }
+            else if($this->paket == 'Browsing and Watch'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Home Office')
+                ->where('barangs.category_id' , $idcat)->get();
+            }
+        }
+        else if($this->rekomendasi == "design"){
+            if($this->paket == 'Graphic Designer'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                ->where('barangs.category_id' , $idcat)->get();
+            }
+            else if($this->paket == 'Video Editor'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                ->where('barangs.category_id' , $idcat)->get();
+            }
+            else if($this->paket == 'Animator'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                ->where('barangs.category_id' , $idcat)->get();
+            }
+        }
+    }
+
+    public function RekomendasiCase(){
+        $cat = Category::where('name' , 'Casing')->get();
+        $idcat = $cat[0]->id;
+
+        if($this->rekomendasi == "gaming"){
+            if($this->paket == 'High Spec'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+            else if($this->paket == 'Mid Range'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+            else if($this->paket == 'Low Budget'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Gaming')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+        }
+        else if($this->rekomendasi == "school"){
+            if($this->paket == 'Elementary'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'School')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+            else if($this->paket == 'Highschool'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'School')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+        }
+        else if($this->rekomendasi == "home-office"){
+            if($this->paket == 'Multi Tasking'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Home Office')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+            else if($this->paket == 'Browsing and Watch'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Home Office')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+        }
+        else if($this->rekomendasi == "design"){
+            if($this->paket == 'Graphic Designer'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+            else if($this->paket == 'Video Editor'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+            else if($this->paket == 'Animator'){
+                $this->fan = Barang::select("barangs.*")
+                ->join('barang_rekomendasis' , 'barang_rekomendasis.barang_id' , '=' , 'barangs.id')
+                ->join('rekomendasis' , 'rekomendasis.id' , '=' , 'barang_rekomendasis.rekomendasi_id')
+                ->where('rekomendasis.nama_rekomendasi' , 'Design')
+                ->where('barangs.category_id' , $idcat)->where('barangs.size_id' , $this->size)->get();
+            }
+        }
+    }
+
+    public function processor(){
+        if($this->rekomendasi == null || $this->rekomendasi == ""){
+            $cat = Category::where('name' , 'processor')->get();
+            $idcat = $cat[0]->id;
+
+            $this->proc = Barang::where('category_id' , $idcat)->get();
+            $this->indikator = "processor";
+        }
+        else{
+            $this->RekomendasiProc();
+            $this->indikator = "processor";
+        }
     }
 
 
     public function motherboard(){
-        $cat = Category::where('name' , 'motherboard')->get();
-        $idcat = $cat[0]->id;
+        if($this->rekomendasi == null || $this->rekomendasi == ""){
+            $cat = Category::where('name' , 'motherboard')->get();
+            $idcat = $cat[0]->id;
 
-        if($this->socket != "" || $this->socket != null){
-            $this->motherboard = Barang::where('category_id' , $idcat)->where('socket_id' , '=' , $this->socket)->get();
+            if($this->socket != "" || $this->socket != null){
+                $this->motherboard = Barang::where('category_id' , $idcat)->where('socket_id' , '=' , $this->socket)->get();
+            }
+            else{
+                $this->motherboard = Barang::where('category_id' , $idcat);
+            }
         }
         else{
-            $this->motherboard = Barang::where('category_id' , $idcat);
+            $this->RekomendasiMotherboard();
         }
-
-        //dd($this->socket);
 
         $this->indikator = "motherboard";
     }
 
     public function ram(){
-        $cat = Category::where('name' , 'RAM')->get();
-        $idcat = $cat[0]->id;
+        if($this->rekomendasi == null || $this->rekomendasi == ""){
+            $cat = Category::where('name' , 'RAM')->get();
+            $idcat = $cat[0]->id;
 
-        if($this->slot != "" || $this->slot != null){
-            $this->ram = Barang::where('category_id' , $idcat)->where('slot_id' , $this->slot)->get();
+            if($this->slot != "" || $this->slot != null){
+                $this->ram = Barang::where('category_id' , $idcat)->where('slot_id' , $this->slot)->get();
+            }
+            else{
+                $this->ram = Barang::where('category_id' , $idcat);
+            }
         }
         else{
-            $this->ram = Barang::where('category_id' , $idcat);
+            $this->RekomendasiRam();
         }
 
         $this->indikator = "ram";
     }
 
     public function vga(){
-        $cat = Category::where('name' , 'VGA Card')->get();
-        $idcat = $cat[0]->id;
+        if($this->rekomendasi == null || $this->rekomendasi == ""){
+            $cat = Category::where('name' , 'VGA Card')->get();
+            $idcat = $cat[0]->id;
 
-        $this->vga = Barang::where('category_id' , $idcat)->get();
+            $this->vga = Barang::where('category_id' , $idcat)->get();
+        }
+        else{
+            $this->RekomendasiVGA();
+        }
         $this->indikator = "vga";
     }
 
     public function fan(){
-        $cat = Category::where('name' , 'CPU Cooler')->get();
-        $idcat = $cat[0]->id;
+        if($this->rekomendasi == null || $this->rekomendasi == ""){
+            $cat = Category::where('name' , 'CPU Cooler')->get();
+            $idcat = $cat[0]->id;
 
-        $this->fan = Barang::where('category_id' , $idcat)->get();
+            $this->fan = Barang::where('category_id' , $idcat)->get();
+        }
+        else{
+            $this->RekomendasiFan();
+        }
         $this->indikator = "fan";
     }
 
     public function case(){
-        $cat = Category::where('name' , 'Casing')->get();
-        $idcat = $cat[0]->id;
 
-        if ($this->size != "" || $this->size != null) {
-            $this->case = Barang::where('category_id' , $idcat)->where('size_id' , $this->size)->get();
+        if($this->rekomendasi == null || $this->rekomendasi == ""){
+            $cat = Category::where('name' , 'Casing')->get();
+            $idcat = $cat[0]->id;
+
+            if ($this->size != "" || $this->size != null) {
+                $this->case = Barang::where('category_id' , $idcat)->where('size_id' , $this->size)->get();
+            }
+            else{
+                $this->case = Barang::where('category_id' , $idcat);
+            }
         }
         else{
-            $this->case = Barang::where('category_id' , $idcat);
+            $this->RekomendasiCase();
         }
 
         $this->indikator = "case";

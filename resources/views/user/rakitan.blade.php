@@ -5,10 +5,21 @@
  $gambar = "";
 @endphp
 
-@livewire('form-rakit' , [
-    'gambar' => $image,
-    'barang' => $barang
-])
+@if(isset($rekomendasi))
+    @livewire('form-rakit' , [
+        'gambar' => $image,
+        'barang' => $barang,
+        'rekomendasi' => $rekomendasi,
+        'paket' => $paket
+    ])
+@else
+    @livewire('form-rakit' , [
+        'gambar' => $image,
+        'barang' => $barang,
+        'rekomendasi' => null,
+        'paket' => null
+    ])
+@endif
 
 <script>
     document.getElementById('popup').style.display = "none";

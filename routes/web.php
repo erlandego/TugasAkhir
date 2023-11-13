@@ -79,3 +79,4 @@ Route::get('/rakitan' , [tes::class , 'rakitan']);
 Route::post('/tambahrakitan' , [tes::class , 'tambahrakitan']);
 
 Route::get('/rekomendasi' , [tes::class , 'rekomendasi']);
+Route::post('/form-rekomendasi' , [tes::class , 'FormRekomendasi']);

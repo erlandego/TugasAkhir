@@ -334,7 +334,81 @@ class tes extends Controller
 
 
         if(isset($_POST["cart"])){
-            return "Cart";
+            Rakitan::create([
+                'nama_rakitan' => $request->nama_rakitan,
+                'user_id' => auth()->user()->id,
+                'totalharga' => $request->totalharga
+            ]);
+
+            $idrakitan = Rakitan::latest()->first()->id;
+            $hargarakitan = Rakitan::latest()->first()->totalharga;
+
+            //Processor
+            Drakitan::create([
+                'barang_id' => $request->processorID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->processorPrice,
+                'qty' => 1
+            ]);
+
+            //Motherboard
+            Drakitan::create([
+                'barang_id' => $request->motherboardID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->motherboardPrice,
+                'qty' => 1
+            ]);
+
+            //ram
+            Drakitan::create([
+                'barang_id' => $request->ramID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->ramPrice,
+                'qty' => $request->ramQty
+            ]);
+
+            //vga
+            Drakitan::create([
+                'barang_id' => $request->vgaID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->vgaPrice,
+                'qty' => 1
+            ]);
+
+            //fan
+            Drakitan::create([
+                'barang_id' => $request->fanID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->fanPrice,
+                'qty' => 1
+            ]);
+
+            //Case
+            Drakitan::create([
+                'barang_id' => $request->caseID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->casePrice,
+                'qty' => 1
+            ]);
+
+            //psu
+            Drakitan::create([
+                'barang_id' => $request->psuID,
+                'rakitan_id' => $idrakitan,
+                'price' => $request->psuPrice,
+                'qty' => 1
+            ]);
+
+            //insert ke cart
+            Cart::create([
+                'user_id' => auth()->user()->id,
+                'barang_id' => null,
+                'rakitan_id' => $idrakitan,
+                'type' => 'rakitan',
+                'qty' => 0,
+                'berat' => 0,
+                'total' => $hargarakitan
+            ]);
         }
     }
 
@@ -343,6 +417,16 @@ class tes extends Controller
             'title' => 'Rekomendasi',
             'rekomendasi' => Rekomendasi::all(),
             'BarangRekomendasi' => BarangRekomendasi::all()
+        ]);
+    }
+
+    public function FormRekomendasi(Request $request){
+        return view('user.rakitan' , [
+            'title' => 'Rakitan',
+            'image' => Image::all(),
+            'barang' => Barang::all(),
+            'rekomendasi' => $request->rekomendasi,
+            'paket' => $request->paket
         ]);
     }
 }

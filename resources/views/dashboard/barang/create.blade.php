@@ -2,7 +2,7 @@
 
 @section('container')
     {{-- @dd($merkPro) --}}
-    <h2>Ini halaman create</h2>
+    <h2>Tambah Barang</h2>
 
     <form method="post" action="/dashboard/barang" enctype="multipart/form-data">
         @csrf

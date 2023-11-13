@@ -18,7 +18,7 @@ class PilihRekomendasi extends Component
         $this->paketgaming = ["High Spec" , "Mid Range" , "Low Budget"];
         $this->pakethome = ["Multi Tasking" , "Browsing and Watch"];
         $this->paketdesign = ["Graphic Designer" , "Video Editor" , "Animator"];
-        $this->paketschool = ["Elementery" , "Highschool"];
+        $this->paketschool = ["Elementary" , "Highschool"];
     }
 
     public function pilih($rekomendasi){
