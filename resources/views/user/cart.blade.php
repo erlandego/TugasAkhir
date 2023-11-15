@@ -35,6 +35,7 @@
         }
 
         $gambar = "";
+        $gambar2 = "";
     @endphp
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
@@ -56,23 +57,61 @@
                         @foreach($cart as $item)
                             @if($item->user_id == auth()->user()->id)
                                 @php
-                                    foreach ($img as $value) {
-                                        if($item->Barang->id == $value->barang_id){
-                                            $gambar = $value->image;
+                                    if($item->type == "rakitan" || $item->type == "Rakitan"){
+                                        $gambar = null;
+                                    }
+                                    else{
+                                        foreach ($img as $value) {
+                                            if($item->Barang->id == $value->barang_id){
+                                                $gambar = $value->image;
+                                            }
                                         }
                                     }
                                 @endphp
-                                @livewire('edit-qty' , [
-                                    'qty' => $item->qty,
-                                    'idcart' => $item->id,
-                                    'harga' => $item->Barang->harga,
-                                    'total' => $item->total,
-                                    'namabarang' => $item->Barang->nama_barang,
-                                    'berat' => $item->berat,
-                                    'gambar' => $gambar
-                                ], key($index))
+                                @if($item->type == "rakitan")
+                                    @livewire('edit-qty' , [
+                                        'qty' => $item->qty,
+                                        'idcart' => $item->id,
+                                        'harga' => $item->total,
+                                        'total' => $item->total,
+                                        'namabarang' => $item->Rakitan->nama_rakitan,
+                                        'berat' => $item->berat,
+                                        'type' => $item->type,
+                                        'gambar' => null
+                                    ], key($index))
+                                @else
+                                    @livewire('edit-qty' , [
+                                        'qty' => $item->qty,
+                                        'idcart' => $item->id,
+                                        'harga' => $item->Barang->harga,
+                                        'total' => $item->total,
+                                        'namabarang' => $item->Barang->nama_barang,
+                                        'berat' => $item->berat,
+                                        'type' => $item->type,
+                                        'gambar' => $gambar
+                                    ], key($index))
+                                @endif
                             @endif
                         @php $index++; @endphp
+                        @if($item->type == 'rakitan')
+                            @foreach ($drakitan as $item2)
+                                @php
+                                    foreach ($img as $value){
+                                        if($item2->Barang->id == $value->barang_id){
+                                            $gambar2 = $value->image;
+                                        }
+                                    }
+                                @endphp
+                                <tr class="detailrakitan" style="background-color:lemonchiffon">
+                                    <td class="align-middle"><img src="{{ asset('storage/' . $gambar2) }}" alt="" style="width: 50px;"></td>
+                                    <td class="align-middle">{{ $item2->Barang->nama_barang }}</td>
+                                    <td class="align-middle">Rp{{ number_format($item2->Barang->harga) }}</td>
+                                    <td class="align-middle">{{ $item->qty }}</td>
+                                    <td class="align-middle">-</td>
+                                    <td class="align-middle">-</td>
+                                </tr>
+                            @endforeach
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -126,6 +165,19 @@
     <!-- Cart End -->
 
     <script>
+        var detailrakitan = document.getElementsByClassName("detailrakitan");
+        for (let index = 0; index < detailrakitan.length; index++) {
+            detailrakitan[index].style.display = "none";
+        }
 
+        function show(){
+            for (let index = 0; index < detailrakitan.length; index++) {
+                if(detailrakitan[index].style.display == "none"){
+                    detailrakitan[index].style.display = "";
+                }else{
+                    detailrakitan[index].style.display = "none";
+                }
+            }
+        }
     </script>
 @endsection

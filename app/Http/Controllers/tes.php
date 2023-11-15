@@ -118,7 +118,8 @@ class tes extends Controller
             'title' => 'Cart',
             'cart' => Cart::all(),
             'img' => Image::all(),
-            'listaddress' => address::where('user_id' , '=' , auth()->user()->id)->get()
+            'listaddress' => address::where('user_id' , '=' , auth()->user()->id)->get(),
+            'drakitan' => Drakitan::all()
         ]);
     }
 
@@ -409,6 +410,8 @@ class tes extends Controller
                 'berat' => 0,
                 'total' => $hargarakitan
             ]);
+
+            return redirect('/')->with('success' , 'Rakitan berhasil di save dan dimasukkan ke cart');
         }
     }
 

@@ -325,7 +325,7 @@ class DashboardBarangController extends Controller
         $kategoripilihan = "";
         $validatedData = [];
         foreach ($listcat as $key => $value) {
-            if($key+1 == $request->category_id){
+            if($value->id == $request->category_id){
                 $kategoripilihan = $value->name;
             }
         }
@@ -501,6 +501,7 @@ class DashboardBarangController extends Controller
             $validatedData['slot_id'] = null;
             $validatedData['socket_id'] = null;
             $validatedData['nvme'] = null;
+            //return "masuk sini";
         }
         else{
             $rules = [
@@ -585,7 +586,7 @@ class DashboardBarangController extends Controller
             return back()->with('rekomendasi', 'Rekomendasi harus di pilih');
         }
 
-        //return $request;
+        //return $kategoripilihan;
         Barang::where('id' , $barang->id)->update($validatedData);
         return redirect('/dashboard/barang')->with('success' , 'Barang telah di update');
     }

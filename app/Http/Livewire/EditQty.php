@@ -17,8 +17,9 @@ class EditQty extends Component
     public $gambar;
     public $hapus;
     public $berat;
+    public $type;
 
-    public function mount($qty , $idcart , $harga , $total , $namabarang , $berat , $gambar){
+    public function mount($qty , $idcart , $harga , $total , $namabarang , $berat , $type, $gambar){
         $this->qty = $qty;
         $this->qty2 = $qty;
         $this->idcart = $idcart;
@@ -27,6 +28,7 @@ class EditQty extends Component
         $this->namabarang = $namabarang;
         $this->gambar = $gambar;
         $this->hapus = false;
+        $this->type = $type;
         $this->berat = $berat;
     }
 
@@ -76,7 +78,8 @@ class EditQty extends Component
             'namabarang' => $this->namabarang,
             'gambar' => $this->gambar,
             'hapus' => $this->hapus,
-            'berat' => $this->berat
+            'berat' => $this->berat,
+            'type' => $this->type
         ]);
     }
 }

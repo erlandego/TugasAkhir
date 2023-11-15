@@ -17,4 +17,8 @@ class Rakitan extends Model
     public function Drakitan(){
         return $this->hasMany(Drakitan::class);
     }
+
+    Public function Cart(){
+        return $this->hasMany(Cart::class);
+    }
 }

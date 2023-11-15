@@ -17,4 +17,8 @@ class Cart extends Model
     public function User(){
         return $this->belongsTo(User::class);
     }
+
+    public function Rakitan(){
+        return $this->belongsTo(Rakitan::class);
+    }
 }

@@ -190,7 +190,7 @@
 
     <input type="submit" class="btn btn-primary mt-5" value="Save" name="save">
     <input type="submit" class="btn btn-primary mt-5" value="Add To Cart" name="cart">
-    <input type="hidden" name="totalpower" class="form-control" id="totalpower" value="{{ $totalpower }}" readonly>
+    <input type="text" name="totalpower" class="form-control" id="totalpower" value="{{ $totalpower }}" readonly>
 </form>
 </div>
 
