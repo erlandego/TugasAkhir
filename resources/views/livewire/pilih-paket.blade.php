@@ -5,6 +5,7 @@
                 <h4 class="font-weight-semi-bold m-0">Paket Pengiriman</h4>
             </div>
             <div class="card-body">
+                        {{-- @dd($response) --}}
                         @if($response != null)
                             @foreach ($response->rajaongkir->results[0]->costs as $item)
                                 <div class="form-check mb-3">

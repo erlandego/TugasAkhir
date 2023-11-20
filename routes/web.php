@@ -76,7 +76,9 @@ Route::resource('/alamat' , AddressController::class)->middleware('auth');
 Route::post('/checkout' , [tes::class , 'checkout'])->middleware('auth');
 
 Route::get('/rakitan' , [tes::class , 'rakitan']);
-Route::post('/tambahrakitan' , [tes::class , 'tambahrakitan']);
+Route::post('/tambahrakitan' , [tes::class , 'tambahrakitan'])->middleware('auth');
 
-Route::get('/rekomendasi' , [tes::class , 'rekomendasi']);
-Route::post('/form-rekomendasi' , [tes::class , 'FormRekomendasi']);
+Route::get('/rekomendasi' , [tes::class , 'rekomendasi'])->middleware('auth');
+Route::post('/form-rekomendasi' , [tes::class , 'FormRekomendasi'])->middleware('auth');
+
+Route::get('/transaksi' , [tes::class , 'transaksi'])->middleware('auth');

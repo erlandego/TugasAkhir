@@ -15,6 +15,7 @@ use App\Models\Rakitan;
 use App\Models\Drakitan;
 use App\Models\Rekomendasi;
 use Illuminate\Http\Request;
+use Symfony\Component\Mime\Encoder\Base64Encoder;
 
 class tes extends Controller
 {
@@ -183,13 +184,26 @@ class tes extends Controller
         foreach ($cart as $value) {
             foreach ($barangbeli as $value2) {
                 if($value->id == $value2){
-                    Djual::create([
-                        'hjual_id' => $idhjual,
-                        'barang_id' => $value->barang_id,
-                        'subtotal' => $value->total,
-                        'qty' => $value->qty,
-                        'berat' => $value->berat
-                    ]);
+                    if($value->type == "rakitan" || $value->type == "Rakitan"){
+                        Djual::create([
+                            'hjual_id' => $idhjual,
+                            'rakitan_id' => $value->rakitan_id,
+                            'barang_id' => null,
+                            'subtotal' => $value->total,
+                            'qty' => $value->qty,
+                            'berat' => $value->berat
+                        ]);
+                    }
+                    else{
+                        Djual::create([
+                            'hjual_id' => $idhjual,
+                            'barang_id' => $value->barang_id,
+                            'rakitan_id' => null,
+                            'subtotal' => $value->total,
+                            'qty' => $value->qty,
+                            'berat' => $value->berat
+                        ]);
+                    }
                 }
             }
         }
@@ -198,6 +212,16 @@ class tes extends Controller
         foreach ($barangbeli as $value) {
             Cart::destroy($value);
         }
+
+        //generate order_id
+        $listhjual = Hjual::where('user_id' , auth()->user()->id)->get();
+        $ctr = count($listhjual);
+        $penggal = explode(' ' , auth()->user()->name);
+        $uniquecode = "";
+        for ($i=0; $i < count($penggal); $i++) {
+            $uniquecode .= substr($penggal[$i] , 0 , 1);
+        }
+        $uniquecode .= $ctr;
 
         //Payment
         // Set your Merchant Server Key
@@ -211,7 +235,7 @@ class tes extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $idhjual,
+                'order_id' => $uniquecode,
                 'gross_amount' => $subtotal + $shipping,
             ),
             'customer_details' => array(
@@ -225,7 +249,8 @@ class tes extends Controller
 
         //Masukkan snaptoken
         Hjual::where('id' , $idhjual)->update([
-            'snap_token' => $snapToken
+            'snap_token' => $snapToken,
+            'order_id' => $uniquecode
         ]);
 
         return view('user.checkout' , [
@@ -233,6 +258,7 @@ class tes extends Controller
             'alamat' => $alamat,
             'barangbeli' => $barangbeli,
             'hjual' => $idhjual,
+            'drakitan' => Drakitan::all(),
             'listdjual' => Djual::all(),
             'img' => Image::all(),
             'snapToken' => $snapToken
@@ -244,8 +270,8 @@ class tes extends Controller
         $hashed = hash("sha512" , $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
         if($hashed == $request->signature_key){
             if($request->transaction_status == 'capture'){
-                Hjual::where('id' , $request->order_id)->update(['status' => 'Paid']);
-            }
+                Hjual::where('order_id' , $request->order_id)->update(['status' => 'Paid']);
+        }
         }
     }
 
@@ -265,6 +291,7 @@ class tes extends Controller
     }
 
     public function tambahrakitan(Request $request){
+        //dd($request);
         if(isset($_POST["save"])){
             Rakitan::create([
                 'nama_rakitan' => $request->nama_rakitan,
@@ -333,12 +360,11 @@ class tes extends Controller
             return redirect('/')->with('success' , 'Rakitan berhasil di save');
         }
 
-
         if(isset($_POST["cart"])){
             Rakitan::create([
                 'nama_rakitan' => $request->nama_rakitan,
                 'user_id' => auth()->user()->id,
-                'totalharga' => $request->totalharga
+                'totalharga' => $request->totalharga,
             ]);
 
             $idrakitan = Rakitan::latest()->first()->id;
@@ -407,7 +433,7 @@ class tes extends Controller
                 'rakitan_id' => $idrakitan,
                 'type' => 'rakitan',
                 'qty' => 0,
-                'berat' => 0,
+                'berat' => $request->totalberat,
                 'total' => $hargarakitan
             ]);
 
@@ -430,6 +456,29 @@ class tes extends Controller
             'barang' => Barang::all(),
             'rekomendasi' => $request->rekomendasi,
             'paket' => $request->paket
+        ]);
+    }
+
+    public function transaksi(){
+        // $serverkeyhash = Base64_encode(config('midtrans.server_key').':');
+        // $cURLConnection = curl_init();
+
+        // curl_setopt($cURLConnection, CURLOPT_URL, 'https://api.sandbox.midtrans.com/v2/AS1/status');
+        // curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+
+        // curl_setopt($cURLConnection , CURLOPT_HTTPHEADER , array(
+        //     'Accept: application/json',
+        //     'Content-Type: application/json',
+        //     'Authorization: Basic '.$serverkeyhash
+        // ));
+
+        // $response = curl_exec($cURLConnection);
+        // curl_close($cURLConnection);
+
+        return view('user.transaksi', [
+            'title' => 'List transaksi',
+            'hjual' => Hjual::where('user_id' , auth()->user()->id)->get(),
+            'djual' => Djual::all()
         ]);
     }
 }

@@ -28,7 +28,7 @@
         document.getElementById('popup').style.display = "";
     }
 
-    function pilih(tipe , namabarang , idbarang , socket , slot , size , dimm , m2 , nvme , price){
+    function pilih(tipe , namabarang , idbarang , socket , slot , size , dimm , m2 , nvme , price , weight , power){
         if(tipe == 'processor'){
             document.getElementById('processor').value = namabarang;
             document.getElementById('processorID').value = idbarang;
@@ -39,6 +39,9 @@
 
             document.getElementById('processorPrice').value = price;
             document.getElementById('processorPrice').dispatchEvent(new Event('input'));
+
+            document.getElementById('processorweight').value = weight;
+            document.getElementById('processorweight').dispatchEvent(new Event('input'));
 
         }
 
@@ -64,6 +67,9 @@
 
             document.getElementById('motherboardPrice').value = price;
             document.getElementById('motherboardPrice').dispatchEvent(new Event('input'));
+
+            document.getElementById('motherboardweight').value = weight;
+            document.getElementById('motherboardweight').dispatchEvent(new Event('input'));
         }
 
         else if(tipe == 'ram'){
@@ -73,6 +79,9 @@
 
             document.getElementById('ramPrice').value = price;
             document.getElementById('ramPrice').dispatchEvent(new Event('input'));
+
+            document.getElementById('ramweight').value = weight;
+            document.getElementById('ramweight').dispatchEvent(new Event('input'));
         }
 
         else if(tipe == 'vga'){
@@ -82,6 +91,9 @@
 
             document.getElementById('vgaPrice').value = price;
             document.getElementById('vgaPrice').dispatchEvent(new Event('input'));
+
+            document.getElementById('vgaweight').value = weight;
+            document.getElementById('vgaweight').dispatchEvent(new Event('input'));
         }
 
         else if(tipe == 'fan'){
@@ -91,6 +103,9 @@
 
             document.getElementById('fanPrice').value = price;
             document.getElementById('fanPrice').dispatchEvent(new Event('input'));
+
+            document.getElementById('fanweight').value = weight;
+            document.getElementById('fanweight').dispatchEvent(new Event('input'));
         }
 
         else if(tipe == 'case'){
@@ -100,6 +115,9 @@
 
             document.getElementById('casePrice').value = price;
             document.getElementById('casePrice').dispatchEvent(new Event('input'));
+
+            document.getElementById('caseweight').value = weight;
+            document.getElementById('caseweight').dispatchEvent(new Event('input'));
         }
 
         else if(tipe == 'psu'){

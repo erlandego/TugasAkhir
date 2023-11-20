@@ -17,4 +17,8 @@ class Djual extends Model
     public function Barang(){
         return $this->belongsTo(Barang::class);
     }
+
+    public function Rakitan(){
+        return $this->belongsTo(Rakitan::class);
+    }
 }

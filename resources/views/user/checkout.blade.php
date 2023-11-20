@@ -9,6 +9,7 @@
     //     array_push($listbarang , $temp);
     // }
     $gambar = "";
+    $gambar2 = "";
 @endphp
 <div class="card m-5">
     <h6 class="card-header">Pengiriman ke :</h6>
@@ -35,20 +36,49 @@
         <tbody class="align-middle">
             @foreach ($listdjual as $item)
                 @if ($item->hjual_id == $hjual)
-                    @php
+                    @if($item->rakitan_id != null && $item->barang_id == null)
+                        <tr style="background-color:khaki;">
+                            <td onclick = "show()"> <i class="fa fa-sort-desc" aria-hidden="true"> </td>
+                            <td>{{ $item->Rakitan->nama_rakitan }}</td>
+                            <td>Rp{{ number_format($item->Rakitan->totalharga) }}</td>
+                            <td>1</td>
+                            <td>Rp{{ number_format($item->Rakitan->totalharga) }}</td>
+                        </tr>
+                    @elseif($item->rakitan_id == null && $item->barang_id != null)
+                        @php
                         foreach ($img as $value) {
                             if($item->barang_id == $value->barang_id){
                                 $gambar = $value->image;
                             }
                         }
-                    @endphp
-                    <tr>
-                        <td><img src="{{ asset('storage/' . $gambar) }}" alt="" style="width: 50px;"></td>
-                        <td>{{ $item->Barang->nama_barang }}</td>
-                        <td>Rp{{ number_format($item->Barang->harga) }}</td>
-                        <td>{{ $item->qty }}</td>
-                        <td>Rp{{ number_format($item->subtotal) }}</td>
-                    </tr>
+                        @endphp
+                        <tr>
+                            <td><img src="{{ asset('storage/' . $gambar) }}" alt="" style="width: 50px;"></td>
+                            <td>{{ $item->Barang->nama_barang }}</td>
+                            <td>Rp{{ number_format($item->Barang->harga) }}</td>
+                            <td>{{ $item->qty }}</td>
+                            <td>Rp{{ number_format($item->subtotal) }}</td>
+                        </tr>
+                    @endif
+                    @if($item->type == 'rakitan')
+                        @foreach ($drakitan as $item2)
+                            @php
+                                foreach ($img as $value){
+                                    if($item2->Barang->id == $value->barang_id){
+                                        $gambar2 = $value->image;
+                                    }
+                                }
+                            @endphp
+                            <tr class="detailrakitan" style="background-color:lemonchiffon">
+                                <td class="align-middle"><img src="{{ asset('storage/' . $gambar2) }}" alt="" style="width: 50px;"></td>
+                                <td class="align-middle">{{ $item2->Barang->nama_barang }}</td>
+                                <td class="align-middle">Rp{{ number_format($item2->Barang->harga) }}</td>
+                                <td class="align-middle">{{ $item->qty }}</td>
+                                <td class="align-middle">-</td>
+                                <td class="align-middle">-</td>
+                            </tr>
+                        @endforeach
+                    @endif
                 @endif
             @endforeach
         </tbody>
@@ -84,6 +114,21 @@
         }
       });
     });
+
+    var detailrakitan = document.getElementsByClassName("detailrakitan");
+    for (let index = 0; index < detailrakitan.length; index++) {
+        detailrakitan[index].style.display = "none";
+    }
+
+    function show(){
+        for (let index = 0; index < detailrakitan.length; index++) {
+            if(detailrakitan[index].style.display == "none"){
+                detailrakitan[index].style.display = "";
+            }else{
+                detailrakitan[index].style.display = "none";
+            }
+        }
+    }
 
   </script>
 

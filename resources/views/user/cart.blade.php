@@ -148,7 +148,7 @@
                             <a href="/alamat" class="btn btn-primary"> Pilih Alamat </a>
                         @else
                             @foreach ($listaddress as $item)
-                                @if($item->utama == 1)
+                            @if($item->utama == 1)
                                     <b>{{ $item->alamat }}</b><br>
                                     {{ $item->Kecamatan->subdistrict_name }}<br>
                                     {{ $item->City->city_name }}<br>

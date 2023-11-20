@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('hjuals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->string('order_id')->nullable()->unique();
             $table->integer('total_belanja');
             $table->integer('total_shipping');
             $table->string('kurir_pengiriman');

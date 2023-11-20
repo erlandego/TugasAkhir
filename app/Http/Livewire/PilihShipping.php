@@ -34,12 +34,13 @@ class PilihShipping extends Component
 
     public function updatedShipping(){
         $this->berat = 0;
+        //$beratrakitan = 0;
         $listcart = Cart::where('user_id' , '=' , auth()->user()->id)->get();
         foreach ($listcart as $value) {
             $this->berat += $value->berat;
         }
 
-        $this->berat *= 1000;
+        //$this->berat *= 1000;
         if($this->checkutama == true){
             $curl = curl_init();
 

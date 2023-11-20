@@ -77,7 +77,7 @@
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><img src="img/logo.png" width="70px" height="auto">Rakit PC<span style="font-size: 16px">.com</span></h1>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
@@ -185,6 +185,8 @@
                                     @csrf
                                     <button type="submit" class="dropdown-item">Logout</button>
                                   </form>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="/transaksi">Daftar Transaksi</a>
                                 </div>
                               </li>
                             {{-- <a href="/" class="nav-item nav-link">Welcome, {{ auth()->user()->name }}</a> --}}

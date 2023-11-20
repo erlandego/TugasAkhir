@@ -18,37 +18,45 @@ class FormRakit extends Component
     public $processor;
     public $processorcheck;
     public $processorPrice;
+    public $processorweight;
     private $indikator;
     public $socket;
+    public $totalberat;
 
     private $motherboard;
     public $motherboardID;
     public $motherboardPrice;
     public $motherboardcheck;
+    public $motherboardweight;
 
     private $ram;
     public $ramID;
     public $ramPrice;
     public $ramcheck;
     public $ramQty;
+    public $ramweight;
 
     private $vga;
     public $vgaID;
     public $vgaPrice;
     public $vgacheck;
+    public $vgaweight;
 
     private $fan;
     public $fanID;
     public $fanPrice;
+    public $fanweight;
 
     private $case;
     public $caseID;
     public $casePrice;
+    public $caseweight;
 
     private $psu;
     public $psuID;
     public $psuPrice;
     public $psucheck;
+    public $psuweight;
 
     private $hide;
     public $slot;
@@ -91,6 +99,7 @@ class FormRakit extends Component
         $this->psuPrice = 0;
         $this->totalharga = 0;
         $this->ramQty = 0;
+        $this->totalberat = 0;
     }
 
     public function RekomendasiProc(){
@@ -742,6 +751,10 @@ class FormRakit extends Component
         $this->totalharga = $this->processorPrice + $this->motherboardPrice + $this->ramPrice + $this->vgaPrice + $this->fanPrice + $this->casePrice + $this->psuPrice;
     }
 
+    public function hitungberat(){
+        $this->totalberat = $this->processorweight + $this->motherboardweight + $this->ramweight + $this->vgaweight + $this->fanweight + $this->caseweight + $this->psuweight;
+    }
+
     public function updatedRamQty(){
         $this->ramPrice = $this->ramPrice * $this->ramQty;
         $this->hide = true;
@@ -789,6 +802,7 @@ class FormRakit extends Component
     public function render()
     {
         $this->hitungtotal();
+        $this->hitungberat();
 
         return view('livewire.form-rakit' , [
             'barang' => $this->barang,
@@ -805,6 +819,7 @@ class FormRakit extends Component
             'psu' => $this->psu,
             'totalpower' => $this->totalpower,
             'totalharga' => $this->totalharga,
+            'totalberat' => $this->totalberat,
             'ramQty' => $this->ramQty
         ]);
     }
