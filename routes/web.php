@@ -68,6 +68,9 @@ Route::get('/dashboard/slots/checkSlug' , [DashboardSlotController::class , 'che
 Route::resource('/dashboard/size' , DashboardSizeController::class)->middleware('auth');
 Route::get('dashboard/sizes/checkSlug' , [DashboardSizeController::class , 'checkSlug']);
 
+Route::get('/dashboard/ListTransaksi' , [tes::class , 'DashboardTransaksi'])->middleware('auth');
+Route::get('/dashboard/transaksi/{hjual:id}' , [tes::class , 'DetailTransaksi'])->middleware('auth');
+
 Route::get('/cart' , [tes::class , 'cart'])->middleware('auth');
 Route::get('/shop' , [tes::class , 'shop']);
 

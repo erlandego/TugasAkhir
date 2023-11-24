@@ -460,25 +460,62 @@ class tes extends Controller
     }
 
     public function transaksi(){
-        // $serverkeyhash = Base64_encode(config('midtrans.server_key').':');
-        // $cURLConnection = curl_init();
+        $listhjual = Hjual::where('user_id' , auth()->user()->id)->get();
 
-        // curl_setopt($cURLConnection, CURLOPT_URL, 'https://api.sandbox.midtrans.com/v2/AS1/status');
-        // curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+        $serverkeyhash = Base64_encode(config('midtrans.server_key').':');
+        $cURLConnection = curl_init();
 
-        // curl_setopt($cURLConnection , CURLOPT_HTTPHEADER , array(
-        //     'Accept: application/json',
-        //     'Content-Type: application/json',
-        //     'Authorization: Basic '.$serverkeyhash
-        // ));
+        foreach ($listhjual as $value) {
+            curl_setopt($cURLConnection, CURLOPT_URL, 'https://api.sandbox.midtrans.com/v2/'.$value->order_id.'/status');
+            curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($cURLConnection , CURLOPT_HTTPHEADER , array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'Authorization: Basic '.$serverkeyhash
+            ));
 
-        // $response = curl_exec($cURLConnection);
-        // curl_close($cURLConnection);
+            $response = curl_exec($cURLConnection);
+            $status = json_decode($response);
+
+            if($status->status_code != '404'){
+                if($value->status == 'unpaid' && $status->transaction_status == 'expire'){
+                    Hjual::where('id' , $value->id)->update([
+                        'status' => 'expire'
+                    ]);
+                    //dd('Masuk sini');
+                }
+            }
+        }
+
+
+        curl_close($cURLConnection);
 
         return view('user.transaksi', [
             'title' => 'List transaksi',
             'hjual' => Hjual::where('user_id' , auth()->user()->id)->get(),
+            'djual' => Djual::all(),
+            'drakitan' => Drakitan::all(),
+            'img' => Image::all()
+        ]);
+    }
+
+    public function DashboardTransaksi(){
+        return view('dashboard.transaksi.ListTransaksi' , [
+            'title' => "List Transaksi",
+            'hjual' => Hjual::all(),
             'djual' => Djual::all()
+        ]);
+    }
+
+    public function DetailTransaksi($id){
+        return view('dashboard.transaksi.detailtransaksi' , [
+            'title' => "Detail transaksi",
+            'djual' => Djual::where('hjual_id' , $id)->get(),
+            'hjual' => Hjual::where('id' , $id)->get(),
+            'hjualid' => $id,
+            'img' => Image::all(),
+            'drakitan' => Drakitan::all(),
+            'rakitan' => Rakitan::all()
         ]);
     }
 }

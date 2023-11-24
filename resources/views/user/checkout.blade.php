@@ -60,7 +60,7 @@
                             <td>Rp{{ number_format($item->subtotal) }}</td>
                         </tr>
                     @endif
-                    @if($item->type == 'rakitan')
+                    @if($item->rakitan_id != null)
                         @foreach ($drakitan as $item2)
                             @php
                                 foreach ($img as $value){

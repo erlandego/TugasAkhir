@@ -7,14 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.108.0">
-    <title>{{ $title }}</title>
+    <title>Admin | {{ $title }}</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
   </head>
   <body>
 
@@ -101,7 +101,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/dashboard/ListTransaksi">
               <span data-feather="layers" class="align-text-bottom"></span>
               List Transaksi
             </a>

@@ -25,4 +25,8 @@ class Provinsi extends Model
     public function Hjual(){
         return $this->hasMany(Hjual::class);
     }
+
+    public function Provinsi(){
+        return $this->hasMany(Provinsi::class);
+    }
 }
