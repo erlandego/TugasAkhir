@@ -518,4 +518,46 @@ class tes extends Controller
             'rakitan' => Rakitan::all()
         ]);
     }
+
+    public function KonfirmasiTransaksi($id){
+        Hjual::where('id' , $id)->update([
+            'status' => 'confirmed'
+        ]);
+
+        return redirect('/dashboard/ListTransaksi')->with('confirmed' , 'Pesanan Sudah di konfirmasi');
+    }
+
+    public function KirimItem($id){
+        Hjual::where('id' , $id)->update([
+            'status' => 'sent'
+        ]);
+
+        return redirect('/dashboard/ListTransaksi')->with('kirim' , 'Status Pesanan Sudah diubah');
+    }
+
+    public function received($id){
+        Hjual::where('id' , $id)->update([
+            'status' => 'received'
+        ]);
+
+        return redirect('/transaksi')->with('received' , 'Status Pesanan Sudah Diterima');
+    }
+
+    public function SelesaikanTransaksi($id){
+        //Ganti status
+        Hjual::where('id' , $id)->update([
+            'status' => 'selesai'
+        ]);
+
+        //kurangi stock
+        $djual = Djual::where('hjual_id' , $id)->get();
+        foreach ($djual as $value) {
+            $stocklama = Barang::select('stok')->where('id' , $value->barang_id);
+            Barang::where('id' , $value->barang_id)->update([
+                'stok' => $stocklama - 1
+            ]);
+        }
+
+        return redirect('/dashboard/ListTransaksi')->with('selesai' , 'Pesanan Sudah di selesaikan');
+    }
 }

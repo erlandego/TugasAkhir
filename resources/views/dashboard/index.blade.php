@@ -115,30 +115,66 @@
           </a>
         </h6>
         <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text" class="align-text-bottom"></span>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text" class="align-text-bottom"></span>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text" class="align-text-bottom"></span>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text" class="align-text-bottom"></span>
-              Year-end sale
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/LaporanKeuntungan">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Keuntungan
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard/LaporanPembelian">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Pembelian
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard/LaporanPenjualan">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Penjualan
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard/LaporanStokBarang">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Stok barang
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard/LaporanArusKas">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Arus Kas
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard/LaporanProdukTerlaris">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Produk Terlaris
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard/LaporanRakitanUser">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Rakitan User
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard/LaporanProdukTerpopuler">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Produk Terpopuler
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard/LaporanKepuasaPelanggan">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Kepuasan Pelanggan
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text" class="align-text-bottom"></span>
+                  Laporan Neraca Keuangan
+                </a>
+              </li>
         </ul>
       </div>
     </nav>

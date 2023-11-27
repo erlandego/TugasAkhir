@@ -27,6 +27,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MerkController;
 use App\Http\Controllers\RakitanController;
+use App\Http\Controllers\ReportController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [tes::class, 'index']);
@@ -68,8 +69,13 @@ Route::get('/dashboard/slots/checkSlug' , [DashboardSlotController::class , 'che
 Route::resource('/dashboard/size' , DashboardSizeController::class)->middleware('auth');
 Route::get('dashboard/sizes/checkSlug' , [DashboardSizeController::class , 'checkSlug']);
 
+//ubah ubah status
 Route::get('/dashboard/ListTransaksi' , [tes::class , 'DashboardTransaksi'])->middleware('auth');
 Route::get('/dashboard/transaksi/{hjual:id}' , [tes::class , 'DetailTransaksi'])->middleware('auth');
+Route::get('/dashboard/KonfirmasiItem/{hjual:id}' , [tes::class , 'KonfirmasiTransaksi'])->middleware('auth');
+Route::get('/dashboard/SelesaikanItem/{hjual:id}' , [tes::class , 'SelesaikanTransaksi'])->middleware('auth');
+Route::get('/dashboard/KirimItem/{hjual:id}' , [tes::class , 'KirimItem'])->middleware('auth');
+Route::get('/received/{hjual:id}' , [tes::class , 'received'])->middleware('auth');
 
 Route::get('/cart' , [tes::class , 'cart'])->middleware('auth');
 Route::get('/shop' , [tes::class , 'shop']);
@@ -85,3 +91,15 @@ Route::get('/rekomendasi' , [tes::class , 'rekomendasi'])->middleware('auth');
 Route::post('/form-rekomendasi' , [tes::class , 'FormRekomendasi'])->middleware('auth');
 
 Route::get('/transaksi' , [tes::class , 'transaksi'])->middleware('auth');
+
+//Report
+Route::get('/dashboard/LaporanArusKas' , [ReportController::class , 'ArusKas'])->middleware('auth');
+Route::get('/dashboard/LaporanKepuasanPelanggan' , [ReportController::class , 'KepuasanPelanggan'])->middleware('auth');
+Route::get('/dashboard/LaporanKeuntungan' , [ReportController::class , 'Keuntungan'])->middleware('auth');
+Route::get('/dashboard/LaporanNeracaKeuangan' , [ReportController::class , 'NeracaKeungan'])->middleware('auth');
+Route::get('/dashboard/LaporanPembelian' , [ReportController::class , 'Pembelian'])->middleware('auth');
+Route::get('/dashboard/LaporanPenjualan' , [ReportController::class , 'Penjualan'])->middleware('auth');
+Route::get('/dashboard/LaporanProdukTerlaris' , [ReportController::class , 'ProdukTerlaris'])->middleware('auth');
+Route::get('/dashboard/LaporanProdukTerpopuler' , [ReportController::class , 'ProdukTerpopuler'])->middleware('auth');
+Route::get('/dashboard/LaporanStokBarang' , [ReportController::class , 'StokBarang'])->middleware('auth');
+Route::get('/dashboard/LaporanRakitanUser' , [ReportController::class , 'RakitanUser'])->middleware('auth');

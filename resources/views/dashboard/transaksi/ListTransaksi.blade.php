@@ -2,6 +2,11 @@
 
 @section('container')
     <h3>List Transaksi</h3>
+    @if (session()->has('confirmed'))
+        <div class="alert alert-success" role="alert">
+            {{ session('confirmed') }}
+        </div>
+    @endif
     <table class="table table-striped table-sm">
         <thead>
             <tr>
@@ -31,8 +36,13 @@
                     <td>{{ $item->status }}</td>
                     <td>
                         @if($item->status == 'Paid')
-                            <a type="button" class="btn btn-success">Konfirmasi</a>
+                            <a href="/dashboard/KonfirmasiItem/{{ $item->id }}" class="btn btn-success">Konfirmasi</a>
                             <a class="btn btn-primary" href="/dashboard/transaksi/{{ $item->id }}">Detail Transaksi</a>
+                        @elseif($item->status == 'confirmed')
+                            <a class="btn btn-primary" href="/dashboard/KirimItem/{{ $item->id }}">Sudah dikirim</a>
+                            <a class="btn btn-primary" href="/dashboard/transaksi/{{ $item->id }}">Detail Transaksi</a>
+                        @elseif($item->status == 'received')
+                            <a href="/dashboard/SelesaikanItem/{{ $item->id }}" class="btn btn-success">Selesaikan</a>
                         @else
                             <a class="btn btn-primary" href="/dashboard/transaksi/{{ $item->id }}">Detail Transaksi</a>
                         @endif

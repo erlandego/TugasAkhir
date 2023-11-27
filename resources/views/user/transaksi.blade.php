@@ -6,6 +6,11 @@
     $gambar2 = "";
 @endphp
 <h3>List Transaksi, {{ auth()->user()->name }}</h3>
+@if(session()->has('received'))
+    <div class="alert alert-success" role="alert">
+        {{ session('received') }}
+    </div>
+@endif
 <table class="table table-bordered text-center m-0">
     <thead class="bg-secondary text-dark">
         <tr>
@@ -36,6 +41,12 @@
                                     {{ "Menunggu Konfirmasi" }}
                                 @elseif($item->status == 'expire')
                                     {{ "Expire" }}
+                                @elseif($item->status == 'confirmed')
+                                    {{ "Barang Sedang Diproses" }}
+                                @elseif($item->status == 'sent')
+                                    {{ "Barang Sedang Dalam Pengiriman" }}
+                                @elseif($item->status == 'Selesai')
+                                    {{ "Selesai" }}
                                 @endif
                             </td>
                             <td>
@@ -44,6 +55,12 @@
                                 @elseif($item->status == 'Paid')
                                     <button type="button" class="btn btn-danger">Batalkan</button>
                                 @elseif($item->status == 'expire')
+                                    {{ "-" }}
+                                @elseif($item->status == 'confirmed')
+                                    {{ "-" }}
+                                @elseif($item->status == 'sent')
+                                    <a href="/received/{{ $item->id }}" class="btn btn-success">Pesanan Sudah Diterima</a>
+                                @else
                                     {{ "-" }}
                                 @endif
                             </td>
@@ -70,6 +87,12 @@
                                     {{ "Menunggu Konfirmasi" }}
                                 @elseif($item->status == 'expire')
                                     {{ "Expired" }}
+                                @elseif($item->status == 'confirmed')
+                                    {{ "Barang Sedang Dikirim" }}
+                                @elseif($item->status == 'sent')
+                                    {{ "Barang Sedang Dalam Pengiriman" }}
+                                @elseif($item->status == 'Selesai')
+                                    {{ "Selesai" }}
                                 @endif
                             </td>
                             <td>
@@ -78,6 +101,12 @@
                                 @elseif($item->status == 'Paid')
                                     <button type="button" class="btn btn-danger">Batalkan</button>
                                 @elseif($item->status == 'expire')
+                                    {{ "-" }}
+                                @elseif($item->status == 'confirmed')
+                                    {{ "-" }}
+                                @elseif($item->status == 'sent')
+                                    <a href="/received/{{ $item->id }}" class="btn btn-success">Pesanan Sudah Diterima</a>
+                                @else
                                     {{ "-" }}
                                 @endif
                             </td>
