@@ -28,11 +28,37 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
 
     <!-- Customized Bootstrap Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/6bd86ebf4a.js" crossorigin="anonymous"></script>
 
     <style>
+
+        .tooltipku {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            /* border-bottom: 1px dotted black; */
+        }
+
+        .tooltiptextku{
+            visibility: hidden;
+            width: 100px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltipku:hover .tooltiptextku{
+            visibility: visible;
+        }
 
         .rekomendasi{
             display: flex;
@@ -45,7 +71,17 @@
             margin-top: 25px;
         }
 
-        .popup{
+        .popup .content .closebut{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        .closebut:hover{
+            cursor: pointer;
+        }
+
+        .popup .content{
             display: flex;
             width: 1050px;
             height: 500px;

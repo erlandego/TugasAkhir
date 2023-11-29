@@ -28,6 +28,10 @@
         document.getElementById('popup').style.display = "";
     }
 
+    function tutuppopup(){
+        document.getElementById('popup').style.display = "none";
+    }
+
     function pilih(tipe , namabarang , idbarang , socket , slot , size , dimm , m2 , nvme , price , weight , power){
         if(tipe == 'processor'){
             document.getElementById('processor').value = namabarang;

@@ -22,6 +22,7 @@ class FormRakit extends Component
     private $indikator;
     public $socket;
     public $totalberat;
+    private $bantuan;
 
     private $motherboard;
     public $motherboardID;
@@ -100,6 +101,7 @@ class FormRakit extends Component
         $this->totalharga = 0;
         $this->ramQty = 0;
         $this->totalberat = 0;
+        $this->bantuan = false;
     }
 
     public function RekomendasiProc(){
@@ -653,7 +655,6 @@ class FormRakit extends Component
         }
     }
 
-
     public function motherboard(){
         if($this->rekomendasi == null || $this->rekomendasi == ""){
             $cat = Category::where('name' , 'motherboard')->get();
@@ -760,6 +761,32 @@ class FormRakit extends Component
         $this->hide = true;
     }
 
+    public function bantuan($indikator){
+        if($indikator == "processor"){
+            $this->indikator = "processor";
+        }
+        else if($indikator == "motherboard"){
+            $this->indikator = "motherboard";
+        }
+        else if($indikator == "ram"){
+            $this->indikator = "ram";
+        }
+        else if($indikator == "vga"){
+            $this->indikator = "vga";
+        }
+        else if($indikator == "fan"){
+            $this->indikator = "fan";
+        }
+        else if($indikator == "case"){
+            $this->indikator = "case";
+        }
+        else if($indikator == "psu"){
+            $this->indikator = "psu";
+        }
+
+        $this->bantuan = true;
+    }
+
     public function hide($power , $indikator){
 
         $this->hide = true;
@@ -820,7 +847,8 @@ class FormRakit extends Component
             'totalpower' => $this->totalpower,
             'totalharga' => $this->totalharga,
             'totalberat' => $this->totalberat,
-            'ramQty' => $this->ramQty
+            'ramQty' => $this->ramQty,
+            'bantuan' => $this->bantuan
         ]);
     }
 }
