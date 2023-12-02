@@ -35,6 +35,19 @@
 
     <style>
 
+        .divharga {
+            bottom: 0px;
+            width: 100%;
+            height: 100px;
+            position: fixed;
+            background-color: white;
+        }
+
+        .divharga .price{
+            position: absolute;
+            right: 0;
+        }
+
         .tooltipku {
             position: relative;
             display: inline-block;

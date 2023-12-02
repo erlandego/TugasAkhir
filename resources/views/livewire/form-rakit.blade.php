@@ -253,12 +253,17 @@
         </div>
     </div>
 
-    <input type="text" name="totalharga" class="form-control" id="totalpower" value="{{ $totalharga }}" readonly>
-    <input type="text" name="totalberat" class="form-control" id="totalberat" value="{{ $totalberat }}" readonly>
+    <input type="hidden" name="totalharga" class="form-control" id="totalpower" value="{{ $totalharga }}" readonly>
+    <input type="hidden" name="totalberat" class="form-control" id="totalberat" value="{{ $totalberat }}" readonly>
+    <input type="hidden" name="totalpower" class="form-control" id="totalpower" value="{{ $totalpower }}" readonly>
 
     <input type="submit" class="btn btn-primary mt-5" value="Save" name="save">
     <input type="submit" class="btn btn-primary mt-5" value="Add To Cart" name="cart">
-    <input type="text" name="totalpower" class="form-control" id="totalpower" value="{{ $totalpower }}" readonly>
 </form>
+<div class="divharga">
+    <div class="price">
+        <h4>Total : <span style="color: #17a2b8">Rp{{ number_format($totalharga) }}</span></h4>
+    </div>
+</div>
 </div>
 
