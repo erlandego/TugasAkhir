@@ -41,6 +41,7 @@
             height: 100px;
             position: fixed;
             background-color: white;
+            border-top: solid black 2px;
         }
 
         .divharga .price{
