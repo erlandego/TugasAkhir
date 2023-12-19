@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('category_id');
             $table->string('slug')->unique();
             $table->integer('harga');
+            $table->integer('harga_beli')->nullable();
             $table->integer('stok');
             $table->longtext('deskripsi');
             $table->foreignId('merk_id');

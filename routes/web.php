@@ -91,6 +91,7 @@ Route::get('/rekomendasi' , [tes::class , 'rekomendasi'])->middleware('auth');
 Route::post('/form-rekomendasi' , [tes::class , 'FormRekomendasi'])->middleware('auth');
 
 Route::get('/transaksi' , [tes::class , 'transaksi'])->middleware('auth');
+Route::get('/rating' , [tes::class , 'rating'])->middleware('auth');
 
 //Report
 Route::get('/dashboard/LaporanArusKas' , [ReportController::class , 'ArusKas'])->middleware('auth');

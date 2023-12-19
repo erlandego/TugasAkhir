@@ -560,4 +560,11 @@ class tes extends Controller
 
         return redirect('/dashboard/ListTransaksi')->with('selesai' , 'Pesanan Sudah di selesaikan');
     }
+
+    public function Rating(Request $request){
+        Hjual::where('id' , '=' , $request->hjualid)->update([
+            'rating' => $request->rating
+        ]);
+        return response()->json(['rate' => 'Berhasil Rate']);
+    }
 }

@@ -283,7 +283,7 @@
 
     {{-- Harga Barang --}}
     <div class="form-group mb-3">
-        <b><label for="harga">Harga Barang</label></b>
+        <b><label for="harga">Harga Jual Barang</label></b>
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
@@ -291,9 +291,29 @@
             <input id="harga" type="number" value="{{ $barang->harga }}" class="form-control" aria-label="Small" name="harga" required>
         </div>
         @error('harga')
-            <div class="invalid-feedback">
+            <p class="invalid-feedback">
                 {{ $message }}
+            </p>
+        @enderror
+    </div>
+
+    {{-- Harga Beli --}}
+    <div class="form-group mb-3">
+        <b><label for="harga">Harga Beli Barang</label></b>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
             </div>
+            @if($barang->harga_beli)
+                <input id="harga" type="number" value="{{ $barang->harga_beli }}" class="form-control" aria-label="Small" name="harga_beli" required>
+            @else
+                <input id="harga" type="number" class="form-control" aria-label="Small" name="harga_beli" required>
+            @endif
+        </div>
+        @error('harga_beli')
+            <p class="invalid-feedback">
+                {{ $message }}
+            </p>
         @enderror
     </div>
 
@@ -301,12 +321,12 @@
     <div class="form-group mb-3">
         <b><label for="stok">Input Stok : </label></b>
         <div class="input-group input-group-sm mb-3">
-            <input id="stok" type="number" value="{{ $barang->stok }}" class="form-control" aria-label="Small" name="stok" required>
+            <input id="stok" type="number" value="{{ $barang->stok }}" class="form-control" aria-label="Small" name="stok" readonly>
         </div>
         @error('stok')
-            <div class="invalid-feedback">
+            <p class="invalid-feedback">
                 {{ $message }}
-            </div>
+            </p>
         @enderror
     </div>
 

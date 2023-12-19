@@ -16,7 +16,8 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Nama Barang</th>
-              <th scope="col">Harga</th>
+              <th scope="col">Harga Jual</th>
+              <th scope="col">Harga Beli</th>
               <th scope="col">Stok</th>
               <th scope="col">Category</th>
               <th scope="col">Merk</th>
@@ -29,6 +30,7 @@
                 <td>{{ $ctr }}</td>
                 <td>{{ $item->nama_barang }}</td>
                 <td>Rp{{ number_format($item->harga) }}</td>
+                <td>@if($item->harga_beli != null)Rp{{ number_format($item->harga_beli) }}@else - @endif</td>
                 <td>{{ $item->stok }}</td>
                 <td>{{ $item->Category->name }}</td>
                 <td>{{ $item->Merk->nama_merk }}</td>

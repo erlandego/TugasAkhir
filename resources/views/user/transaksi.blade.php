@@ -21,6 +21,7 @@
             <th>Tanggal Pembelian</th>
             <th>Status</th>
             <th>Action</th>
+            <th>Penilaian</th>
         </tr>
     </thead>
     <tbody class="align-middle">
@@ -62,6 +63,30 @@
                                     <a href="/received/{{ $item->id }}" class="btn btn-success">Pesanan Sudah Diterima</a>
                                 @else
                                     {{ "-" }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($item->status == 'Selesai')
+                                    @if($item->rating == null)
+                                        <div class="ratingview">
+                                            <div class="ratingpelanggan">
+                                                <input type="radio" onclick="rate({{ $item->id }} , 5)" name="rate" id="rate-5">
+                                                <label for="rate-5" class="fas fa-star"></label>
+                                                <input type="radio" onclick="rate({{ $item->id }} , 4)" name="rate" id="rate-4">
+                                                <label for="rate-4" class="fas fa-star"></label>
+                                                <input type="radio" onclick="rate({{ $item->id }} , 3)" name="rate" id="rate-3">
+                                                <label for="rate-3" class="fas fa-star"></label>
+                                                <input type="radio" onclick="rate({{ $item->id }} , 2)" name="rate" id="rate-2">
+                                                <label for="rate-2" class="fas fa-star"></label>
+                                                <input type="radio" onclick="rate({{ $item->id }} , 1)" name="rate" id="rate-1">
+                                                <label for="rate-1" class="fas fa-star"></label>
+                                            </div>
+                                        </div>
+                                    @else
+                                        {{ $item->rating }} <label for="rate-4" class="fas fa-star" style="color:#fd4"></label>
+                                    @endif
+                                @else
+                                    -
                                 @endif
                             </td>
                         </tr>
@@ -108,6 +133,30 @@
                                     <a href="/received/{{ $item->id }}" class="btn btn-success">Pesanan Sudah Diterima</a>
                                 @else
                                     {{ "-" }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($item->status == 'Selesai')
+                                    @if($item->rating == null)
+                                        <div class="ratingview">
+                                            <div class="ratingpelanggan">
+                                                <input type="radio" onclick="rate({{ $item->id }} , 5)" name="rate" id="rate-5">
+                                                <label for="rate-5" class="fas fa-star"></label>
+                                                <input type="radio" onclick="rate({{ $item->id }} , 4)" name="rate" id="rate-4">
+                                                <label for="rate-4" class="fas fa-star"></label>
+                                                <input type="radio" onclick="rate({{ $item->id }} , 3)" name="rate" id="rate-3">
+                                                <label for="rate-3" class="fas fa-star"></label>
+                                                <input type="radio" onclick="rate({{ $item->id }} , 2)" name="rate" id="rate-2">
+                                                <label for="rate-2" class="fas fa-star"></label>
+                                                <input type="radio" onclick="rate({{ $item->id }} , 1)" name="rate" id="rate-1">
+                                                <label for="rate-1" class="fas fa-star"></label>
+                                            </div>
+                                        </div>
+                                    @else
+                                        {{ $item->rating }} <label for="rate-4" class="fas fa-star" style="color:#fd4"></label>
+                                    @endif
+                                @else
+                                    -
                                 @endif
                             </td>
                         </tr>
@@ -177,6 +226,11 @@
                 detailrakitan[index].style.display = "none";
             }
         }
+    }
+
+    function rate(hjualid , rating){
+        fetch('/rating?hjualid=' + hjualid + '&rating=' + rating)
+            .then(location.reload())
     }
 </script>
 @endsection

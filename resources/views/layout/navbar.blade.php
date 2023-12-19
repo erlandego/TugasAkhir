@@ -35,6 +35,32 @@
 
     <style>
 
+        .ratingview{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .ratingpelanggan input{
+            display: none;
+        }
+
+        .ratingpelanggan label{
+            color:#444;
+            transition: all 0.2s ease;
+            font-size: 13px;
+            float: right;
+        }
+
+        .ratingpelanggan input:not(:checked) ~ label:hover,
+        .ratingpelanggan input:not(:checked) ~ label:hover ~ label{
+            color: #fd4;
+        }
+        .ratingpelanggan input:checked ~ label{
+            color: #fd4;
+        }
+
         .divharga {
             bottom: 0px;
             width: 100%;

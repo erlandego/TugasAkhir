@@ -154,12 +154,23 @@
 
         {{-- Harga Barang --}}
         <div class="form-group mb-3">
-            <b><label for="harga">Harga Barang</label></b>
+            <b><label for="harga">Harga Jual Barang</label></b>
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
                 </div>
                 <input id="harga" type="number" value="{{ old('harga') }}" class="form-control" aria-label="Small" name="harga">
+            </div>
+        </div>
+
+        {{-- Harga Beli --}}
+        <div class="form-group mb-3">
+            <b><label for="harga">Harga Beli Barang</label></b>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Rp</span>
+                </div>
+                <input id="harga" type="number" value="{{ old('harga') }}" class="form-control" aria-label="Small" name="harga_beli">
             </div>
         </div>
 
