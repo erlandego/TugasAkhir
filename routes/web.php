@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\BeliBarang;
 use App\Http\Controllers\DashboardBarangController;
 use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardMerkController;
@@ -68,6 +69,9 @@ Route::get('/dashboard/slots/checkSlug' , [DashboardSlotController::class , 'che
 
 Route::resource('/dashboard/size' , DashboardSizeController::class)->middleware('auth');
 Route::get('dashboard/sizes/checkSlug' , [DashboardSizeController::class , 'checkSlug']);
+
+Route::get('/dashboard/belibarang' , [BeliBarang::class , 'belibarang'])->middleware('auth');
+Route::post('/dashboard/belibarang' , [BeliBarang::class , 'beli'])->middleware('auth');
 
 //ubah ubah status
 Route::get('/dashboard/ListTransaksi' , [tes::class , 'DashboardTransaksi'])->middleware('auth');

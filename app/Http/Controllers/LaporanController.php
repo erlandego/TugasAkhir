@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Barang;
+use App\Models\Djual;
+use App\Models\Drakitan;
 
 class LaporanController extends Controller
 {
@@ -22,7 +24,10 @@ class LaporanController extends Controller
 
     public function Keuntungan(){
         return view('dashboard.laporan.LaporanKeuntungan' , [
-            'title' => 'Laporan Keuntungan'
+            'title' => 'Laporan Keuntungan',
+            'djual' => Djual::select('barang_id' , 'rakitan_id' , Djual::raw('COUNT(barang_id) AS Terjual'))->join('hjuals' , 'hjuals.id' , '=' , 'djuals.hjual_id')->GroupBy('barang_id' , 'rakitan_id')->where('hjuals.status' , '=' , 'selesai')->get(),
+            //'djual' => "",
+            'drakitan' => Drakitan::all()
         ]);
     }
 

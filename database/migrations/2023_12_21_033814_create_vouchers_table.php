@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('arus_kas', function (Blueprint $table) {
+        Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barang_id');
-            $table->integer('jumlah');
-            $table->string('type');
+            $table->string('kode_voucher')->unique();
+            $table->integer('potongan');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arus_kas');
+        Schema::dropIfExists('vouchers');
     }
 };

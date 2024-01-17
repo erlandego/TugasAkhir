@@ -12,6 +12,7 @@ use App\Models\Slot;
 use App\Models\Socket;
 use App\Models\Rekomendasi;
 use App\Models\BarangRekomendasi;
+use App\Models\ArusKas;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -272,8 +273,12 @@ class DashboardBarangController extends Controller
         }
         //-----------------------------------------------------------------------------------------
 
-        //return $request->rekomendasi;
-        //return redirect('/dashboard/barang')->with('success' , 'Barang telah ditambahkan!');
+        //Masukkan Dalam ArusKas
+        ArusKas::create([
+            'barang_id' => $id_barang,
+            'jumlah' => $request->stok,
+            'type' => 'Beli'
+        ]);
     }
 
     /**

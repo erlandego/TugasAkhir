@@ -14,6 +14,7 @@ use App\Models\Djual;
 use App\Models\Rakitan;
 use App\Models\Drakitan;
 use App\Models\Rekomendasi;
+use App\Models\ArusKas;
 use Illuminate\Http\Request;
 use Symfony\Component\Mime\Encoder\Base64Encoder;
 
@@ -524,6 +525,40 @@ class tes extends Controller
             'status' => 'confirmed'
         ]);
 
+        $djuals = Djual::where('hjual_id' , $id)->get();
+        foreach ($djuals as $key => $value) {
+            if($value->barang_id != null){
+                $stoklama = $value->Barang->stok;
+                $stokbaru = $stoklama - $value->qty;
+                Barang::where('id' , $value->barang_id)->update([
+                    'stok' => $stokbaru
+                ]);
+
+                ArusKas::create([
+                    'barang_id' => $value->barang_id,
+                    'type' => 'jual',
+                    'jumlah' => $value->qty
+                ]);
+            }
+            else{
+                //$rakitans = Rakitan::where('id' , $value->rakitan_id);
+                $drakitans = Drakitan::where('rakitan_id' , $value->rakitan_id);
+                foreach ($drakitans as $value2) {
+                    $stoklama2 = $value2->Barang->stok;
+                    $stokbaru2 = $stoklama2 - $value2->qty;
+                    Barang::where('id' , $value2->barang_id)->update([
+                        'stok' => $stokbaru2
+                    ]);
+
+                    ArusKas::create([
+                        'barang_id' => $value2->barang_id,
+                        'type' => 'jual',
+                        'jumlah' => $value2->qty
+                    ]);
+                }
+            }
+        }
+
         return redirect('/dashboard/ListTransaksi')->with('confirmed' , 'Pesanan Sudah di konfirmasi');
     }
 
@@ -550,13 +585,13 @@ class tes extends Controller
         ]);
 
         //kurangi stock
-        $djual = Djual::where('hjual_id' , $id)->get();
-        foreach ($djual as $value) {
-            $stocklama = Barang::select('stok')->where('id' , $value->barang_id);
-            Barang::where('id' , $value->barang_id)->update([
-                'stok' => $stocklama - 1
-            ]);
-        }
+        // $djual = Djual::where('hjual_id' , $id)->get();
+        // foreach ($djual as $value) {
+        //     $stocklama = Barang::select('stok')->where('id' , $value->barang_id);
+        //     Barang::where('id' , $value->barang_id)->update([
+        //         'stok' => $stocklama - 1
+        //     ]);
+        // }
 
         return redirect('/dashboard/ListTransaksi')->with('selesai' , 'Pesanan Sudah di selesaikan');
     }

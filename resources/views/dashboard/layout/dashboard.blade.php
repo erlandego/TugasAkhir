@@ -12,6 +12,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
+    <script src="https://kit.fontawesome.com/6bd86ebf4a.js" crossorigin="anonymous"></script>
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
     @livewireStyles
@@ -123,49 +124,49 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="dashboard/LaporanPembelian">
+                <a class="nav-link" href="/dashboard/LaporanPembelian">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Laporan Pembelian
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="dashboard/LaporanPenjualan">
+                <a class="nav-link" href="/dashboard/LaporanPenjualan">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Laporan Penjualan
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="dashboard/LaporanStokBarang">
+                <a class="nav-link" href="/dashboard/LaporanStokBarang">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Laporan Stok barang
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="dashboard/LaporanArusKas">
+                <a class="nav-link" href="/dashboard/LaporanArusKas">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Laporan Arus Kas
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="dashboard/LaporanProdukTerlaris">
+                <a class="nav-link" href="/dashboard/LaporanProdukTerlaris">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Laporan Produk Terlaris
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="dashboard/LaporanRakitanUser">
+                <a class="nav-link" href="/dashboard/LaporanRakitanUser">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Laporan Rakitan User
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="dashboard/LaporanProdukTerpopuler">
+                <a class="nav-link" href="/dashboard/LaporanProdukTerpopuler">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Laporan Produk Terpopuler
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="dashboard/LaporanKepuasaPelanggan">
+                <a class="nav-link" href="/dashboard/LaporanKepuasanPelanggan">
                   <span data-feather="file-text" class="align-text-bottom"></span>
                   Laporan Kepuasan Pelanggan
                 </a>

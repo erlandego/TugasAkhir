@@ -2,10 +2,15 @@
     <div class="col-lg-4">
         <form class="mb-3" action="">
             <div class="input-group">
-                <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                <input type="text" wire:model="kodevoucher" class="form-control p-4" placeholder="Coupon Code">
                 <div class="input-group-append">
-                    <button class="btn btn-primary">Apply Coupon</button>
+                    <button type="button" class="btn btn-primary" wire:click="kupon()">Apply Coupon</button>
                 </div>
+                @if($vouchercheck != null && $vouchercheck == false)
+                    <p class="text-danger">
+                        Voucher Tidak Tersedia
+                    </p>
+                @endif
             </div>
         </form>
         <div class="card border-secondary mb-5">

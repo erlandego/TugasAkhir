@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Cart;
+use App\Models\Voucher;
 use Carbon\Carbon;
 
 class UpdateSubtotal extends Component
@@ -16,12 +17,18 @@ class UpdateSubtotal extends Component
     public $addresspilihan;
     public $paket;
     public $kurir;
+    public $potongan;
+    public $kodevoucher;
+    public $vouchers;
+    public $vouchercheck;
     protected $listeners = ['updateSub' => 'render' , 'ubahShippingprice' => 'ubahShippingprice'];
 
     public function mount($userid , $addresspilihan){
         $this->userid = $userid;
         $this->addresspilihan = $addresspilihan;
         $this->kurir = "";
+        $this->potongan = 0;
+        $this->vouchers = Voucher::all();
     }
 
     public function ubahShippingprice($paket , $kurir){
@@ -29,6 +36,15 @@ class UpdateSubtotal extends Component
         $this->shipping = $arrtemp[0];
         $this->paket = $arrtemp[1];
         $this->kurir = $kurir;
+    }
+
+    public function kupon(){
+        foreach ($this->vouchers as $value) {
+            if($value->kode_voucher == $this->kodevoucher){
+                $this->potongan = $value->potongan;
+                $this->vouchercheck = true;
+            }
+        }
     }
 
     public function render()
@@ -51,6 +67,10 @@ class UpdateSubtotal extends Component
         $this->totalall = $total + $this->shipping;
         $this->todaydate = Carbon::now()->setTimezone("Asia/Jakarta")->format('d/m/y h:m');
 
+        if($this->vouchercheck == true){
+            $this->totalall -= $this->potongan;
+        }
+
         return view('livewire.update-subtotal' , [
             'subtotal' => $total,
             'shipping' => $this->shipping,
@@ -59,7 +79,9 @@ class UpdateSubtotal extends Component
             'todaydate' => $this->todaydate,
             'addresspilihan' => $this->addresspilihan,
             'paket' => $this->paket,
-            'kurir' => $this->kurir
+            'kurir' => $this->kurir,
+            'potongan' => $this->potongan,
+            'vouchercheck' => $this->vouchercheck
         ]);
     }
 }

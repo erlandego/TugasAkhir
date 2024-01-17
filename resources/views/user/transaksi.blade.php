@@ -46,7 +46,7 @@
                                     {{ "Barang Sedang Diproses" }}
                                 @elseif($item->status == 'sent')
                                     {{ "Barang Sedang Dalam Pengiriman" }}
-                                @elseif($item->status == 'Selesai')
+                                @elseif($item->status == 'selesai')
                                     {{ "Selesai" }}
                                 @endif
                             </td>
@@ -66,7 +66,7 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($item->status == 'Selesai')
+                                @if ($item->status == 'selesai')
                                     @if($item->rating == null)
                                         <div class="ratingview">
                                             <div class="ratingpelanggan">
@@ -116,7 +116,7 @@
                                     {{ "Barang Sedang Dikirim" }}
                                 @elseif($item->status == 'sent')
                                     {{ "Barang Sedang Dalam Pengiriman" }}
-                                @elseif($item->status == 'Selesai')
+                                @elseif($item->status == 'selesai')
                                     {{ "Selesai" }}
                                 @endif
                             </td>
@@ -136,7 +136,7 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($item->status == 'Selesai')
+                                @if ($item->status == 'selesai')
                                     @if($item->rating == null)
                                         <div class="ratingview">
                                             <div class="ratingpelanggan">

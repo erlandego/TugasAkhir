@@ -647,7 +647,7 @@ class FormRakit extends Component
             $idcat = $cat[0]->id;
 
             if($this->socket == null){
-                $this->proc = Barang::where('category_id' , $idcat)->where('socket_id' , '=' , $this->socket)->get();
+                $this->proc = Barang::where('category_id' , $idcat)->get();
                 $this->indikator = "processor";
             }
             else{

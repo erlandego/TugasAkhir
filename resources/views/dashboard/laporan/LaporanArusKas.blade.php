@@ -2,37 +2,23 @@
 
 @section('container')
 <div class="table-responsive">
-    <table class="table table-striped table-sm">
+    <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Nama Barang</th>
           <th scope="col">Harga</th>
-          <th scope="col">Stok</th>
-          <th scope="col">Category</th>
-          <th scope="col">Merk</th>
-          <th scope="col">Action</th>
+          <th scope="col">Jumlah</th>
+          <th scope="col">Type</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($barangs as $item)
-        <tr>
-            <td>{{ $ctr }}</td>
-            <td>{{ $item->nama_barang }}</td>
-            <td>Rp{{ number_format($item->harga) }}</td>
-            <td>{{ $item->stok }}</td>
-            <td>{{ $item->Category->name }}</td>
-            <td>{{ $item->Merk->nama_merk }}</td>
-            <td>
-                <form action="/dashboard/barang/{{ $item->slug }}" method="post">
-                    @method('delete')
-                    @csrf
-                    <button class="btn btn-danger" onclick="return confirm('Apakah yakin ingin menghapus ?')">Delete</button>
-                    <a href="/dashboard/barang/{{ $item->slug }}/edit" class="btn btn-warning">Edit</a>
-                </form>
-            </td>
-            <?php $ctr+= 1 ?>
-        </tr>
+        @foreach ($ArusKas as $item)
+            <tr @if($item->type== 'beli') class="table-success" @elseif($item->type == 'jual') class="table-danger" @endif>
+                <td>{{ $item ->Barang->nama_barang }}</td>
+                <td>Rp{{ number_format($item->Barang->harga_beli) }}</td>
+                <td>{{ $item->jumlah }}</td>
+                <td>{{ $item->type }}</td>
+            </tr>
         @endforeach
       </tbody>
     </table>
